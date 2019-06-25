@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "antd";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   const body = isOpen && (
@@ -11,7 +12,9 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
     <div>
       <h3>{restaurant.name}</h3>
       {body}
-      <button onClick={onBtnClick}>{isOpen ? "close" : "open"}</button>
+      <Button onClick={onBtnClick} type="primary">
+        {isOpen ? "close" : "open"}
+      </Button>
     </div>
   );
 }
