@@ -1,12 +1,15 @@
 import React from "react";
 import { Button } from "antd";
+import ReviewsList from "./reviews-list";
 
-export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+
+export default function Restaurant({ restaurant, isOpen, onBtnClick, reviews }) {
   const body = isOpen && (
     <>
-      <img src={restaurant.image} width={64} height={64} />
+      <img src={restaurant.image} width={64} height={64} alt={"restaurant"} />
       <div>Menu items: {restaurant.menu.length}</div>
-    </>
+        <ReviewsList reviews={reviews}/>
+     </>
   );
   return (
     <div>
@@ -15,6 +18,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
       <Button onClick={onBtnClick} type="primary">
         {isOpen ? "close" : "open"}
       </Button>
+
     </div>
   );
 }
