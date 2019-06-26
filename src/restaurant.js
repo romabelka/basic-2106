@@ -1,4 +1,6 @@
 import React from "react";
+import ReviewsList from "./reviews-list";
+
 import { Button } from "antd";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
@@ -6,6 +8,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
     <>
       <img src={restaurant.image} width={64} height={64} />
       <div>Menu items: {restaurant.menu.length}</div>
+      <ReviewsList reviews={restaurant.reviews} />
     </>
   );
   return (
