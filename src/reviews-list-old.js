@@ -1,9 +1,11 @@
 import React from "react";
 import Review from "./review";
-import togglerDecorator from "./decorators/toggler";
+import { useToggler } from "./custom-hooks/use-toggler";
 import { Button, List } from "antd";
 
-function ReviewsList({ reviews, isShown, toggleShown }) {
+export default function ReviewsList({ reviews }) {
+  const { toggleShown, isShown } = useToggler(false);
+
   const body = isShown && (
     <List bordered>
       {reviews.map(review => (
@@ -20,5 +22,3 @@ function ReviewsList({ reviews, isShown, toggleShown }) {
     </>
   );
 }
-
-export default togglerDecorator(ReviewsList);
