@@ -2,7 +2,7 @@ import React from "react";
 import Restaurant from "./restaurant";
 import accordionDecorator from "./decorators/accordion";
 
-function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
+function RestaurantsList({ restaurants, isItemOpen, toggleOpenItem }) {
   return (
     <div>
       {restaurants.map(restaurant => (
