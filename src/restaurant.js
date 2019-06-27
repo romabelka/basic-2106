@@ -7,7 +7,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
     <>
       <img src={restaurant.image} alt="" width={64} height={64} />
       <div>Menu items: {restaurant.menu.length}</div>
-      <ReviewList reviews={restaurant.reviews} isOpen={isOpen} />
+      <ReviewList reviews={restaurant.reviews} />
     </>
   );
   return (
