@@ -1,6 +1,6 @@
 import React from "react";
-import Restaurant from "./restaurant";
-import { useAccordion } from "./custom-hooks/use-accordion";
+import Restaurant from "../Restaurant/restaurant";
+import { useAccordion } from "../../custom-hooks/use-accordion";
 
 export default function RestaurantsList({ restaurants }) {
   const { toggleOpenItem, isItemOpen } = useAccordion();
