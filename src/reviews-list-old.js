@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button } from "antd";
+import { useReviewsAccordion } from "./custom-hooks/use-reviews-accordion"
 import reviewsAccordionDecorator from "./decorators/reviews-accordion";
 
-function ReviewsList({ reviews, isOpenReviews, toogleOpenReviews }) {
+export default function ReviewsList({ reviews }) {
+  const { isOpenReviews, toogleOpenReviews } = useReviewsAccordion();
   const body = isOpenReviews && (
     <ul>
       {reviews.map( review => <li key={review.id}>{review.text}</li> )}
@@ -18,5 +20,3 @@ function ReviewsList({ reviews, isOpenReviews, toogleOpenReviews }) {
     </div>
   );
 }
-
-export default reviewsAccordionDecorator(ReviewsList);

@@ -3,20 +3,20 @@ import React from "react";
 export default OriginalComponent =>
   class DecoratedComponent extends React.Component {
     state = {
-      isReviewsOpen: false
+      isOpen: false
     };
 
-    toggleOpenReviews = () =>
+    toogleOpenReviews = () =>
       this.setState({
-        isReviewsOpen: !this.isReviewsOpen
+        isOpen: !this.state.isOpen
       });
 
     render() {
       return (
         <OriginalComponent
           {...this.props}
-          isReviewsOpen={this.isReviewsOpen}
-          toggleOpenReviews={this.toggleOpenReviews}
+          isOpenReviews={this.state.isOpen}
+          toogleOpenReviews={this.toogleOpenReviews}
         />
       );
     }
