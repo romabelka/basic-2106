@@ -1,5 +1,4 @@
 import React from "react";
-import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import Review from "./review";
 

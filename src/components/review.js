@@ -1,19 +1,25 @@
 import React from "react";
-import { Typography, Rate } from "antd";
+import { Button } from "antd";
 
 export default function Review({ review, isOpen, onBtnClick }) {
   const reviewBody = isOpen && (
     <>
-      <p>{review.text}</p>
-      <p>{review.rating}</p>
+      <p>
+        comment: <span className="fw-bold">{review.text}</span>
+      </p>
+      <p>
+        rating: <span className="fw-bold">{review.rating}</span>
+      </p>
     </>
   );
   return (
-    <div>
-      <Typography.Text strong onClick={onBtnClick}>
-        {review.user}
-      </Typography.Text>
+    <ul>
+      <li>{review.user}</li>
+      <Button type="dashed" onClick={onBtnClick}>
+        {" "}
+        {isOpen ? "hide review" : "show review"}
+      </Button>
       {reviewBody}
-    </div>
+    </ul>
   );
 }

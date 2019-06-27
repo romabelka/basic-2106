@@ -4,7 +4,7 @@ import accordionDecorator from "../decorators/accordion";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
-    <div>
+    <ul className="restaurants__list">
       {restaurants.map(restaurant => (
         <Restaurant
           key={restaurant.id}
@@ -13,7 +13,7 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
           onBtnClick={toggleOpenItem(restaurant.id)}
         />
       ))}
-    </div>
+    </ul>
   );
 }
 
