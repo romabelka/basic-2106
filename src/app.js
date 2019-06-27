@@ -1,8 +1,8 @@
 import React from "react";
-import RestaurantsList from "./restaurants-list";
-import { restaurants } from "./fixtures";
+import RestaurantsList from "./components/restaurants-list";
+import { restaurants } from "./api/fixtures";
 import "antd/dist/antd.css";
-import OrderForm from "./order-form";
+import OrderForm from "./components/order-form";
 
 export default function App() {
   return (

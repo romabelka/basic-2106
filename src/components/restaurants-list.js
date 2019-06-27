@@ -1,6 +1,6 @@
 import React from "react";
 import Restaurant from "./restaurant";
-import accordionDecorator from "./decorators/accordion";
+import accordionDecorator from "../decorators/accordion";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
