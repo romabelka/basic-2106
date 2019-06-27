@@ -9,7 +9,7 @@ export default function App() {
     <div>
       <h1>Delivery App</h1>
       <RestaurantsList restaurants={restaurants} />
-      <OrderForm />
+      {/* <OrderForm /> */}
     </div>
   );
 }
