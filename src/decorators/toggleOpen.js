@@ -1,6 +1,7 @@
 import React from "react";
 
-export default OriginalComponent =>
+export default ToggleComponent =>
+
   class DecoratedComponent extends React.Component {
     state = {
       openItemId: null
@@ -15,9 +16,10 @@ export default OriginalComponent =>
 
     render() {
       return (
-        <OriginalComponent
+        <ToggleComponent 
           {...this.props}
           isItemOpen={this.isItemOpen}
+          openName = {this.isItemOpen ? "close" : "open"}
           toggleOpenItem={this.toggleOpenItem}
         />
       );

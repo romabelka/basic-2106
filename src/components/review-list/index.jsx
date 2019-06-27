@@ -1,23 +1,29 @@
-import React, { Component } from "react";
+import React from "react";
 import Review from "../review/index.jsx";
+import useToggleOpen from "../../custom-hooks/useToggleOpen";
+import { Button } from "antd";
 
-class ReviewList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      reviewList: props.reviews
-    };
-  }
+function ReviewList({reviews}){
 
-  render() {
-    console.log(this.state.reviewList);
+  const { isOpen, toggleOpenItem, openButName } = useToggleOpen();
 
-    const reviewElem = this.state.reviewList.map(item => (
-      <Review key={item.id} />
-    ));
+  console.log(isOpen);
 
-    return <div>{reviewElem}</div>;
-  }
+  const body = isOpen && reviews.map( item => (
+    <Review 
+      key={item.id} 
+      reviewData = {item} 
+    />
+  ))
+
+  return (
+    <div>
+      <Button onClick={toggleOpenItem()} >
+        {openButName()}
+      </Button>
+      {body}
+    </div> 
+  )
 }
 
 export default ReviewList;
