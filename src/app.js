@@ -1,15 +1,30 @@
 import React from "react";
-import RestaurantsList from "./restaurants-list";
-import { restaurants } from "./fixtures";
+import { Layout } from "antd";
 import "antd/dist/antd.css";
-import OrderForm from "./order-form";
+import styled from "styled-components";
+import { restaurants } from "./fixtures";
+import Wrapper from "./components/wrapper";
+import RestaurantsList from "./components/restaurants-list";
+import OrderForm from "./components/order-form";
+
+const { Header, Content } = Layout;
+
+const Title = styled.h1`
+  color: white;
+`;
 
 export default function App() {
   return (
-    <div>
-      <h1>Delivery App</h1>
-      <RestaurantsList restaurants={restaurants} />
-      <OrderForm />
-    </div>
+    <Wrapper>
+      <Header>
+        <Title>Delivery App</Title>
+      </Header>
+      <Content>
+        <RestaurantsList restaurants={restaurants} />
+        <Wrapper>
+          <OrderForm />
+        </Wrapper>
+      </Content>
+    </Wrapper>
   );
 }

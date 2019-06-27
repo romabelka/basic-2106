@@ -6,20 +6,18 @@ export default OriginalComponent =>
       openItemId: null
     };
 
-    toggleOpenItem = openItemId => () =>
-      this.setState({
-        openItemId
-      });
-
     isItemOpen = id => this.state.openItemId === id;
 
-    render() {
-      return (
-        <OriginalComponent
-          {...this.props}
-          isItemOpen={this.isItemOpen}
-          toggleOpenItem={this.toggleOpenItem}
-        />
-      );
-    }
+    toggleOpenItem = openItemId => () =>
+      this.setState({
+        openItemId: this.isItemOpen(openItemId) ? null : openItemId
+      });
+
+    render = () => (
+      <OriginalComponent
+        {...this.props}
+        toggleOpenItem={this.toggleOpenItem}
+        isItemOpen={this.isItemOpen}
+      />
+    );
   };
