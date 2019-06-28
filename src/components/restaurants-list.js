@@ -12,6 +12,7 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
           restaurant={restaurant}
           isOpen={isItemOpen(restaurant.id)}
           onBtnClick={toggleOpenItem(restaurant.id)}
+          data-id="restaurant"
         />
       ))}
     </List>

@@ -8,7 +8,7 @@ import RestaurantMap from "./restaurant-map";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   const body = isOpen && (
-    <div>
+    <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} ref={setMenuRef} />
       <ReviewList reviews={restaurant.reviews} />
       <RestaurantMap />
@@ -18,7 +18,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
     <List.Item
       style={{ paddingLeft: "8px" }}
       actions={[
-        <Button onClick={onBtnClick}>
+        <Button onClick={onBtnClick} data-id="menu-btn">
           {isOpen ? "Hide menu" : "Show menu"}
         </Button>
       ]}
