@@ -1,20 +1,25 @@
 import React from "react";
-import accordionDecorator from "../decorators/accordion";
+import toggleDecorator from "../decorators/toggle";
 import Review from "./review";
+import { Button } from "antd";
 
-function ReviewsList({ reviews, isItemOpen, toggleOpenItem }) {
-  return (
-    <div>
+function ReviewsList({ reviews, isShown, toggleShown }) {
+  const body = isShown && (
+    <section className="reviews">
       {reviews.map(review => (
-        <Review
-          key={review.id}
-          review={review}
-          isOpen={isItemOpen(review.id)}
-          onBtnClick={toggleOpenItem(review.id)}
-        />
+        <Review key={review.id} review={review} />
       ))}
-    </div>
+    </section>
+  );
+
+  return (
+    <>
+      <Button type="dashed" onClick={toggleShown}>
+        {isShown ? "hide all" : "show all"}
+      </Button>
+      {body}
+    </>
   );
 }
 
-export default accordionDecorator(ReviewsList);
+export default toggleDecorator(ReviewsList);

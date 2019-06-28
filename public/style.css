@@ -8,6 +8,16 @@
   flex-direction: column;
   align-items: center;
 }
+.reviews {
+  display: flex;
+  flex-wrap: wrap;
+}
+.reviews__item {
+  display: flex;
+}
+.reviews__list {
+  margin-right: 20px;
+}
 .main-title {
   text-align: center;
 }
