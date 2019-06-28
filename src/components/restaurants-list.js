@@ -1,20 +1,22 @@
 import React from "react";
 import Restaurant from "./restaurant";
-import { useAccordion } from "./custom-hooks/use-accordion";
+import accordionDecorator from "../decorators/accordion";
+import { List } from "antd";
 
-export default function RestaurantsList({ restaurants }) {
-  const { toggleOpenItem, isItemOpen } = useAccordion();
-
+function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
-    <div>
+    <List>
       {restaurants.map(restaurant => (
         <Restaurant
           key={restaurant.id}
           restaurant={restaurant}
           isOpen={isItemOpen(restaurant.id)}
           onBtnClick={toggleOpenItem(restaurant.id)}
+          data-id="restaurant"
         />
       ))}
-    </div>
+    </List>
   );
 }
+
+export default accordionDecorator(RestaurantsList);
