@@ -11,9 +11,8 @@ class RestaurantMenu extends Component {
     error: null
   };
 
-  getSnapshotBeforeUpdate(prevProps, prevState) {}
-
   /*
+       getSnapshotBeforeUpdate(prevProps, prevState) {}
         componentWillReceiveProps(nextProps, nextContext) {
         }
 
@@ -33,7 +32,7 @@ class RestaurantMenu extends Component {
     if (this.state.error) return <h3>Oooops....</h3>;
     const { menu } = this.props;
     return (
-      <div style={{ padding: "16px" }}>
+      <div style={{ padding: "16px" }} ref={this.setContainerRef}>
         <Row gutter={16}>
           {menu.map(dish => (
             <Col key={dish.id} span={8}>
@@ -44,6 +43,8 @@ class RestaurantMenu extends Component {
       </div>
     );
   }
+
+  setContainerRef = element => console.log(element);
 }
 
 export default RestaurantMenu;
