@@ -12,7 +12,6 @@ const restaurants = [
       {
         id: "d75f762a-eadd-49be-8918-ed0daa8dd024",
         name: "Chicken tikka masala",
-        price: 12,
         ingredients: ["chicken", "rice"]
       },
       {

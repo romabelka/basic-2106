@@ -1,5 +1,6 @@
 import React from "react";
 import { Avatar, Button, List } from "antd";
+import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 
@@ -27,3 +28,14 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
     </List.Item>
   );
 }
+
+Restaurant.propTypes = {
+  isOpen: PropTypes.bool,
+  onBtnClick: PropTypes.func,
+  restaurant: PropTypes.shape({
+    menu: PropTypes.array,
+    reviews: PropTypes.array,
+    image: PropTypes.string,
+    name: PropTypes.string
+  })
+};

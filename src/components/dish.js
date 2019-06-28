@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button } from "antd";
+import PropTypes from "prop-types";
 
 function Dish(props) {
   return (
@@ -23,5 +24,11 @@ function Dish(props) {
     </Card>
   );
 }
+
+Dish.propTypes = {
+  price: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
 export default Dish;
