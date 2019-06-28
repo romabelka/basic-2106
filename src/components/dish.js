@@ -25,6 +25,10 @@ function Dish(props) {
   );
 }
 
+Dish.defaultProps = {
+  name: "Unknown"
+};
+
 Dish.propTypes = {
   price: PropTypes.number.isRequired,
   name: PropTypes.string,
