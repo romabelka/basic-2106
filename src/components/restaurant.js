@@ -7,6 +7,17 @@ import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+  Restaurant.propTypes = {
+    isOpen: PropTypes.bool,
+    onBtnClick: PropTypes.func,
+    restaurant: PropTypes.shape({
+      menu: PropTypes.array,
+      reviews: PropTypes.array,
+      image: PropTypes.string,
+      name: PropTypes.string
+    })
+  };
+
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} ref={setMenuRef} />
@@ -30,19 +41,8 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
       {body}
     </List.Item>
   );
-}
 
-function setMenuRef(ref) {
-  console.log("---", ref, findDOMNode(ref));
+  function setMenuRef(ref) {
+    console.log("---", ref, findDOMNode(ref));
+  }
 }
-
-Restaurant.propTypes = {
-  isOpen: PropTypes.bool,
-  onBtnClick: PropTypes.func,
-  restaurant: PropTypes.shape({
-    menu: PropTypes.array,
-    reviews: PropTypes.array,
-    image: PropTypes.string,
-    name: PropTypes.string
-  })
-};

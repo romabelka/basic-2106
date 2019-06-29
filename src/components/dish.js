@@ -1,18 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 
 function Dish(props) {
+  const [counter, setCounter] = useState(0);
+
+  const changeCounter = operation => () => {
+    operation === "plus"
+      ? setCounter(counter + 1)
+      : setCounter(counter === 0 ? counter : counter - 1);
+  };
+
   return (
     <Card
       bordered
       actions={[
         `$${props.price}`,
         <>
-          <span style={{ margin: "0 12px" }}>{0}</span>
+          <span data-id="count" style={{ margin: "0 12px" }}>
+            {counter}
+          </span>
           <Button.Group>
-            <Button type="primary" shape="circle" icon="minus" />
-            <Button type="primary" shape="circle" icon="plus" />
+            <Button
+              type="primary"
+              shape="circle"
+              icon="minus"
+              onClick={changeCounter("minus")}
+              data-id="minus-btn"
+            />
+            <Button
+              type="primary"
+              shape="circle"
+              icon="plus"
+              onClick={changeCounter("plus")}
+              data-id="plus-btn"
+            />
           </Button.Group>
         </>
       ]}
@@ -20,6 +42,7 @@ function Dish(props) {
       <Card.Meta
         title={props.name}
         description={props.ingredients.join(", ")}
+        data-id="dish"
       />
     </Card>
   );
