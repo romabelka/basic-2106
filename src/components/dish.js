@@ -1,20 +1,49 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import * as PropTypes from "prop-types";
 import { Card, Button } from "antd";
 
-function Dish(props) {
+const Quantity = ({ quantity }) => (
+  <span style={{ margin: "0 12px" }}>{quantity}</span>
+);
+
+Quantity.propTypes = {
+  quantity: PropTypes.number
+};
+
+Quantity.defaultProps = {
+  quantity: 0
+};
+
+const Dish = props => {
+  const [quantity, setQuantity] = useState(0);
+
   return (
     <Card
       bordered
       actions={[
         `$${props.price}`,
-        <>
-          <span style={{ margin: "0 12px" }}>{0}</span>
+        <Fragment>
+          <Quantity quantity={quantity} />
           <Button.Group>
-            <Button type="primary" shape="circle" icon="minus" />
-            <Button type="primary" shape="circle" icon="plus" />
+            <Button
+              onClick={() => {
+                setQuantity(quantity - 1);
+              }}
+              disabled={!quantity}
+              type="primary"
+              shape="circle"
+              icon="minus"
+            />
+            <Button
+              onClick={() => {
+                setQuantity(quantity + 1);
+              }}
+              type="primary"
+              shape="circle"
+              icon="plus"
+            />
           </Button.Group>
-        </>
+        </Fragment>
       ]}
     >
       <Card.Meta
@@ -23,7 +52,7 @@ function Dish(props) {
       />
     </Card>
   );
-}
+};
 
 Dish.defaultProps = {
   name: "Unknown"
@@ -36,3 +65,4 @@ Dish.propTypes = {
 };
 
 export default Dish;
+export { Quantity };
