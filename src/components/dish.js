@@ -2,27 +2,59 @@ import React from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 
-function Dish(props) {
-  return (
-    <Card
-      bordered
-      actions={[
-        `$${props.price}`,
-        <>
-          <span style={{ margin: "0 12px" }}>{0}</span>
-          <Button.Group>
-            <Button type="primary" shape="circle" icon="minus" />
-            <Button type="primary" shape="circle" icon="plus" />
-          </Button.Group>
-        </>
-      ]}
-    >
-      <Card.Meta
-        title={props.name}
-        description={props.ingredients.join(", ")}
-      />
-    </Card>
-  );
+class Dish extends React.Component {
+  state = {
+    count: 0
+  };
+
+  addDish = () => {
+    this.setState(state => ({
+      count: state.count + 1
+    }));
+  };
+
+  removeDish = () => {
+    this.setState(state => ({
+      count: state.count === 0 ? 0 : state.count - 1
+    }));
+  };
+
+  render() {
+    return (
+      <Card
+        bordered
+        actions={[
+          `$${this.props.price}`,
+          <>
+            <span style={{ margin: "0 12px" }} data-id="dish-count">
+              {this.state.count}
+            </span>
+            <Button.Group>
+              <Button
+                type="primary"
+                shape="circle"
+                icon="minus"
+                data-id="dish-btn-minus"
+                onClick={this.removeDish}
+              />
+              <Button
+                type="primary"
+                shape="circle"
+                icon="plus"
+                data-id="dish-btn-plus"
+                onClick={this.addDish}
+              />
+            </Button.Group>
+          </>
+        ]}
+      >
+        <Card.Meta
+          title={this.props.name}
+          description={this.props.ingredients.join(", ")}
+        />
+      </Card>
+    );
+  }
 }
 
 Dish.defaultProps = {
