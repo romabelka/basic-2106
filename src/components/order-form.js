@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Input } from "antd";
+import PropTypes from "prop-types";
 
 export default function OrderForm() {
   const [name, setName] = useInputValue();
@@ -23,6 +24,12 @@ export default function OrderForm() {
     </form>
   );
 }
+
+OrderForm.propTypes = {
+  name: PropTypes.string,
+  address: PropTypes.string,
+  telephone: PropTypes.string
+};
 
 function useInputValue(initialValue) {
   const [state, setState] = useState(initialValue);

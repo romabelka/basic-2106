@@ -2,6 +2,7 @@ import React from "react";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { List } from "antd";
+import PropTypes from "prop-types";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
@@ -18,5 +19,11 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
     </List>
   );
 }
+
+RestaurantsList.propTypes = {
+  isItemOpen: PropTypes.func,
+  toggleOpenItem: PropTypes.func,
+  restaurants: PropTypes.arrayOf(PropTypes.object)
+};
 
 export default accordionDecorator(RestaurantsList);

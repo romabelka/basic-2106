@@ -2,6 +2,7 @@ import React from "react";
 import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
+import PropTypes from "prop-types";
 
 function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
@@ -23,5 +24,11 @@ function ReviewList({ reviews }) {
     </div>
   );
 }
+
+ReviewList.propTypes = {
+  isOpen: PropTypes.bool,
+  toggleOpen: PropTypes.func,
+  reviews: PropTypes.arrayOf(PropTypes.object)
+};
 
 export default ReviewList;
