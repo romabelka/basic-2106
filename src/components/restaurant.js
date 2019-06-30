@@ -1,6 +1,6 @@
 import React from "react";
 import { findDOMNode } from "react-dom";
-import { Avatar, Button, List } from "antd";
+import { Avatar, Button, List, Rate } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
@@ -27,6 +27,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
         avatar={<Avatar shape="square" src={restaurant.image} />}
         title={restaurant.name}
       />
+      Set rating: <Rate data-id="restaurant-rating" />
       {body}
     </List.Item>
   );
