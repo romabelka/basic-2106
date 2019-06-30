@@ -1,19 +1,38 @@
 import React from "react";
 import { findDOMNode } from "react-dom";
-import { Avatar, Button, List } from "antd";
+import { Avatar, Button, List, Rate } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+  const reviews = restaurant.reviews;
+
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} ref={setMenuRef} />
-      <ReviewList reviews={restaurant.reviews} />
+      <ReviewList reviews={reviews} />
       <RestaurantMap />
     </div>
   );
+
+  let rate;
+  if (reviews.length) {
+    let rateValue =
+      reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+    rateValue = Math.round(rateValue);
+
+    rate = (
+      <Rate
+        disabled
+        defaultValue={rateValue}
+        style={{ marginLeft: "24px" }}
+        data-id="restaurant-rate"
+      />
+    );
+  }
+
   return (
     <List.Item
       style={{ paddingLeft: "8px" }}
@@ -25,7 +44,12 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
     >
       <List.Item.Meta
         avatar={<Avatar shape="square" src={restaurant.image} />}
-        title={restaurant.name}
+        title={
+          <div>
+            {restaurant.name}
+            {rate}
+          </div>
+        }
       />
       {body}
     </List.Item>
