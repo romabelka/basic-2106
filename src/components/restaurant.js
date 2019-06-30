@@ -1,18 +1,10 @@
 import React from "react";
 import * as PropTypes from "prop-types";
-import { findDOMNode } from "react-dom";
 import { Avatar, Button, List } from "antd";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
-  const body = isOpen && (
-    <div data-id="restaurant-body">
-      <RestaurantMenu menu={restaurant.menu} ref={setMenuRef} />
-      <ReviewList reviews={restaurant.reviews} />
-    </div>
-  );
-
   return (
     <List.Item
       style={{ paddingLeft: "8px" }}
@@ -26,13 +18,14 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
         avatar={<Avatar shape="square" src={restaurant.image} />}
         title={restaurant.name}
       />
-      {body}
+      {isOpen && (
+        <div data-id="restaurant-body">
+          <RestaurantMenu menu={restaurant.menu} />
+          <ReviewList reviews={restaurant.reviews} />
+        </div>
+      )}
     </List.Item>
   );
-}
-
-function setMenuRef(ref) {
-  console.log("---", ref, findDOMNode(ref));
 }
 
 Restaurant.propTypes = {

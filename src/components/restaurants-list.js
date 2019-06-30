@@ -5,19 +5,17 @@ import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
-  return (
-    <List>
-      {restaurants.map(restaurant => (
-        <Restaurant
-          key={restaurant.id}
-          restaurant={restaurant}
-          isOpen={isItemOpen(restaurant.id)}
-          onBtnClick={toggleOpenItem(restaurant.id)}
-          data-id="restaurant"
-        />
-      ))}
-    </List>
+  const ListItem = item => (
+    <Restaurant
+      key={item.id}
+      restaurant={item}
+      isOpen={isItemOpen(item.id)}
+      onBtnClick={toggleOpenItem(item.id)}
+      data-id="restaurant"
+    />
   );
+
+  return <List dataSource={restaurants} renderItem={ListItem} />;
 }
 
 RestaurantsList.propTypes = {

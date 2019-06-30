@@ -6,19 +6,16 @@ import Review from "./review";
 
 function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
-  const body = isOpen && (
-    <List>
-      {reviews.map(review => (
-        <List.Item key={review.id}>
-          <Review review={review} />
-        </List.Item>
-      ))}
-    </List>
+
+  const ListItem = item => (
+    <List.Item>
+      <Review review={item} />
+    </List.Item>
   );
 
   return (
     <div>
-      {body}
+      {isOpen && <List dataSource={reviews} renderItem={ListItem} />}
       <Button onClick={toggleOpen}>
         {isOpen ? "hide reviews" : "show reviews"}
       </Button>
@@ -27,11 +24,7 @@ function ReviewList({ reviews }) {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-    })
-  )
+  reviews: PropTypes.arrayOf(PropTypes.object)
 };
 
 ReviewList.defaultProps = {
