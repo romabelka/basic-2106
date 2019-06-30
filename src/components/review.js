@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import * as PropTypes from "prop-types";
 import { Comment, Rate } from "antd";
 
 function Review({ review }) {
+  const [rating, setRating] = useState(review.rating);
+
   return (
     <Comment
       style={{
@@ -13,9 +15,9 @@ function Review({ review }) {
       content={review.text}
       actions={[
         <Rate
-          disabled
-          defaultValue={review.rating}
+          value={rating}
           style={{ marginLeft: "24px" }}
+          onChange={value => setRating(value)}
         />
       ]}
     />
