@@ -14,11 +14,13 @@ describe("RestaurantsList", () => {
       restaurants.length
     );
   });
+
   it("should render restaurants closed by default", () => {
     const container = mount(<RestaurantsList restaurants={restaurants} />);
 
     expect(container.find('[data-id="restaurant-body"]').length).toEqual(0);
   });
+
   it("should render restaurants open restaurant body on click", () => {
     const container = mount(<RestaurantsList restaurants={restaurants} />);
 
@@ -31,6 +33,7 @@ describe("RestaurantsList", () => {
 
     expect(container.find('[data-id="restaurant-body"]').length).toEqual(1);
   });
+
   it("should render restaurants close restaurant body on click when open", () => {
     const container = mount(<RestaurantsList restaurants={restaurants} />);
 
