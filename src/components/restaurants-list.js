@@ -1,7 +1,8 @@
 import React from "react";
+import * as PropTypes from "prop-types";
+import { List } from "antd";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
-import { List } from "antd";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
@@ -18,5 +19,22 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
     </List>
   );
 }
+
+RestaurantsList.propTypes = {
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+    })
+  ),
+  toggleOpenItem: PropTypes.func,
+  isItemOpen: PropTypes.func
+};
+
+// noinspection JSUnusedGlobalSymbols
+RestaurantsList.defaultProps = {
+  restaurants: [],
+  toggleOpenItem: () => null,
+  isItemOpen: () => false
+};
 
 export default accordionDecorator(RestaurantsList);

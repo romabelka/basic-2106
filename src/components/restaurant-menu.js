@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import * as PropTypes from "prop-types";
 import Dish from "./dish";
 import { Row, Col } from "antd";
 
@@ -7,18 +8,17 @@ class RestaurantMenu extends Component {
     error: null
   };
 
-  /*
-       getSnapshotBeforeUpdate(prevProps, prevState) {}
-        componentWillReceiveProps(nextProps, nextContext) {
-        }
+  static propTypes = {
+    menu: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+      })
+    )
+  };
 
-        componentWillUpdate(nextProps, nextState, nextContext) {
-        }
-
-        componentWillMount() {
-
-        }
-    */
+  static defaultProps = {
+    menu: []
+  };
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error });

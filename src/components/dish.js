@@ -1,6 +1,6 @@
 import React from "react";
+import * as PropTypes from "prop-types";
 import { Card, Button } from "antd";
-import PropTypes from "prop-types";
 
 function Dish(props) {
   return (
