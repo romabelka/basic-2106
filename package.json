@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.19.8",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
@@ -30,6 +31,8 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "husky": "^2.3.0",
     "prettier": "1.17.1",
     "pretty-quick": "^1.10.0"
