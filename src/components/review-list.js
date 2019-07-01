@@ -11,13 +11,15 @@ function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
 
   const body = isOpen && (
-    <List>
-      {reviews.map(review => (
-        <List.Item key={review.id}>
-          <Review key={review.id} review={review} />
-        </List.Item>
-      ))}
-    </List>
+    <>
+      <List>
+        {reviews.map(review => (
+          <List.Item key={review.id}>
+            <Review key={review.id} review={review} />
+          </List.Item>
+        ))}
+      </List>
+    </>
   );
   return (
     <div>
