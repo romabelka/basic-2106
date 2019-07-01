@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Dish from "./dish";
 import { Row, Col } from "antd";
+import PropTypes from "prop-types";
 
 class RestaurantMenu extends Component {
   static getDerivedStateFromProps(props, state) {
@@ -46,5 +47,9 @@ class RestaurantMenu extends Component {
 
   setContainerRef = element => console.log(element);
 }
+
+RestaurantMenu.propTypes = {
+  menu: PropTypes.arrayOf(PropTypes.object)
+};
 
 export default RestaurantMenu;
