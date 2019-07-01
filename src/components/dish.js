@@ -1,28 +1,66 @@
-import React from "react";
+import React, { Component } from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 
-function Dish(props) {
-  return (
-    <Card
-      bordered
-      actions={[
-        `$${props.price}`,
-        <>
-          <span style={{ margin: "0 12px" }}>{0}</span>
-          <Button.Group>
-            <Button type="primary" shape="circle" icon="minus" />
-            <Button type="primary" shape="circle" icon="plus" />
-          </Button.Group>
-        </>
-      ]}
-    >
-      <Card.Meta
-        title={props.name}
-        description={props.ingredients.join(", ")}
-      />
-    </Card>
-  );
+class Dish extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      itemsCount: 0
+    };
+  }
+
+  addItem = () => {
+    this.setState(state => ({
+      itemsCount: this.state.itemsCount + 1
+    }));
+  };
+
+  removeItem = () => {
+    this.setState(state => ({
+      itemsCount: this.state.itemsCount > 0 ? this.state.itemsCount - 1 : 0
+    }));
+  };
+
+  render() {
+    return (
+      <Card
+        bordered
+        actions={[
+          `$${this.props.price}`,
+          <>
+            <span style={{ margin: "0 12px" }} data-id="itemsCount">
+              {this.state.itemsCount}
+            </span>
+            <Button.Group>
+              <Button
+                type="primary"
+                shape="circle"
+                icon="minus"
+                data-id="dish-btn-minus"
+                onClick={this.removeItem}
+              />
+              <Button
+                type="primary"
+                shape="circle"
+                icon="plus"
+                data-id="dish-btn-plus"
+                onClick={this.addItem}
+              />
+            </Button.Group>
+          </>
+        ]}
+      >
+        <Card.Meta
+          title={this.props.name ? this.props.name : ""}
+          description={
+            this.props.ingredients ? this.props.ingredients.join(", ") : []
+          }
+        />
+      </Card>
+    );
+  }
 }
 
 Dish.defaultProps = {

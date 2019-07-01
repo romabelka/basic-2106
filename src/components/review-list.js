@@ -2,6 +2,7 @@ import React from "react";
 import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
+import PropTypes from "prop-types";
 
 function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
@@ -23,5 +24,17 @@ function ReviewList({ reviews }) {
     </div>
   );
 }
+
+ReviewList.propTypes = {
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+    })
+  )
+};
+
+ReviewList.defaultProps = {
+  reviews: []
+};
 
 export default ReviewList;
