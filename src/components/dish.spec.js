@@ -13,11 +13,20 @@ describe("Dish: test cases", () => {
   let addBtn = container.find('[data-id="dish-btn-plus"]');
   let removeBtn = container.find('[data-id="dish-btn-minus"]');
 
-  it("checking default items count", () => {
+  it("test default items count", () => {
     expect(itemsCount.text()).toEqual("0");
   });
 
-  it("checking items count on 'add button' clicks", () => {
+  it("test on positive items count", () => {
+    removeBtn
+      .at(0)
+      .simulate("click")
+      .simulate("click");
+
+    expect(itemsCount.text()).toEqual("0");
+  });
+
+  it("test items count on 'add button' clicks", () => {
     addBtn.at(0).simulate("click");
 
     expect(itemsCount.text()).toEqual("1");
@@ -27,7 +36,7 @@ describe("Dish: test cases", () => {
     expect(itemsCount.text()).toEqual("2");
   });
 
-  it("checking items count on 'remove button' clicks", () => {
+  it("test items count on 'remove button' clicks", () => {
     removeBtn.at(0).simulate("click");
 
     expect(itemsCount.text()).toEqual("1");
