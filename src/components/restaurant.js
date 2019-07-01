@@ -7,6 +7,7 @@ import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} ref={setMenuRef} />
@@ -14,6 +15,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
       <RestaurantMap />
     </div>
   );
+  
   return (
     <List.Item
       style={{ paddingLeft: "8px" }}
