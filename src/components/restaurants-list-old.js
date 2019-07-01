@@ -1,6 +1,7 @@
 import React from "react";
 import Restaurant from "./restaurant";
 import { useAccordion } from "../custom-hooks/use-accordion";
+import propTypes from "prop-types";
 
 export default function RestaurantsList({ restaurants }) {
   const { toggleOpenItem, isItemOpen } = useAccordion();
@@ -18,3 +19,7 @@ export default function RestaurantsList({ restaurants }) {
     </div>
   );
 }
+
+RestaurantsList.propTypes = {
+  restaurants: propTypes.arrayOf(propTypes.string).isRequired
+};
