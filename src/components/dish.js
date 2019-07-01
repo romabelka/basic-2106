@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 
@@ -12,25 +12,27 @@ function Dish(props) {
       actions={[
         `$${props.price}`,
         <>
-          <span data-id="span" style={{ margin: "0 12px" }}>
-            {amount}
-          </span>
-          <Button.Group>
-            <Button
-              onClick={onMinusClick}
-              data-id="minus-btn"
-              type="primary"
-              shape="circle"
-              icon="minus"
-            />
-            <Button
-              onClick={onPlusClick}
-              data-id="plus-btn"
-              type="primary"
-              shape="circle"
-              icon="plus"
-            />
-          </Button.Group>
+          <Fragment>
+            <span data-id="span" style={{ margin: "0 12px" }}>
+              {amount}
+            </span>
+            <Button.Group>
+              <Button
+                onClick={onMinusClick}
+                data-id="minus-btn"
+                type="primary"
+                shape="circle"
+                icon="minus"
+              />
+              <Button
+                onClick={onPlusClick}
+                data-id="plus-btn"
+                type="primary"
+                shape="circle"
+                icon="plus"
+              />
+            </Button.Group>
+          </Fragment>
         </>
       ]}
     >

@@ -36,7 +36,7 @@ class RestaurantMenu extends Component {
 }
 
 RestaurantMenu.propTypes = {
-  menu: PropTypes.arrayOf(PropTypes.string).isRequired
+  menu: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default RestaurantMenu;

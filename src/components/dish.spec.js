@@ -6,7 +6,7 @@ import { restaurants } from "../fixtures";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("Dish", () => {
+describe("Dish amount change", () => {
   let menu = restaurants[0].menu[0];
   const container = mount(<Dish {...menu} />);
   const span = container.find('[data-id="span"]');
@@ -22,13 +22,15 @@ describe("Dish", () => {
     expect(span.text()).toEqual("2");
   });
 
-  it("should decrease amount of dishes by one(1) when clicked on - button, but only when amount > 0", () => {
+  it("should decrease amount of dishes by one(1) when clicked on - button", () => {
     minusBtn.simulate("click");
     expect(span.text()).toEqual("1");
 
     minusBtn.simulate("click");
     expect(span.text()).toEqual("0");
+  });
 
+  it("should not decrease amount when current amount = 0", () => {
     minusBtn.simulate("click");
     expect(span.text()).toEqual("0");
   });
