@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import Dish from "./dish";
 import { Row, Col } from "antd";
+import PropTypes from "prop-types";
 
 class RestaurantMenu extends Component {
+  static propTypes = {
+    menu: PropTypes.array
+  };
+
   static getDerivedStateFromProps(props, state) {
     return {};
   }
