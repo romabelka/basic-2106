@@ -6,8 +6,9 @@ import * as PropTypes from "prop-types";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
-    <List>
-      {restaurants.map(restaurant => (
+    <List
+      dataSource={restaurants}
+      renderItem={restaurant => (
         <Restaurant
           key={restaurant.id}
           restaurant={restaurant}
@@ -15,7 +16,9 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
           onBtnClick={toggleOpenItem(restaurant.id)}
           data-id="restaurant"
         />
-      ))}
+      )}
+    >
+      >
     </List>
   );
 }
@@ -23,7 +26,7 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
 RestaurantsList.propTypes = {
   restaurants: PropTypes.array,
   toggleOpenItem: PropTypes.func,
-  isItemOpen: PropTypes.bool
+  isItemOpen: PropTypes.func
 };
 
 export default accordionDecorator(RestaurantsList);

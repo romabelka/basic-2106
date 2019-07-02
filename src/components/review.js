@@ -1,26 +1,37 @@
 import React from "react";
 import { Comment, Rate } from "antd";
-import PropTypes from "prop-types";
-import Dish from "./dish";
+import * as PropTypes from "prop-types";
 
-function Review({ review }) {
-  return (
-    <Comment
-      style={{
-        margin: "16px",
-        backgroundColor: "white"
-      }}
-      author={review.user}
-      content={review.text}
-      actions={[
-        <Rate
-          disabled
-          defaultValue={review.rating}
-          style={{ marginLeft: "24px" }}
-        />
-      ]}
-    />
-  );
+class Review extends React.PureComponent {
+  state = {
+    rating: this.props.review.rating
+  };
+
+  onChange = value => {
+    this.setState({ rating: value });
+  };
+
+  render() {
+    return (
+      <Comment
+        style={{
+          margin: "16px",
+          backgroundColor: "white"
+        }}
+        author={this.props.review.user}
+        content={this.props.review.text}
+        actions={[
+          <Rate
+            data-id="rating"
+            onChange={this.onChange}
+            defaultValue={this.state.rating}
+            value={this.state.rating}
+            style={{ marginLeft: "24px" }}
+          />
+        ]}
+      />
+    );
+  }
 }
 
 Review.propTypes = {

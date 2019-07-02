@@ -2,18 +2,9 @@ import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { restaurants } from "../fixtures";
 import React from "react";
-import Dish from "./dish";
+import Dish from "./../components/dish";
 
 Enzyme.configure({ adapter: new Adapter() });
-
-/*
-* Dish.propTypes = {
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
-};
-
-* */
 
 describe("Dish", () => {
   it("the only counter should be present per dish", () => {

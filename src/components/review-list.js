@@ -7,13 +7,14 @@ import * as PropTypes from "prop-types";
 function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
-    <List>
-      {reviews.map(review => (
-        <List.Item key={review.id}>
-          <Review review={review} />
+    <List
+      dataSource={reviews}
+      renderItem={item => (
+        <List.Item key={item.id}>
+          <Review review={item} />
         </List.Item>
-      ))}
-    </List>
+      )}
+    />
   );
   return (
     <div>
