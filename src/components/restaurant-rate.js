@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 import { Rate } from "antd";
 
 class RestaurantRate extends Component {
   static propTypes = {
     restaurant: PropTypes.object.isRequired
   };
+
   state = {
     rate: getDefaultRate(this.props.restaurant)
   };

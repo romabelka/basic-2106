@@ -1,23 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
+import { List } from "antd";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
-import { List } from "antd";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
-  return (
-    <List>
-      {restaurants.map(restaurant => (
-        <Restaurant
-          key={restaurant.id}
-          restaurant={restaurant}
-          isOpen={isItemOpen(restaurant.id)}
-          onBtnClick={toggleOpenItem(restaurant.id)}
-          data-id="restaurant"
-        />
-      ))}
-    </List>
+  const ListItem = item => (
+    <Restaurant
+      restaurant={item}
+      isOpen={isItemOpen(item.id)}
+      onBtnClick={toggleOpenItem(item.id)}
+      data-id="restaurant"
+    />
   );
+
+  return <List dataSource={restaurants} renderItem={ListItem} />;
 }
 
 RestaurantsList.propTypes = {
