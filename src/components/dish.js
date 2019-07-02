@@ -2,10 +2,9 @@ import React from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { increment, decrement } from "../ac";
 
 function Dish(props) {
-  const handleIncrease = () => props.dispatch({ type: "increment" });
-  const handleDecrease = () => props.dispatch({ type: "decrement" });
   return (
     <Card
       bordered
@@ -21,14 +20,14 @@ function Dish(props) {
               shape="circle"
               icon="minus"
               data-id="dish-minus"
-              onClick={handleDecrease}
+              onClick={props.handleDecrease}
             />
             <Button
               type="primary"
               shape="circle"
               icon="plus"
               data-id="dish-plus"
-              onClick={handleIncrease}
+              onClick={props.handleIncrease}
             />
           </Button.Group>
         </>
@@ -56,4 +55,12 @@ const mapStateToProps = state => ({
   amount: state.count
 });
 
-export default connect(mapStateToProps)(Dish);
+const mapDispatchToProps = {
+  handleIncrease: increment,
+  handleDecrease: decrement
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dish);
