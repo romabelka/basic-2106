@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 function Dish(props) {
-  const [amount, setAmount] = useState(0);
-  const handleIncrease = () => setAmount(amount + 1);
-  const handleDecrease = () => setAmount(Math.max(amount - 1, 0));
+  const handleIncrease = () => props.dispatch({ type: "increment" });
+  const handleDecrease = () => props.dispatch({ type: "decrement" });
   return (
     <Card
       bordered
@@ -13,7 +13,7 @@ function Dish(props) {
         `$${props.price}`,
         <>
           <span style={{ margin: "0 12px" }} data-id="dish-amount">
-            {amount}
+            {props.amount}
           </span>
           <Button.Group>
             <Button
@@ -52,4 +52,8 @@ Dish.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
-export default Dish;
+const mapStateToProps = state => ({
+  amount: state.count
+});
+
+export default connect(mapStateToProps)(Dish);
