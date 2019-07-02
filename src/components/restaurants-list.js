@@ -6,8 +6,9 @@ import { List } from "antd";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
-    <List>
-      {restaurants.map(restaurant => (
+    <List
+      dataSource={restaurants}
+      renderItem={restaurant => (
         <Restaurant
           key={restaurant.id}
           restaurant={restaurant}
@@ -15,8 +16,8 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
           onBtnClick={toggleOpenItem(restaurant.id)}
           data-id="restaurant"
         />
-      ))}
-    </List>
+      )}
+    />
   );
 }
 

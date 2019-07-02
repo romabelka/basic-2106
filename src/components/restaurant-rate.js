@@ -27,6 +27,4 @@ function getDefaultRate(restaurant) {
     .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
 }
 
-RestaurantRate.propTypes = {};
-
 export default RestaurantRate;

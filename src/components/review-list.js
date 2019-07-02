@@ -7,13 +7,14 @@ import Review from "./review";
 function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
-    <List>
-      {reviews.map(review => (
+    <List
+      dataSource={reviews}
+      renderItem={review => (
         <List.Item key={review.id}>
           <Review review={review} />
         </List.Item>
-      ))}
-    </List>
+      )}
+    />
   );
   return (
     <div>
