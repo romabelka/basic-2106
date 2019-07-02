@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 
-function Dish(props) {
+export default function Dish(props) {
   const [count, setCount] = useState(0);
   return (
     <Card
@@ -55,5 +55,3 @@ Dish.propTypes = {
   name: PropTypes.string,
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
 };
-
-export default Dish;

@@ -3,12 +3,14 @@ import { Avatar, Button, List } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
+import Rating from "./rating";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} />
       <ReviewList reviews={restaurant.reviews} />
+      <Rating />
     </div>
   );
   return (

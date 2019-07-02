@@ -2,7 +2,7 @@ import React from "react";
 import { Comment, Rate } from "antd";
 import PropTypes from "prop-types";
 
-function Review({ review }) {
+export default function Review({ review }) {
   return (
     <Comment
       style={{
@@ -29,5 +29,3 @@ Review.propTypes = {
     rating: PropTypes.number
   })
 };
-
-export default Review;
