@@ -27,7 +27,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
         avatar={<Avatar shape="square" src={restaurant.image} />}
         title={restaurant.name}
       />
-      <RestaurantRate restaurant={restaurant} />
+      <RestaurantRate restaurant={restaurant} key={restaurant.id} />
       {body}
     </List.Item>
   );

@@ -20,7 +20,7 @@ class RestaurantRate extends Component {
   }
 }
 
-function getDefaultRate(restaurant) {
+export function getDefaultRate(restaurant) {
   return restaurant.reviews
     .map(review => review.rating)
     .filter(rate => typeof rate !== "undefined")

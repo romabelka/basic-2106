@@ -1,4 +1,10 @@
-import { ADD_ITEM, DECREMENT, INCREMENT, REMOVE_ITEM } from "../constants";
+import {
+  ADD_ITEM,
+  DECREMENT,
+  INCREMENT,
+  REMOVE_ITEM,
+  SET_THRESHOLD
+} from "../constants";
 
 export const increment = () => ({
   type: INCREMENT
@@ -17,3 +23,10 @@ export const removeItem = id => ({
   type: REMOVE_ITEM,
   payload: { id }
 });
+
+export const setThreshold = threshold => {
+  return {
+    type: SET_THRESHOLD,
+    payload: { threshold }
+  };
+};

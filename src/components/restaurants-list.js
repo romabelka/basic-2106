@@ -1,13 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { List } from "antd";
+import { getDefaultRate } from "./restaurant-rate";
+import * as PropTypes from "prop-types";
 
-function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
+function RestaurantsList({
+  restaurants,
+  toggleOpenItem,
+  isItemOpen,
+  ratingThreshold
+}) {
+  let filtered = restaurants.filter(
+    restaurant => getDefaultRate(restaurant) >= ratingThreshold
+  );
+
   return (
     <List
-      dataSource={restaurants}
+      dataSource={filtered}
       renderItem={restaurant => (
         <Restaurant
           key={restaurant.id}
