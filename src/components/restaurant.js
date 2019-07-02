@@ -1,17 +1,14 @@
 import React from "react";
-import { findDOMNode } from "react-dom";
 import { Avatar, Button, List } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
-import RestaurantMap from "./restaurant-map";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   const body = isOpen && (
     <div data-id="restaurant-body">
-      <RestaurantMenu menu={restaurant.menu} ref={setMenuRef} />
+      <RestaurantMenu menu={restaurant.menu} />
       <ReviewList reviews={restaurant.reviews} />
-      <RestaurantMap />
     </div>
   );
   return (
@@ -30,10 +27,6 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
       {body}
     </List.Item>
   );
-}
-
-function setMenuRef(ref) {
-  console.log("---", ref, findDOMNode(ref));
 }
 
 Restaurant.propTypes = {
