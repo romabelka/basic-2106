@@ -1,14 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { List } from "antd";
-import * as PropTypes from "prop-types";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
-    <List
-      dataSource={restaurants}
-      renderItem={restaurant => (
+    <List>
+      {restaurants.map(restaurant => (
         <Restaurant
           key={restaurant.id}
           restaurant={restaurant}
@@ -16,17 +15,15 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
           onBtnClick={toggleOpenItem(restaurant.id)}
           data-id="restaurant"
         />
-      )}
-    >
-      >
+      ))}
     </List>
   );
 }
 
 RestaurantsList.propTypes = {
-  restaurants: PropTypes.array,
-  toggleOpenItem: PropTypes.func,
-  isItemOpen: PropTypes.func
+  restaurants: PropTypes.array.isRequired,
+  toggleOpenItem: PropTypes.func.isRequired,
+  isItemOpen: PropTypes.func.isRequired
 };
 
 export default accordionDecorator(RestaurantsList);

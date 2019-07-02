@@ -1,40 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Button } from "antd";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addItem, removeItem } from "../ac";
 
 function Dish(props) {
-  let [count, setCount] = useState(0);
-
-  const increment = () => setCount(count + 1);
-  const decrement = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  };
-
   return (
     <Card
       bordered
       actions={[
         `$${props.price}`,
         <>
-          <span data-id="counter" style={{ margin: "0 12px" }}>
-            {count}
+          <span style={{ margin: "0 12px" }} data-id="dish-amount">
+            {props.amount}
           </span>
           <Button.Group>
             <Button
-              data-id="minus"
               type="primary"
               shape="circle"
               icon="minus"
-              onClick={decrement}
+              data-id="dish-minus"
+              onClick={() => props.handleDecrease(props.id)}
             />
             <Button
-              data-id="plus"
               type="primary"
               shape="circle"
               icon="plus"
-              onClick={increment}
+              data-id="dish-plus"
+              onClick={() => props.handleIncrease(props.id)}
             />
           </Button.Group>
         </>
@@ -58,4 +51,16 @@ Dish.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
-export default Dish;
+const mapStateToProps = (state, ownProps) => ({
+  amount: state.order[ownProps.id] || 0
+});
+
+const mapDispatchToProps = {
+  handleIncrease: addItem,
+  handleDecrease: removeItem
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dish);

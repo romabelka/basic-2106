@@ -1,20 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
-import * as PropTypes from "prop-types";
 
 function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
-    <List
-      dataSource={reviews}
-      renderItem={item => (
-        <List.Item key={item.id}>
-          <Review review={item} />
+    <List>
+      {reviews.map(review => (
+        <List.Item key={review.id}>
+          <Review review={review} />
         </List.Item>
-      )}
-    />
+      ))}
+    </List>
   );
   return (
     <div>
@@ -26,12 +25,8 @@ function ReviewList({ reviews }) {
   );
 }
 
-Review.propTypes = {
-  reviews: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired
-    })
-  )
+ReviewList.propTypes = {
+  reviews: PropTypes.array.isRequired
 };
 
 export default ReviewList;
