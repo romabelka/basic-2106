@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button } from "antd";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 
 function Dish(props) {
+  let [count, setCount] = useState(0);
+
+  const increment = () => setCount(count + 1);
+  const decrement = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
   return (
     <Card
       bordered
       actions={[
         `$${props.price}`,
         <>
-          <span style={{ margin: "0 12px" }}>{0}</span>
+          <span data-id="counter" style={{ margin: "0 12px" }}>
+            {count}
+          </span>
           <Button.Group>
-            <Button type="primary" shape="circle" icon="minus" />
-            <Button type="primary" shape="circle" icon="plus" />
+            <Button
+              data-id="minus"
+              type="primary"
+              shape="circle"
+              icon="minus"
+              onClick={decrement}
+            />
+            <Button
+              data-id="plus"
+              type="primary"
+              shape="circle"
+              icon="plus"
+              onClick={increment}
+            />
           </Button.Group>
         </>
       ]}
