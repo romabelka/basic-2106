@@ -21,9 +21,9 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
 }
 
 RestaurantsList.propTypes = {
-  restaurants: PropTypes.arrayOf(PropTypes.object).isRequired,
-  toggleOpenItem: PropTypes.func,
-  isItemOpen: PropTypes.func
+  restaurants: PropTypes.array.isRequired,
+  toggleOpenItem: PropTypes.func.isRequired,
+  isItemOpen: PropTypes.func.isRequired
 };
 
 export default accordionDecorator(RestaurantsList);

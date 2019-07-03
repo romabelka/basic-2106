@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Dish from "./dish";
 import { Row, Col } from "antd";
+import PropTypes from "prop-types";
 
 class RestaurantMenu extends Component {
+  static propTypes = {
+    menu: PropTypes.array.isRequired
+  };
+
   static getDerivedStateFromProps(props, state) {
     return {};
   }
@@ -33,7 +37,7 @@ class RestaurantMenu extends Component {
     if (this.state.error) return <h3>Oooops....</h3>;
     const { menu } = this.props;
     return (
-      <div style={{ padding: "16px" }} ref={this.setContainerRef}>
+      <div style={{ padding: "16px" }}>
         <Row gutter={16}>
           {menu.map(dish => (
             <Col key={dish.id} span={8}>
@@ -44,12 +48,6 @@ class RestaurantMenu extends Component {
       </div>
     );
   }
-
-  setContainerRef = element => console.log(element);
 }
-
-RestaurantMenu.propTypes = {
-  menu: PropTypes.arrayOf(PropTypes.object)
-};
 
 export default RestaurantMenu;

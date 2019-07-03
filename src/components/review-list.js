@@ -26,10 +26,7 @@ function ReviewList({ reviews }) {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.object),
-  toggleOpen: PropTypes.func,
-  isOpen: PropTypes.bool
+  reviews: PropTypes.array.isRequired
 };
-
 
 export default ReviewList;

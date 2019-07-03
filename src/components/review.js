@@ -27,7 +27,7 @@ Review.propTypes = {
     user: PropTypes.string,
     text: PropTypes.string,
     rating: PropTypes.number
-  })
+  }).isRequired
 };
 
 export default Review;
