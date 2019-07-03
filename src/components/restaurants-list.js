@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { List } from "antd";
+import { restaurants } from "../fixtures";
+import getDefaultRate from "../utils/getDefaultRate";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
@@ -26,4 +29,14 @@ RestaurantsList.propTypes = {
   isItemOpen: PropTypes.func.isRequired
 };
 
-export default accordionDecorator(RestaurantsList);
+RestaurantsList.defaultProps = {
+  restaurants
+};
+
+const mapStateToProps = state => ({
+  restaurants: restaurants.filter(
+    restaurant => getDefaultRate(restaurant) >= state.rating
+  )
+});
+
+export default connect(mapStateToProps)(accordionDecorator(RestaurantsList));

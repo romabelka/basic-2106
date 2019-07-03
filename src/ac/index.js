@@ -1,4 +1,10 @@
-import { ADD_ITEM, DECREMENT, INCREMENT, REMOVE_ITEM } from "../constants";
+import {
+  ADD_ITEM,
+  DECREMENT,
+  INCREMENT,
+  REMOVE_ITEM,
+  SELECT_RAITING
+} from "../constants";
 
 export const increment = () => ({
   type: INCREMENT
@@ -16,4 +22,9 @@ export const addItem = id => ({
 export const removeItem = id => ({
   type: REMOVE_ITEM,
   payload: { id }
+});
+
+export const selectRaiting = raiting => ({
+  type: SELECT_RAITING,
+  payload: { raiting }
 });
