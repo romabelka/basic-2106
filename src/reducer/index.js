@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import counterReducer from "./counter";
 import order from "./order";
+import minRating from "./min-rating";
 
 export default combineReducers({
-  count: counterReducer,
-  order
+  order,
+  minRating
 });

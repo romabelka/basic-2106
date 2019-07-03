@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM } from "../constants";
+import { ADD_ITEM, REMOVE_ITEM, CHANGE_MIN_RATING } from "../constants";
 
 export const addItem = id => ({
   type: ADD_ITEM,
@@ -8,4 +8,9 @@ export const addItem = id => ({
 export const removeItem = id => ({
   type: REMOVE_ITEM,
   payload: { id }
+});
+
+export const changeMinRating = minRating => ({
+  type: CHANGE_MIN_RATING,
+  payload: { minRating }
 });
