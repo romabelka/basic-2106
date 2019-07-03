@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import Dish from "./dish";
 import { Row, Col } from "antd";
+import PropTypes from "prop-types";
 
 class RestaurantMenu extends Component {
+  static propTypes = {
+    menu: PropTypes.array.isRequired
+  };
+
   static getDerivedStateFromProps(props, state) {
     return {};
   }
@@ -11,9 +16,8 @@ class RestaurantMenu extends Component {
     error: null
   };
 
-  getSnapshotBeforeUpdate(prevProps, prevState) {}
-
   /*
+       getSnapshotBeforeUpdate(prevProps, prevState) {}
         componentWillReceiveProps(nextProps, nextContext) {
         }
 
