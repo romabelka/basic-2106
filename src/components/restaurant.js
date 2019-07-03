@@ -6,14 +6,9 @@ import RestaurantMenu from "./restaurant-menu";
 import RestaurantRate from "./restaurant-rate";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
-  const body = isOpen && (
-    <div data-id="restaurant-body">
-      <RestaurantMenu menu={restaurant.menu} />
-      <ReviewList reviews={restaurant.reviews} />
-    </div>
-  );
   return (
     <List.Item
+      key={restaurant.id}
       style={{ paddingLeft: "8px" }}
       actions={[
         <Button onClick={onBtnClick} data-id="menu-btn">
@@ -26,7 +21,12 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
         title={restaurant.name}
       />
       <RestaurantRate restaurant={restaurant} />
-      {body}
+      {isOpen && (
+        <div data-id="restaurant-body">
+          <RestaurantMenu menu={restaurant.menu} />
+          <ReviewList reviews={restaurant.reviews} />
+        </div>
+      )}
     </List.Item>
   );
 }

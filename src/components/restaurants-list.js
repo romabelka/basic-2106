@@ -1,5 +1,6 @@
 import React from "react";
 import * as PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { List } from "antd";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
@@ -23,4 +24,6 @@ RestaurantsList.propTypes = {
   isItemOpen: PropTypes.func.isRequired
 };
 
-export default accordionDecorator(RestaurantsList);
+const mapStateToProps = ({ filter }) => ({ restaurants: filter.restaurants });
+
+export default connect(mapStateToProps)(accordionDecorator(RestaurantsList));

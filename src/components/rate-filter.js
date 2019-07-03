@@ -30,7 +30,7 @@ RateFilter.defaultProps = {
   highestRating: 5
 };
 
-const mapStateToProps = ({ minRating }) => ({ minRating });
+const mapStateToProps = ({ filter }) => ({ minRating: filter.minRating });
 
 export default connect(
   mapStateToProps,
