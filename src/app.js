@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
 import "antd/dist/antd.css";
-import { restaurants } from "./fixtures";
 import store from "./store";
 import RateFilter from "./components/rate-filter";
 import RestaurantsList from "./components/restaurants-list";
@@ -13,7 +12,7 @@ export default function App() {
       <div>
         <h1>Delivery App</h1>
         <RateFilter />
-        <RestaurantsList restaurants={restaurants} />
+        <RestaurantsList />
         <Cart />
       </div>
     </Provider>
