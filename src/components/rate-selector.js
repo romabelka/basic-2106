@@ -5,20 +5,14 @@ import { selectChange } from "../ac";
 
 const { Option } = Select;
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
-
 function RateSelector(props) {
   return (
     <>
-      <h3>Фильтр ресторанов по рейтингу:</h3>
+      <h3>Min Rating Filter:</h3>
       <Select
-        /*defaultValue="1"*/ value={props.filter}
+        value={props.filterValue}
         style={{ width: 120 }}
-        onChange={
-          filterValue => props.handleSelectChange(filterValue) /*handleChange*/
-        }
+        onChange={filterValue => props.handleSelectChange(filterValue)}
       >
         <Option value="1">*</Option>
         <Option value="2">**</Option>
@@ -31,7 +25,7 @@ function RateSelector(props) {
 }
 
 const mapStateToProps = state => ({
-  filter: state.filter
+  filterValue: state.filterValue
 });
 
 const mapDispatchToProps = {

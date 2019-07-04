@@ -1,18 +1,9 @@
 import {
   ADD_ITEM,
-  DECREMENT,
-  INCREMENT,
   REMOVE_ITEM,
-  SELECT_CHANGE
+  SELECT_CHANGE,
+  RESTAURANT_RATE_CHANGE
 } from "../constants";
-
-export const increment = () => ({
-  type: INCREMENT
-});
-
-export const decrement = () => ({
-  type: DECREMENT
-});
 
 export const addItem = id => ({
   type: ADD_ITEM,
@@ -27,4 +18,9 @@ export const removeItem = id => ({
 export const selectChange = filterValue => ({
   type: SELECT_CHANGE,
   payload: filterValue
+});
+
+export const restaurantRateChange = (id, rate) => ({
+  type: RESTAURANT_RATE_CHANGE,
+  payload: { id, rate }
 });
