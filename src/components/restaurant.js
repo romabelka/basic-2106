@@ -1,5 +1,4 @@
 import React from "react";
-import { findDOMNode } from "react-dom";
 import { Avatar, Button, List } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
