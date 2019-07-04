@@ -1,4 +1,4 @@
-import { ADD_ITEM, DECREMENT, INCREMENT, REMOVE_ITEM } from "../constants";
+import { ADD_ITEM, DECREMENT, INCREMENT, REMOVE_ITEM, CHANGE_ITEM } from "../constants";
 
 export const increment = () => ({
   type: INCREMENT
@@ -17,3 +17,8 @@ export const removeItem = id => ({
   type: REMOVE_ITEM,
   payload: { id }
 });
+
+export const changeItem = value => ({
+  type : CHANGE_ITEM,
+  payload : value 
+})

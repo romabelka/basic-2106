@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { addItem, removeItem } from "../ac";
 
 function Dish(props) {
+  
   return (
     <Card
       bordered
@@ -52,7 +53,7 @@ Dish.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  amount: state.order[ownProps.id] || 0
+  amount : state.order[ownProps.id] || 0
 });
 
 const mapDispatchToProps = {

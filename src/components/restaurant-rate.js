@@ -3,11 +3,17 @@ import PropTypes from "prop-types";
 import { Rate } from "antd";
 
 class RestaurantRate extends Component {
+  
+  constructor(props){
+    super(props);
+  }
+
   static propTypes = {
     restaurant: PropTypes.object.isRequired
   };
+  
   state = {
-    rate: getDefaultRate(this.props.restaurant)
+    rate : this.props.restaurant.rate
   };
 
   render() {
@@ -18,13 +24,6 @@ class RestaurantRate extends Component {
       />
     );
   }
-}
-
-function getDefaultRate(restaurant) {
-  return restaurant.reviews
-    .map(review => review.rating)
-    .filter(rate => typeof rate !== "undefined")
-    .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
 }
 
 RestaurantRate.propTypes = {};

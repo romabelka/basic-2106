@@ -16,19 +16,6 @@ class RestaurantMenu extends Component {
     error: null
   };
 
-  /*
-       getSnapshotBeforeUpdate(prevProps, prevState) {}
-        componentWillReceiveProps(nextProps, nextContext) {
-        }
-
-        componentWillUpdate(nextProps, nextState, nextContext) {
-        }
-
-        componentWillMount() {
-
-        }
-    */
-
   componentDidCatch(error, errorInfo) {
     this.setState({ error });
   }
