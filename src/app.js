@@ -1,17 +1,44 @@
 import React from "react";
 import RestaurantsList from "./components/restaurants-list";
+import RestaurantRateFilter from "./components/restaurant-rate-filter";
 import { restaurants } from "./fixtures";
 import "antd/dist/antd.css";
 import OrderForm from "./components/order-form";
 import Cart from "./components/cart";
+import { connect } from "react-redux";
 
-export default function App() {
+function App(props) {
+  const restaurantsRated = [...restaurants];
+  restaurantsRated.forEach(rest => {
+    rest.rating = rest.reviews
+      .map(rev => rev.rating)
+      .reduce((sum, curr, i, arr) => {
+        sum += curr / arr.length;
+        return sum;
+      }, 0);
+  });
+  console.log(restaurantsRated.map(r => r.rating));
   return (
     <div>
       <h1>Delivery App</h1>
-      <RestaurantsList restaurants={restaurants} />
+      <RestaurantRateFilter />
+      <RestaurantsList
+        restaurants={restaurantsRated.filter(r => {
+          console.log(props.minRating);
+          return r.rating > props.minRating;
+        })}
+      />
       <OrderForm />
       <Cart />
     </div>
   );
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  minRating: state.rating.minRating
+});
+
+export default connect(
+  mapStateToProps,
+  () => ({})
+)(App);
