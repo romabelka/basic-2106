@@ -6,8 +6,14 @@ import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 import RestaurantRate from "./restaurant-rate";
+import { connect } from 'react-redux';
 
-export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+function Restaurant(props) {
+
+  const { minRating, restaurant, isOpen, onBtnClick } = props;  
+  restaurant.rate = getDefaultRate(restaurant);
+  const scorringRatinfg = (restaurant.rate >= minRating);
+
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} />
@@ -15,7 +21,8 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
       <RestaurantMap />
     </div>
   );
-  return (
+
+  return scorringRatinfg && (
     <List.Item
       style={{ paddingLeft: "8px" }}
       actions={[
@@ -34,6 +41,13 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   );
 }
 
+function getDefaultRate(restaurant) {
+  return restaurant.reviews
+    .map(review => review.rating)
+    .filter(rate => typeof rate !== "undefined")
+    .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
+}
+
 Restaurant.propTypes = {
   isOpen: PropTypes.bool,
   onBtnClick: PropTypes.func,
@@ -44,3 +58,10 @@ Restaurant.propTypes = {
     name: PropTypes.string
   })
 };
+
+//export default Restaurant;
+
+export default connect( state => ({
+
+  minRating : state.filterReview || 0
+}))(Restaurant);

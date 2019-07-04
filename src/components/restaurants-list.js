@@ -5,6 +5,7 @@ import accordionDecorator from "../decorators/accordion";
 import { List } from "antd";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
+
   return (
     <List>
       {restaurants.map(restaurant => (
