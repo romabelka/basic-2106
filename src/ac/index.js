@@ -1,4 +1,10 @@
-import { ADD_ITEM, DECREMENT, INCREMENT, REMOVE_ITEM } from "../constants";
+import {
+  ADD_ITEM,
+  DECREMENT,
+  INCREMENT,
+  REMOVE_ITEM,
+  SET_MIN_RATING
+} from "../constants";
 
 export const increment = () => ({
   type: INCREMENT
@@ -17,3 +23,10 @@ export const removeItem = id => ({
   type: REMOVE_ITEM,
   payload: { id }
 });
+
+export const setMinRating = minRating => {
+  return {
+    type: SET_MIN_RATING,
+    payload: { minRating }
+  };
+};
