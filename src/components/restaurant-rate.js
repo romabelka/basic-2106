@@ -1,20 +1,27 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Rate } from "antd";
+import { connect } from "react-redux";
+import { restaurantRateChange } from "../ac";
 
 class RestaurantRate extends Component {
   static propTypes = {
     restaurant: PropTypes.object.isRequired
   };
-  state = {
-    rate: getDefaultRate(this.props.restaurant)
-  };
 
+  componentDidMount() {
+    this.props.handleRateChange(
+      this.props.restaurant.id,
+      getDefaultRate(this.props.restaurant)
+    );
+  }
   render() {
     return (
       <Rate
-        value={this.state.rate}
-        onChange={rate => this.setState({ rate })}
+        value={this.props.rate}
+        onChange={rate =>
+          this.props.handleRateChange(this.props.restaurant.id, rate)
+        }
       />
     );
   }
@@ -29,4 +36,15 @@ function getDefaultRate(restaurant) {
 
 RestaurantRate.propTypes = {};
 
-export default RestaurantRate;
+const mapStateToProps = (state, ownProps) => ({
+  rate: state.restaurantRates[ownProps.restaurant.id] || 0
+});
+
+const mapDispatchToProps = {
+  handleRateChange: restaurantRateChange
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RestaurantRate);

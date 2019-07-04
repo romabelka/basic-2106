@@ -3,11 +3,19 @@ import PropTypes from "prop-types";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { List } from "antd";
+import { connect } from "react-redux";
 
-function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
+function RestaurantsList(props) {
+  let { restaurants, toggleOpenItem, isItemOpen } = props;
+  let filterFunc = restaurant => {
+    return props.restaurantRates[restaurant.id]
+      ? props.restaurantRates[restaurant.id] >= +props.filterValue
+      : true;
+  };
+
   return (
     <List>
-      {restaurants.map(restaurant => (
+      {restaurants.filter(filterFunc).map(restaurant => (
         <Restaurant
           key={restaurant.id}
           restaurant={restaurant}
@@ -26,4 +34,9 @@ RestaurantsList.propTypes = {
   isItemOpen: PropTypes.func.isRequired
 };
 
-export default accordionDecorator(RestaurantsList);
+const mapStateToProps = state => ({
+  restaurantRates: state.restaurantRates,
+  filterValue: state.filterValue
+});
+
+export default connect(mapStateToProps)(accordionDecorator(RestaurantsList));
