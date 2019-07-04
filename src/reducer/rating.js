@@ -1,6 +1,6 @@
 import { SET_MIN_RATING } from "../constants";
 
-export default (rating = {}, action) => {
+export default (rating = { minRating: 4 }, action) => {
   const { type, payload } = action;
 
   switch (type) {

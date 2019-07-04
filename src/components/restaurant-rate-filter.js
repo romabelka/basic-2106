@@ -13,7 +13,7 @@ class RestaurantRateFilter extends Component {
   render() {
     return (
       <Select
-        defaultValue="Select min Rating"
+        defaultValue="Select min Rating (4)"
         style={{ width: "200px" }}
         onChange={value => this.props.setMinRating(value)}
       >
@@ -27,15 +27,11 @@ class RestaurantRateFilter extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  minRating: state.rating
-});
-
 const mapDispatchToProps = {
   setMinRating: setMinRating
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(RestaurantRateFilter);
