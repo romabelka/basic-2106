@@ -1,3 +1,4 @@
+// Action-creator
 import { ADD_ITEM, DECREMENT, INCREMENT, REMOVE_ITEM } from "../constants";
 
 export const increment = () => ({
