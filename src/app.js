@@ -17,14 +17,13 @@ function App(props) {
         return sum;
       }, 0);
   });
-  console.log(restaurantsRated.map(r => r.rating));
+
   return (
     <div>
       <h1>Delivery App</h1>
       <RestaurantRateFilter />
       <RestaurantsList
         restaurants={restaurantsRated.filter(r => {
-          console.log(props.minRating);
           return r.rating > props.minRating;
         })}
       />
