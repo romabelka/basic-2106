@@ -1,13 +1,21 @@
 import { SELECT_RAITING } from "./constants";
 
-export default (raiting = 0, action) => {
+const initialValues = {
+  items: [],
+  filterValue: 0
+};
+
+export default (state = initialValues, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case SELECT_RAITING:
-      return payload.raiting;
+      return {
+        ...state,
+        filterValue: payload
+      };
 
     default:
-      return raiting;
+      return state;
   }
 };
