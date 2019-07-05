@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM } from "../constants";
+import { ADD_ITEM, REMOVE_ITEM } from "./constants";
 
 export default (order = {}, action) => {
   const { type, payload } = action;
