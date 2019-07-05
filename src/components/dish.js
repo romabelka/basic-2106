@@ -3,6 +3,7 @@ import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addItem, removeItem } from "../ac";
+import { dishSelector } from "../selectors";
 
 function Dish({ dish, amount, handleDecrease, handleIncrease }) {
   return (
@@ -50,7 +51,7 @@ Dish.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   amount: state.order[ownProps.id] || 0,
-  dish: state.dishes.find(dish => dish.id === ownProps.id)
+  dish: dishSelector(state, ownProps)
 });
 
 const mapDispatchToProps = {

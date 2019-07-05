@@ -1,10 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
+import { totalAmountSelector, totalPriceSelector } from "../selectors";
 
-function Cart({ total }) {
-  return <div>total items: {total}</div>;
+function Cart({ totalAmount, totalPrice }) {
+  return (
+    <div>
+      total {totalAmount} items from {totalPrice}$
+    </div>
+  );
 }
 
 export default connect(state => ({
-  total: Object.values(state.order).reduce((acc, amount) => acc + amount, 0)
+  totalAmount: totalAmountSelector(state),
+  totalPrice: totalPriceSelector(state)
 }))(Cart);
