@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { List } from "antd";
 import Restaurant from "./restaurant";
-import { restaurants } from "../fixtures";
 import accordionDecorator from "../decorators/accordion";
 import getDefaultRate from "../helpers/getDefaultRate";
 
@@ -33,10 +32,15 @@ RestaurantsList.defaultProps = {
   restaurants: []
 };
 
-const mapStateToProps = state => ({
-  restaurants: restaurants.filter(
-    restaurant => getDefaultRate(restaurant) // >= state.rating
-  )
-});
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    restaurants: state.rating.items.filter(
+      state.rating.filterValue
+        ? restaurant => getDefaultRate(restaurant) === state.rating.filterValue
+        : () => true
+    )
+  };
+};
 
 export default connect(mapStateToProps)(accordionDecorator(RestaurantsList));
