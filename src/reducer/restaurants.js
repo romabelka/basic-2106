@@ -1,6 +1,6 @@
-import { restaurants } from "../fixtures";
+import { normalizedRestaurants as defaultRestaurants } from "../fixtures";
 
-export default (state = restaurants, { type }) => {
+export default (state = defaultRestaurants, { type }) => {
   switch (type) {
     default:
       return state;
