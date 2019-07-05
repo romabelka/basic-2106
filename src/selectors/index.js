@@ -3,8 +3,7 @@ import { getAverageRate } from "../utils";
 
 const restaurantsSelector = state => state.restaurants;
 const filtersSelector = state => state.filters;
-export const dishSelector = (state, { id }) =>
-  state.dishes.find(dish => dish.id === id);
+export const dishSelector = (state, { id }) => state.dishes[id];
 
 export const totalAmountSelector = state =>
   Object.values(state.order).reduce((acc, amount) => acc + amount, 0);
