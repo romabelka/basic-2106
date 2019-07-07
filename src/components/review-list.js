@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
+import { connect } from "react-redux";
+import { reviewsListSelector } from "../selectors";
 
 function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
+
   const body = isOpen && (
     <List>
       {reviews.map(review => (
@@ -29,4 +32,10 @@ ReviewList.propTypes = {
   reviews: PropTypes.array.isRequired
 };
 
-export default ReviewList;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    reviews: reviewsListSelector(state, ownProps)
+  };
+};
+
+export default connect(mapStateToProps)(ReviewList);

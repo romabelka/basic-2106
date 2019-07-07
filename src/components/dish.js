@@ -44,15 +44,17 @@ Dish.defaultProps = {
 };
 
 Dish.propTypes = {
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
+  amount: PropTypes.number.isRequired,
+  handleIncrease: PropTypes.func.isRequired,
+  handleDecrease: PropTypes.func.isRequired
 };
-
+/*
 const mapStateToProps = (state, ownProps) => ({
   amount: state.order[ownProps.id] || 0,
   dish: dishSelector(state, ownProps)
 });
+
+ */
 
 const mapDispatchToProps = {
   handleIncrease: addItem,
@@ -60,6 +62,9 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  mapStateToProps,
+  (state, ownProps) => ({
+    amount: state.order[ownProps.id] || 0,
+    dish: dishSelector(state, ownProps)
+  }),
   mapDispatchToProps
 )(Dish);
