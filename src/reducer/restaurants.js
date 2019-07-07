@@ -1,8 +1,16 @@
-import { normalizedRestaurants as defaultRestaurants } from "../fixtures";
+import { normalizedRestaurants } from "../fixtures";
 
-export default (state = defaultRestaurants, { type }) => {
+const defaultRestaurants = normalizedRestaurants.reduce(
+  (acc, item) => ({
+    ...acc,
+    [item.id]: item
+  }),
+  {}
+);
+
+export default (restaurants = defaultRestaurants, { type }) => {
   switch (type) {
     default:
-      return state;
+      return restaurants;
   }
 };
