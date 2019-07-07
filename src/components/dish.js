@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, Button } from "antd";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Card, Button } from "antd";
 import { addItem, removeItem } from "../ac";
 import { dishSelector } from "../selectors";
 

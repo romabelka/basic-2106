@@ -1,11 +1,14 @@
-import { createStore, applyMiddleware } from "redux";
+// global window
+import { createStore, applyMiddleware, compose } from "redux";
 import reducer from "../reducer";
 import logger from "../middlewares/logger";
 
-const enhancer = applyMiddleware(logger);
-const store = createStore(reducer, enhancer);
+// noinspection JSUnresolvedVariable
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-//dev only. No need in prod
-window.store = store;
+const middleware = [logger];
 
-export default store;
+export default createStore(
+  reducer,
+  composeEnhancers(applyMiddleware(...middleware))
+);

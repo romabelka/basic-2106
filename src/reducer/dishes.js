@@ -8,9 +8,6 @@ const defaultDishes = normalizedDishes.reduce(
   {}
 );
 
-export default (dishes = defaultDishes, { type }) => {
-  switch (type) {
-    default:
-      return dishes;
-  }
+export default (dishes = defaultDishes) => {
+  return dishes;
 };

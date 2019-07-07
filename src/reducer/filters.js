@@ -5,11 +5,9 @@ const initialState = {
 };
 
 export default (filters = initialState, { type, payload }) => {
-  switch (type) {
-    case SET_MIN_RATING:
-      return { ...filters, minRating: payload.minRating };
-
-    default:
-      return filters;
+  if (type === SET_MIN_RATING) {
+    return { ...filters, minRating: payload.minRating };
   }
+
+  return filters;
 };

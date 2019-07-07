@@ -1,18 +1,4 @@
-import {
-  ADD_ITEM,
-  DECREMENT,
-  INCREMENT,
-  REMOVE_ITEM,
-  SET_MIN_RATING
-} from "../constants";
-
-export const increment = () => ({
-  type: INCREMENT
-});
-
-export const decrement = () => ({
-  type: DECREMENT
-});
+import { ADD_ITEM, REMOVE_ITEM, SET_MIN_RATING } from "../constants";
 
 export const addItem = id => ({
   type: ADD_ITEM,
