@@ -1,9 +1,9 @@
 import React from "react";
 import * as PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { List } from "antd";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
-import { List } from "antd";
-import { connect } from "react-redux";
 import { filtratedRestaurantsSelector } from "../selectors";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
@@ -24,7 +24,11 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
 }
 
 RestaurantsList.propTypes = {
-  restaurants: PropTypes.array.isRequired,
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+    })
+  ).isRequired,
   toggleOpenItem: PropTypes.func.isRequired,
   isItemOpen: PropTypes.func.isRequired
 };

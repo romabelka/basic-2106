@@ -24,6 +24,7 @@ function RateFilter({ highestRating, minRating, setMinRating }) {
 }
 
 RateFilter.propTypes = {
+  setMinRating: PropTypes.func.isRequired,
   minRating: PropTypes.number.isRequired,
   highestRating: PropTypes.number
 };

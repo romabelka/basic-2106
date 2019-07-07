@@ -4,3 +4,13 @@ export function getAverageRate(restaurant) {
     .filter(rate => typeof rate !== "undefined")
     .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
 }
+
+export function withKeyValue(array = []) {
+  return array.reduce(
+    (acc, item) => ({
+      ...acc,
+      [item.id]: item
+    }),
+    {}
+  );
+}

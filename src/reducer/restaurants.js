@@ -1,5 +1,6 @@
-import { normalizedRestaurants as defaultRestaurants } from "../fixtures";
+import { normalizedRestaurants } from "../fixtures";
+import { withKeyValue } from "../utils";
 
-export default (state = defaultRestaurants) => {
-  return state;
+export default (restaurants = withKeyValue(normalizedRestaurants)) => {
+  return restaurants;
 };

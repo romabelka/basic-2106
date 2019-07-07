@@ -13,7 +13,7 @@ function ReviewList({ reviews }) {
         <List
           dataSource={reviews}
           renderItem={review => (
-            <List.Item key={review.id}>
+            <List.Item key={review}>
               <Review review={review} />
             </List.Item>
           )}
@@ -27,7 +27,9 @@ function ReviewList({ reviews }) {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.array.isRequired
+  reviews: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  )
 };
 
 export default ReviewList;

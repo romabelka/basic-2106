@@ -1,4 +1,4 @@
-// noinspection LongLine
+// noinspection LongLine,JSUnusedGlobalSymbols
 const restaurants = [
   {
     id: "a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2",
@@ -356,6 +356,7 @@ const normalizedReviews = [
   }
 ];
 
+// noinspection JSUnusedGlobalSymbols
 const normalizedUsers = [
   {
     id: "a304959a-76c0-4b34-954a-b38dbf310360",
@@ -383,6 +384,7 @@ const normalizedUsers = [
   }
 ];
 
+// noinspection JSUnusedGlobalSymbols
 export {
   restaurants,
   normalizedDishes,

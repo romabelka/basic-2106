@@ -1,13 +1,6 @@
 import { normalizedDishes } from "../fixtures";
+import { withKeyValue } from "../utils";
 
-const defaultDishes = normalizedDishes.reduce(
-  (acc, item) => ({
-    ...acc,
-    [item.id]: item
-  }),
-  {}
-);
-
-export default (dishes = defaultDishes) => {
+export default (dishes = withKeyValue(normalizedDishes)) => {
   return dishes;
 };
