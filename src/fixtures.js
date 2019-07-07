@@ -380,7 +380,6 @@ const normalizedUsers = [
     name: "Sam"
   }
 ];
-
 export {
   restaurants,
   normalizedDishes,

@@ -1,7 +1,29 @@
-import { normalizedRestaurants as defaultRestaurants } from "../fixtures";
+import { normalizedRestaurants } from "../fixtures";
+import { ADD_REVIEW } from "../constants";
 
-export default (state = defaultRestaurants, { type }) => {
+const defaultRestaurants = normalizedRestaurants.reduce(
+  (acc, item) => ({
+    ...acc,
+    [item.id]: item
+  }), 
+  {}
+ );
+
+export default (state = defaultRestaurants, action) => {
+  const {type, payload} = action;
   switch (type) {
+    case ADD_REVIEW:
+      let newReviews = payload.restaurant.reviews.slice();
+      newReviews.push(payload.reviewId);
+      let newRestaurant = {
+        ...payload.restaurant,
+        reviews: newReviews
+      };
+      return {
+        ...state,
+        [payload.restaurant.id]: newRestaurant
+      }
+      //console.log(newRestaurant);
     default:
       return state;
   }
