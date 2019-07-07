@@ -3,7 +3,7 @@ import {
   DECREMENT,
   INCREMENT,
   REMOVE_ITEM,
-  SET_THRESHOLD
+  SET_MIN_RATING
 } from "../constants";
 
 export const increment = () => ({
@@ -24,9 +24,7 @@ export const removeItem = id => ({
   payload: { id }
 });
 
-export const setThreshold = threshold => {
-  return {
-    type: SET_THRESHOLD,
-    payload: { threshold }
-  };
-};
+export const setMinRating = minRating => ({
+  type: SET_MIN_RATING,
+  payload: { minRating }
+});

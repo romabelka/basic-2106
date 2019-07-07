@@ -39,9 +39,9 @@ class RestaurantMenu extends Component {
     return (
       <div style={{ padding: "16px" }}>
         <Row gutter={16}>
-          {menu.map(dish => (
-            <Col key={dish.id} span={8}>
-              <Dish {...dish} />
+          {menu.map(id => (
+            <Col key={id} span={8}>
+              <Dish id={id} />
             </Col>
           ))}
         </Row>

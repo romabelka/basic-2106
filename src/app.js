@@ -1,6 +1,5 @@
 import React from "react";
 import RestaurantsList from "./components/restaurants-list";
-import { restaurants } from "./fixtures";
 import "antd/dist/antd.css";
 import OrderForm from "./components/order-form";
 import Cart from "./components/cart";
@@ -11,7 +10,7 @@ export default function App() {
     <div>
       <h1>Delivery App</h1>
       <Filter />
-      <RestaurantsList restaurants={restaurants} />
+      <RestaurantsList />
       <OrderForm />
       <Cart />
     </div>
