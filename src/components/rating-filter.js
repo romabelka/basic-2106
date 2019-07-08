@@ -9,12 +9,12 @@ function RatingFilter(props) {
     <>
       <Select
         style={{ width: 200 }}
-        placeholder="Select a rating"
+        placeholder="Select min rating"
         onChange={props.selectRaiting}
       >
         {RESTAURANT_RAITINGS.map(raiting => (
           <Select.Option key={raiting} value={raiting}>
-            {raiting}
+            {raiting}*
           </Select.Option>
         ))}
       </Select>

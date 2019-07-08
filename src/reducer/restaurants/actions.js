@@ -1,9 +1,8 @@
 import { SELECT_RAITING } from "./constants";
 
-export const selectRaiting = raiting => {
-  console.log(raiting);
+export const selectRaiting = restaurantsRaiting => {
   return {
     type: SELECT_RAITING,
-    payload: { raiting }
+    payload: { restaurantsRaiting }
   };
 };

@@ -12,7 +12,7 @@ export default (state = initialValues, action) => {
     case SELECT_RAITING:
       return {
         ...state,
-        filterValue: payload.raiting
+        filterValue: payload.restaurantsRaiting
       };
 
     default:

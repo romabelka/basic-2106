@@ -1,6 +1,6 @@
 import { DECREMENT, INCREMENT } from "./constants";
 
-export default (count = 10, action) => {
+export default (count = {}, action) => {
   switch (action.type) {
     case INCREMENT:
       return count + 1;

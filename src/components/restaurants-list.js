@@ -6,7 +6,7 @@ import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import getDefaultRate from "../helpers/getDefaultRate";
 
-function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen, rating }) {
+function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
     <List>
       {restaurants.map(restaurant => (
@@ -28,17 +28,12 @@ RestaurantsList.propTypes = {
   isItemOpen: PropTypes.func.isRequired
 };
 
-RestaurantsList.defaultProps = {
-  restaurants: []
-};
-
 const mapStateToProps = state => {
-  console.log(state);
+  const { restaurantsRaiting } = state;
+
   return {
-    restaurants: state.rating.items.filter(
-      state.rating.filterValue
-        ? restaurant => getDefaultRate(restaurant) === state.rating.filterValue
-        : () => true
+    restaurants: restaurantsRaiting.items.filter(
+      restaurant => getDefaultRate(restaurant) >= restaurantsRaiting.filterValue
     )
   };
 };
