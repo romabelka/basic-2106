@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Comment, Rate } from "antd";
+import { connect } from "react-redux";
 
 function Review({ review }) {
   return (
@@ -30,4 +31,11 @@ Review.propTypes = {
   }).isRequired
 };
 
-export default Review;
+const mapStateToProps = (state, ownProps) => ({
+  review: state.reviews[ownProps.id]
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Review);

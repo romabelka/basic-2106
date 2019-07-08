@@ -9,9 +9,9 @@ function ReviewList({ reviews }) {
   const body = isOpen && (
     <List
       dataSource={reviews}
-      renderItem={review => (
-        <List.Item key={review.id}>
-          <Review review={review} />
+      renderItem={reviewId => (
+        <List.Item key={reviewId}>
+          <Review id={reviewId} />
         </List.Item>
       )}
     />
