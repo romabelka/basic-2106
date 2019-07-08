@@ -23,7 +23,7 @@ export default (state = defaultRestaurants, action) => {
         ...state,
         [payload.restaurant.id]: newRestaurant
       }
-      //console.log(newRestaurant);
+      
     default:
       return state;
   }

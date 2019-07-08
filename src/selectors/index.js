@@ -1,7 +1,5 @@
 import { createSelector } from "reselect";
-//import { getAverageRate } from "../utils";
 
-//const stateSelector = state => state;
 const restaurantsSelector = state => state.restaurants;
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
@@ -11,15 +9,6 @@ export const restaurantReviewsRatingSelector = (state, {id}) => restaurantReview
 export const dishSelector = (state, { id }) => state.dishes[id];
 export const reviewSelector = (state, id) => state.reviews[id];
 export const userSelector = (state, id) => state.users[id];
-/*export const getAverageRate = (restaurant) => {
-  console.log (`--- filtering average rate`);
-  let averageRate = restaurant.reviews
-    .map(id => reviews[id].rating)
-    .filter(rate => typeof rate !== "undefined")
-    .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
-  
-  return averageRate;
-}     */
 
 export const totalAmountSelector = state =>
   Object.values(state.order).reduce((acc, amount) => acc + amount, 0);
@@ -48,7 +37,7 @@ export const filtratedRestaurantsSelector = createSelector(
        
     return Object.values(restaurants)
       .map(restaurant => {
-        console.log('calculating');
+        console.log('calculating average rate');
         let averageRate = restaurant.reviews.map(id => reviews[id].rating)
                                             .filter(rate => typeof rate !== "undefined")
                                             .reduce((acc, el, _, arr) => acc + el / arr.length, 0);

@@ -1,7 +1,6 @@
 import {normalizedUsers} from "../fixtures"
 import { ADD_REVIEW } from "../constants";
 
-
 const defaultUsers = normalizedUsers.reduce (
     (acc, item) => (
         {
@@ -11,7 +10,7 @@ const defaultUsers = normalizedUsers.reduce (
     ),
     {}
 );
-//payload: { rating, username, reviewtext }
+
 export default (users = defaultUsers, action) => {
     const {type, payload} = action;
     switch (type) {
@@ -19,8 +18,7 @@ export default (users = defaultUsers, action) => {
                 let newUser = {
                     [payload.userId]: {id: payload.userId, name: payload.username},
                                                
-                    }
-                
+                }           
              return {
                 ...users,
                 ...newUser

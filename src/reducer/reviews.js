@@ -10,7 +10,7 @@ const DefaultReviews = normalizedReviews.reduce (
     ),
     {}
 );
-////payload: { rating, username, reviewtext }
+
 export default (reviews = DefaultReviews, action) => {
     const { type, payload } = action;
     switch (type) {

@@ -2,11 +2,6 @@ import React from "react";
 import {connect} from "react-redux"
 import PropTypes from "prop-types";
 import {addReview} from "../ac"
-//import { Rate } from "antd";
-//import { getAverageRate } from "../utils";
-//import {makeAverageRateSelector,averageRateSelector,reviewSelector} from "../selectors" 
-//import React from "react"
-//import ReactDOM from "react-dom";
 import { Modal, Form, Input, Rate } from 'antd';
 
 const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
@@ -50,7 +45,9 @@ class RestaurantRate extends React.Component {
   componentDidMount(){
     this.saveRate(this.props.restaurant.rate);
   }
-
+  static propTypes = {
+    restaurant: PropTypes.object
+  };
   showModal = () => {
     this.setState({ visible: true });
   };
@@ -58,7 +55,6 @@ class RestaurantRate extends React.Component {
   handleCancel = () => {
     const { form } = this.formRef.props;
     form.resetFields();
-    //form.Rate.defaultValue = this.rate;
     this.setState({ visible: false });
   };
 
@@ -68,12 +64,10 @@ class RestaurantRate extends React.Component {
       if (err) {
         return;
       }
-        //export const addReview = (rating, username, reviewtext)
-        //console.log("restaurant:");
-        //console.log(this.props.restaurant);
+  
       let {rating, username, reviewtext} = values;
         this.props.handleSubmitReview(rating, username, reviewtext, this.props.restaurant);
-      console.log('Received values of form: ', values);
+
       form.resetFields();
       this.setState({ visible: false });
     });
@@ -108,7 +102,6 @@ class RestaurantRate extends React.Component {
 }
 
 const mapStateToProps = () => ({
-  //rate: ownProps.rate,
 
 });
 
