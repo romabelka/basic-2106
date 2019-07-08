@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Rate } from "antd";
 import { getAverageRate } from "../utils";
+import { connect } from "react-redux";
 
 class RestaurantRate extends Component {
   static propTypes = {
     restaurant: PropTypes.object.isRequired
   };
-  state = {
-    rate: getAverageRate(this.props.restaurant)
-  };
 
   render() {
     return (
       <Rate
-        value={this.state.rate}
-        onChange={rate => this.setState({ rate })}
+        value={this.props.rate}
+        onChange={rate => {
+          console.log(`change rating to ${rate}`);
+        }}
       />
     );
   }
@@ -23,4 +23,11 @@ class RestaurantRate extends Component {
 
 RestaurantRate.propTypes = {};
 
-export default RestaurantRate;
+const mapStateToProps = (state, ownProps) => ({
+  rate: getAverageRate(ownProps.restaurant, state.reviews)
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(RestaurantRate);
