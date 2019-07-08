@@ -3,10 +3,10 @@ import { getAverageRate } from "../utils";
 
 const restaurantsSelector = state => state.restaurants;
 const filtersSelector = state => state.filters;
-//const reviewsSelector = state => state.reviews;
 
 export const dishSelector = (state, { id }) => state.dishes[id];
 export const reviewSelector = (state, { id }) => state.reviews[id];
+export const userSelector = (state, id) => state.users[id];
 
 export const totalAmountSelector = state =>
   Object.values(state.order).reduce((acc, amount) => acc + amount, 0);
