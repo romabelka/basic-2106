@@ -6,7 +6,6 @@ import { addItem, removeItem } from "../ac";
 import { dishSelector } from "../selectors";
 
 function Dish({ dish, amount, handleDecrease, handleIncrease }) {
-  console.log(dish);
   return (
     <Card
       bordered
