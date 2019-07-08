@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { reviewsSelector } from "../selectors";
 import PropTypes from "prop-types";
 import { Rate } from "antd";
 import { getAverageRate } from "../utils";
 
 class RestaurantRate extends Component {
   static propTypes = {
-    restaurant: PropTypes.object.isRequired
+    restaurant: PropTypes.object.isRequired,
+    reviews: PropTypes.object
   };
   state = {
-    rate: getAverageRate(this.props.restaurant)
+    rate: getAverageRate(this.props.restaurant, this.props.reviews)
   };
 
   render() {
@@ -21,6 +24,8 @@ class RestaurantRate extends Component {
   }
 }
 
-RestaurantRate.propTypes = {};
+const mapStateToProps = state => ({
+  reviews: reviewsSelector(state)
+});
 
-export default RestaurantRate;
+export default connect(mapStateToProps)(RestaurantRate);
