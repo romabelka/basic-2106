@@ -5,6 +5,7 @@ import { List } from "antd";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { filtratedRestaurantsSelector } from "../selectors";
+import { idPropTypes } from "../utils";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   return (
@@ -26,7 +27,7 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
 RestaurantsList.propTypes = {
   restaurants: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+      id: idPropTypes
     })
   ).isRequired,
   toggleOpenItem: PropTypes.func.isRequired,

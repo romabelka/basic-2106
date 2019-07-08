@@ -1,25 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 import * as PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Rate } from "antd";
-import { getAverageRate } from "../utils";
+import { restaurantAverageRatingSelector } from "../selectors";
+import { idPropTypes } from "../utils";
 
-class RestaurantRate extends Component {
-  static propTypes = {
-    restaurant: PropTypes.object.isRequired
-  };
+const RestaurantRate = ({ rating }) => <Rate disabled value={rating} />;
 
-  state = {
-    rate: getAverageRate(this.props.restaurant)
-  };
+RestaurantRate.propTypes = {
+  restaurantId: idPropTypes,
+  rating: PropTypes.number
+};
 
-  render() {
-    return (
-      <Rate
-        value={this.state.rate}
-        onChange={rate => this.setState({ rate })}
-      />
-    );
-  }
-}
+RestaurantRate.defaultProps = {
+  rating: 0
+};
 
-export default RestaurantRate;
+const mapStateToProps = (state, { restaurantId }) => ({
+  rating: restaurantAverageRatingSelector(state, restaurantId)
+});
+
+export default connect(mapStateToProps)(RestaurantRate);

@@ -36,7 +36,7 @@ export const reviewWithUserSelector = createSelector(
 
 export const makeReviewWithUserSelector = () => reviewWithUserSelector;
 
-export const restaurantsAverageRateSelector = createSelector(
+export const restaurantsAverageRatingSelector = createSelector(
   restaurantsSelector,
   reviewsSelector,
   (restaurants, reviews) =>
@@ -57,9 +57,15 @@ export const restaurantsAverageRateSelector = createSelector(
     }, {})
 );
 
+export const restaurantAverageRatingSelector = (state, id) => {
+  const ratings = restaurantsAverageRatingSelector(state);
+
+  return (ratings && ratings[id]) || 0;
+};
+
 export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
-  restaurantsAverageRateSelector,
+  restaurantsAverageRatingSelector,
   filtersSelector,
   (restaurants, ratings, filters) =>
     Object.values(restaurants).filter(

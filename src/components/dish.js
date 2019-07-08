@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Card, Button } from "antd";
 import { addItem, removeItem } from "../ac";
 import { dishSelector } from "../selectors";
+import { idPropTypes } from "../utils";
 
 function Dish({ dish, amount, handleDecrease, handleIncrease }) {
   return (
@@ -43,7 +44,7 @@ Dish.propTypes = {
   handleDecrease: PropTypes.func.isRequired,
   handleIncrease: PropTypes.func.isRequired,
   dish: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    id: idPropTypes,
     name: PropTypes.string,
     price: PropTypes.number,
     ingredients: PropTypes.arrayOf(PropTypes.string)

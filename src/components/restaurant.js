@@ -4,6 +4,7 @@ import { Avatar, Button, List } from "antd";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantRate from "./restaurant-rate";
+import { idPropTypes } from "../utils";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   return (
@@ -19,7 +20,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
         avatar={<Avatar shape="square" src={restaurant.image} />}
         title={restaurant.name}
       />
-      <RestaurantRate restaurant={restaurant} />
+      <RestaurantRate restaurantId={restaurant.id} />
       {isOpen && (
         <div data-id="restaurant-body">
           <RestaurantMenu menu={restaurant.menu} />
@@ -34,6 +35,7 @@ Restaurant.propTypes = {
   isOpen: PropTypes.bool,
   onBtnClick: PropTypes.func,
   restaurant: PropTypes.shape({
+    id: idPropTypes,
     menu: PropTypes.array,
     reviews: PropTypes.array,
     image: PropTypes.string,
