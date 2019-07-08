@@ -2,7 +2,7 @@ import React from "react";
 import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Comment, Rate } from "antd";
-import { makeReviewWithUserSelector } from "../selectors";
+import { reviewWithUserSelector } from "../selectors";
 
 function Review({ review }) {
   return (
@@ -33,7 +33,7 @@ Review.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  review: makeReviewWithUserSelector()(state, props)
+  review: reviewWithUserSelector(state, props.review)
 });
 
 export default connect(mapStateToProps)(Review);

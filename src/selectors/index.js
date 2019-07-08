@@ -17,24 +17,31 @@ export const totalPriceSelector = state =>
   );
 
 export const reviewsSelector = state => state.reviews;
-export const reviewSelector = (state, { id }) => reviewsSelector(state)[id];
 
 export const usersSelector = state => state.users;
 
-export const reviewWithUserSelector = createSelector(
+export const reviewsWithUsersSelector = createSelector(
+  reviewsSelector,
   usersSelector,
-  (state, props) => reviewSelector(state, { id: props.review }),
-  (users, review) => {
-    const user = users[review.userId];
+  (reviews, users) =>
+    Object.values(reviews).reduce((acc, review) => {
+      const user = users[review.userId];
 
-    return {
-      ...review,
-      userName: (user && user.name) || "Unknown"
-    };
-  }
+      return {
+        ...acc,
+        [review.id]: {
+          ...review,
+          userName: (user && user.name) || "Unknown"
+        }
+      };
+    }, {})
 );
 
-export const makeReviewWithUserSelector = () => reviewWithUserSelector;
+export const reviewWithUserSelector = (state, id) => {
+  const reviews = reviewsWithUsersSelector(state);
+
+  return (reviews && reviews[id]) || {};
+};
 
 export const restaurantsAverageRatingSelector = createSelector(
   restaurantsSelector,
