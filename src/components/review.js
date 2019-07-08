@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Comment, Rate } from "antd";
+import { connect } from 'react-redux';
+import {reviewSelector} from '../selectors/index';
 
 function Review({ review }) {
+  
   return (
     <Comment
       style={{
@@ -22,6 +25,10 @@ function Review({ review }) {
   );
 }
 
+const mapStateToProps = (state, ownProps) =>({
+  review : reviewSelector(state, ownProps)
+});
+
 Review.propTypes = {
   review: PropTypes.shape({
     user: PropTypes.string,
@@ -30,4 +37,4 @@ Review.propTypes = {
   }).isRequired
 };
 
-export default Review;
+export default connect(mapStateToProps)(Review);

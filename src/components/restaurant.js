@@ -6,7 +6,9 @@ import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 import RestaurantRate from "./restaurant-rate";
 
-export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+function Restaurant({ restaurant, isOpen, onBtnClick }) {
+  //console.log(restaurant);
+  
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} />
@@ -27,7 +29,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
         avatar={<Avatar shape="square" src={restaurant.image} />}
         title={restaurant.name}
       />
-      <RestaurantRate restaurant={restaurant} />
+      <RestaurantRate rate={restaurant.rate} />
       {body}
     </List.Item>
   );
@@ -43,3 +45,5 @@ Restaurant.propTypes = {
     name: PropTypes.string
   })
 };
+
+export default Restaurant;

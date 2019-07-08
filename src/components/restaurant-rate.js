@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Rate } from "antd";
-import { getAverageRate } from "../utils";
 
 class RestaurantRate extends Component {
   static propTypes = {
     restaurant: PropTypes.object.isRequired
   };
   state = {
-    rate: getAverageRate(this.props.restaurant)
+    rate : this.props.rate
   };
 
   render() {
@@ -21,6 +20,8 @@ class RestaurantRate extends Component {
   }
 }
 
-RestaurantRate.propTypes = {};
+RestaurantRate.propTypes = {
+  rate : PropTypes.number
+};
 
 export default RestaurantRate;

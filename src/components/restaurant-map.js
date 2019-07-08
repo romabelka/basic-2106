@@ -11,7 +11,6 @@ class RestaurantMap extends Component {
   }
 
   setMapContainerRef = () => {
-    //init map
   };
 }
 
