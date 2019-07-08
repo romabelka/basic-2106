@@ -1,12 +1,14 @@
 import React from "react";
-import { Avatar, Button, List } from "antd";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Avatar, Button, List } from "antd";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 import RestaurantRate from "./restaurant-rate";
+import { restaurantSelector } from "../selectors";
 
-export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+function Restaurant({ restaurant, isOpen, onBtnClick }) {
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} />
@@ -43,3 +45,9 @@ Restaurant.propTypes = {
     name: PropTypes.string
   })
 };
+
+const mapStateToProps = (state, ownProps) => ({
+  restaurant: restaurantSelector(state, ownProps)
+});
+
+export default connect(mapStateToProps)(Restaurant);

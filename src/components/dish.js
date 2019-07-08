@@ -44,9 +44,11 @@ Dish.defaultProps = {
 };
 
 Dish.propTypes = {
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
+  dish: PropTypes.shape({
+    price: PropTypes.number.isRequired,
+    name: PropTypes.string,
+    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
+  })
 };
 
 const mapStateToProps = (state, ownProps) => ({

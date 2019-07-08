@@ -8,9 +8,9 @@ function ReviewList({ reviews }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
     <List>
-      {reviews.map(review => (
-        <List.Item key={review.id}>
-          <Review review={review} />
+      {reviews.map(id => (
+        <List.Item key={id}>
+          <Review id={id} />
         </List.Item>
       ))}
     </List>
