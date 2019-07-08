@@ -1,10 +1,11 @@
 import React from "react";
 import * as PropTypes from "prop-types";
 import { Avatar, Button, List } from "antd";
+import { idPropTypes } from "../utils";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantRate from "./restaurant-rate";
-import { idPropTypes } from "../utils";
+import NewReview from "./new-review";
 
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   return (
@@ -21,6 +22,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
         title={restaurant.name}
       />
       <RestaurantRate restaurantId={restaurant.id} />
+      <NewReview restaurantId={restaurant.id} />
       {isOpen && (
         <div data-id="restaurant-body">
           <RestaurantMenu menu={restaurant.menu} />
