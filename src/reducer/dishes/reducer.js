@@ -1,4 +1,4 @@
-import { normalizedDishes } from "../fixtures";
+import { normalizedDishes } from "../../fixtures";
 
 const defaultDishes = normalizedDishes.reduce(
   (acc, item) => ({

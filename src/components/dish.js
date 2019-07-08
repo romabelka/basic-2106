@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addItem, removeItem } from "../ac";
+import { addItem, removeItem } from "../reducer/order/actions";
 import { dishSelector } from "../selectors";
 
 function Dish({ dish, amount, handleDecrease, handleIncrease }) {

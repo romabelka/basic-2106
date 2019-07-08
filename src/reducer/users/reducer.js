@@ -1,4 +1,4 @@
-import { normalizedUsers } from "../fixtures";
+import { normalizedUsers } from "../../fixtures";
 
 const defaultUsers = normalizedUsers.reduce(
   (acc, item) => ({

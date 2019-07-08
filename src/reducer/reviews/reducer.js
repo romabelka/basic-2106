@@ -1,4 +1,4 @@
-import { normalizedReviews } from "../fixtures";
+import { normalizedReviews } from "../../fixtures";
 
 const defaultReviews = normalizedReviews.reduce(
   (acc, item) => ({

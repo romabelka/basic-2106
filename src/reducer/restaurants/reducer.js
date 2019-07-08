@@ -1,4 +1,4 @@
-import { normalizedRestaurants } from "../fixtures";
+import { normalizedRestaurants } from "../../fixtures";
 
 const defaultRestaurants = normalizedRestaurants.reduce(
   (acc, item) => ({
