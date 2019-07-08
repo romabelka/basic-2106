@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { getAverageRate } from "../utils";
+import { getAverageValue } from "../utils";
 
 export const restaurantsSelector = state => state.restaurants;
 
@@ -16,23 +16,53 @@ export const totalPriceSelector = state =>
     0
   );
 
-export const userSelector = (state, id) => state.users[id];
-export const reviewSelector = (state, { review }) => {
-  const reviewItem = state.reviews[review];
-  const user = userSelector(state, (reviewItem && reviewItem.userId) || 0);
+export const reviewsSelector = state => state.reviews;
+export const reviewSelector = (state, { id }) => reviewsSelector(state)[id];
 
-  return {
-    ...reviewItem,
-    userName: user.name || ""
-  };
-};
+export const usersSelector = state => state.users;
+
+export const reviewWithUserSelector = createSelector(
+  usersSelector,
+  (state, props) => reviewSelector(state, { id: props.review }),
+  (users, review) => {
+    const user = users[review.userId];
+
+    return {
+      ...review,
+      userName: (user && user.name) || "Unknown"
+    };
+  }
+);
+
+export const makeReviewWithUserSelector = () => reviewWithUserSelector;
+
+export const restaurantsAverageRateSelector = createSelector(
+  restaurantsSelector,
+  reviewsSelector,
+  (restaurants, reviews) =>
+    Object.values(restaurants).reduce((acc, restaurant) => {
+      if (!restaurant.reviews || restaurant.reviews.length === 0) {
+        return acc;
+      }
+
+      const averageRating = getAverageValue(
+        restaurant.reviews.map(reviewId => reviews[reviewId]),
+        "rating"
+      );
+
+      return {
+        ...acc,
+        [restaurant.id]: Math.floor(averageRating)
+      };
+    }, {})
+);
 
 export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
+  restaurantsAverageRateSelector,
   filtersSelector,
-  (restaurants, filters) => {
-    return restaurants.filter(
-      restaurant => getAverageRate(restaurant) >= filters.minRating
-    );
-  }
+  (restaurants, ratings, filters) =>
+    Object.values(restaurants).filter(
+      restaurant => ratings[restaurant.id] >= filters.minRating
+    )
 );
