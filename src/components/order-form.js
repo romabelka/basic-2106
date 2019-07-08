@@ -8,7 +8,6 @@ export default function OrderForm() {
 
   const handleSubmit = ev => {
     ev.preventDefault();
-
     console.log("---", name, telephone, address);
   };
 

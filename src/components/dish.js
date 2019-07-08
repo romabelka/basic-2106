@@ -6,6 +6,7 @@ import { addItem, removeItem } from "../ac";
 import { dishSelector } from "../selectors";
 
 function Dish({ dish, amount, handleDecrease, handleIncrease }) {
+
   return (
     <Card
       bordered
@@ -44,9 +45,8 @@ Dish.defaultProps = {
 };
 
 Dish.propTypes = {
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
+  dish : PropTypes.object,
+  amount : PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
