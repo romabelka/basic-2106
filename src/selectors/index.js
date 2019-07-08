@@ -18,9 +18,11 @@ export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
   filtersSelector,
   (restaurants, filters) => {
-    console.log("---", "filtrating");
-    return restaurants.filter(
-      restaurant => getAverageRate(restaurant) >= filters.minRating
-    );
+    console.log("---", "filtrating", restaurants);
+    return Object.entries(restaurants)
+      .filter(
+        ([key, restaurant]) => getAverageRate(restaurant) >= filters.minRating
+      )
+      .map(([key, value]) => value);
   }
 );
