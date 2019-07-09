@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import {calculateAverageRestaurantRate} from "../utils"
 
 const restaurantsSelector = state => state.restaurants;
 const filtersSelector = state => state.filters;
@@ -19,29 +20,24 @@ export const totalPriceSelector = state =>
     0
   );
 
-  export const makeAverageRateSelector = () => {
-    return createSelector(
-      restaurantReviewsRatingSelector,
-      (rates) => {console.log('calculating');
-        return rates
-      .filter(rate => typeof rate !== "undefined")
-      .reduce((acc, el, _, arr) => acc + el / arr.length, 0)}
-    )
-  }
+/*function calculateAverageRestaurantRate(restaurant, reviews){
+  return restaurant.reviews
+        .map(id => reviews[id].rating)
+        .filter(rate => typeof rate !== "undefined")
+        .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
+}*/
 
 export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
   filtersSelector,
   reviewsSelector,
-  (restaurants, filters, reviews) => {
-       
+  (restaurants, filters, reviews) => {     
     return Object.values(restaurants)
       .map(restaurant => {
+        // Добавляем к объекту ресторан значение среднего рейтинга, чтобы затем его спустить вниз по цепочке в пропсах 
+        // От компонента RestaurantList к компоненту RestaurantRate и отобразить
         console.log('calculating average rate');
-        let averageRate = restaurant.reviews.map(id => reviews[id].rating)
-                                            .filter(rate => typeof rate !== "undefined")
-                                            .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
-        
+        let averageRate = calculateAverageRestaurantRate(restaurant, reviews);
         return {
           ...restaurant,
           rate: averageRate
