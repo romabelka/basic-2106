@@ -1,10 +1,12 @@
-import { normalizedRestaurants } from "../fixtures";
 import { arrToMap } from "../utils";
-import { ADD_REVIEW } from "../constants";
+import { ADD_REVIEW, LOAD_ALL_RESTAURANTS } from "../constants";
 
-const defaultRestaurants = arrToMap(normalizedRestaurants);
+const defaultRestaurants = arrToMap([]);
 
-export default (state = defaultRestaurants, { type, payload, id }) => {
+export default (
+  state = defaultRestaurants,
+  { type, payload, id, response }
+) => {
   switch (type) {
     case ADD_REVIEW:
       const restaurant = state[payload.restaurantId];
@@ -15,6 +17,9 @@ export default (state = defaultRestaurants, { type, payload, id }) => {
           reviews: restaurant.reviews.concat(id)
         }
       };
+
+    case LOAD_ALL_RESTAURANTS:
+      return arrToMap(response);
 
     default:
       return state;
