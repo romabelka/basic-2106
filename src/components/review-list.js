@@ -3,18 +3,22 @@ import PropTypes from "prop-types";
 import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
+import ReviewForm from "./review-form";
 
-function ReviewList({ reviews }) {
+function ReviewList({ restaurant }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
-    <List
-      dataSource={reviews}
-      renderItem={review => (
-        <List.Item key={review.id}>
-          <Review review={review} />
-        </List.Item>
-      )}
-    />
+    <div>
+      <List
+        dataSource={restaurant.reviews}
+        renderItem={reviewId => (
+          <List.Item key={reviewId}>
+            <Review id={reviewId} />
+          </List.Item>
+        )}
+      />
+      <ReviewForm restaurantId={restaurant.id} />
+    </div>
   );
   return (
     <div>
@@ -27,7 +31,7 @@ function ReviewList({ reviews }) {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.array.isRequired
+  restaurant: PropTypes.object.isRequired
 };
 
 export default ReviewList;

@@ -1,12 +1,7 @@
 import { normalizedDishes } from "../fixtures";
+import { arrToMap } from "../utils";
 
-const defaultDishes = normalizedDishes.reduce(
-  (acc, item) => ({
-    ...acc,
-    [item.id]: item
-  }),
-  {}
-);
+const defaultDishes = arrToMap(normalizedDishes);
 
 export default (dishes = defaultDishes, { type }) => {
   switch (type) {

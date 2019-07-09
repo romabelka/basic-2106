@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Input } from "antd";
+import { useInputValue } from "../custom-hooks/use-input-value";
 
 export default function OrderForm() {
   const [name, setName] = useInputValue();
@@ -22,11 +23,4 @@ export default function OrderForm() {
       </Button>
     </form>
   );
-}
-
-function useInputValue(initialValue) {
-  const [state, setState] = useState(initialValue);
-  const onChange = ev => setState(ev.target.value);
-
-  return [state, onChange];
 }

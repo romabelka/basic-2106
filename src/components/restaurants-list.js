@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { List } from "antd";
 import { connect } from "react-redux";
 import { filtratedRestaurantsSelector } from "../selectors";
+import { loadAllRestaurants } from "../ac";
 
-function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
+function RestaurantsList({
+  restaurants,
+  toggleOpenItem,
+  isItemOpen,
+  loadAllRestaurants
+}) {
+  useEffect(() => {
+    loadAllRestaurants();
+  }, []);
   console.log("---", "rendering restaurant list");
   return (
     <List>
@@ -29,9 +38,14 @@ RestaurantsList.propTypes = {
   isItemOpen: PropTypes.func.isRequired
 };
 
-export default connect(state => {
-  console.log("---", "connect");
-  return {
-    restaurants: filtratedRestaurantsSelector(state)
-  };
-})(accordionDecorator(RestaurantsList));
+export default connect(
+  state => {
+    console.log("---", "connect");
+    return {
+      restaurants: filtratedRestaurantsSelector(state)
+    };
+  },
+  {
+    loadAllRestaurants
+  }
+)(accordionDecorator(RestaurantsList));
