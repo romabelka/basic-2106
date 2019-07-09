@@ -3,16 +3,17 @@ import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addItem, removeItem } from "../ac";
+import { dishSelector } from "../selectors";
 
-function Dish(props) {
+function Dish({ dish, amount, handleDecrease, handleIncrease }) {
   return (
     <Card
       bordered
       actions={[
-        `$${props.price}`,
+        `$${dish.price}`,
         <>
           <span style={{ margin: "0 12px" }} data-id="dish-amount">
-            {props.amount}
+            {amount}
           </span>
           <Button.Group>
             <Button
@@ -20,23 +21,20 @@ function Dish(props) {
               shape="circle"
               icon="minus"
               data-id="dish-minus"
-              onClick={() => props.handleDecrease(props.id)}
+              onClick={() => handleDecrease(dish.id)}
             />
             <Button
               type="primary"
               shape="circle"
               icon="plus"
               data-id="dish-plus"
-              onClick={() => props.handleIncrease(props.id)}
+              onClick={() => handleIncrease(dish.id)}
             />
           </Button.Group>
         </>
       ]}
     >
-      <Card.Meta
-        title={props.name}
-        description={props.ingredients.join(", ")}
-      />
+      <Card.Meta title={dish.name} description={dish.ingredients.join(", ")} />
     </Card>
   );
 }
@@ -52,7 +50,8 @@ Dish.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  amount: state.order[ownProps.id] || 0
+  amount: state.order[ownProps.id] || 0,
+  dish: dishSelector(state, ownProps)
 });
 
 const mapDispatchToProps = {

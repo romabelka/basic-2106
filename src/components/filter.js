@@ -1,40 +1,24 @@
-import React, { Component } from "react";
-import { Select } from "antd";
+import React from "react";
 import { connect } from "react-redux";
-import { setThreshold } from "../ac";
+import { Select } from "antd";
+import { setMinRating } from "../ac";
 
-const { Option } = Select;
-
-class Filter extends Component {
-  render() {
-    return (
-      <div>
-        <Select
-          defaultValue={0}
-          style={{ width: 120 }}
-          onChange={this.props.handleChange}
-        >
-          <Option value="0">Все</Option>
-          <Option value="1">1</Option>
-          <Option value="2">2</Option>
-          <Option value="3">3</Option>
-          <Option value="4">4</Option>
-          <Option value="5">5</Option>
-        </Select>
-      </div>
-    );
-  }
+function Filter({ minRating, setMinRating }) {
+  return (
+    <Select value={minRating} onChange={setMinRating}>
+      <Select.Option value={0}>all</Select.Option>
+      <Select.Option value={1}>1</Select.Option>
+      <Select.Option value={2}>2</Select.Option>
+      <Select.Option value={3}>3</Select.Option>
+      <Select.Option value={4}>4</Select.Option>
+      <Select.Option value={5}>5</Select.Option>
+    </Select>
+  );
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  currentThreshold: state.threshold
-});
-
-const mapDispatchToProps = {
-  handleChange: setThreshold
-};
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({
+    minRating: state.filters.minRating
+  }),
+  { setMinRating }
 )(Filter);

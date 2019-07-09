@@ -1,10 +1,14 @@
 import { combineReducers } from "redux";
 import counterReducer from "./counter";
 import order from "./order";
-import threshold from "./threshold";
+import filters from "./filters";
+import restaurants from "./restaurants";
+import dishes from "./dishes";
 
 export default combineReducers({
   count: counterReducer,
   order,
-  threshold
+  filters,
+  restaurants,
+  dishes
 });
