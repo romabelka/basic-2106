@@ -3,6 +3,7 @@ import { getAverageRate } from "../utils";
 
 const restaurantsSelector = state => state.restaurants;
 const filtersSelector = state => state.filters;
+const reviewsSelector = state => state.reviews;
 export const dishSelector = (state, { id }) => state.dishes[id];
 export const reviewSelector = (state, { id }) => state.reviews[id];
 
@@ -18,9 +19,11 @@ export const totalPriceSelector = state =>
 export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
   filtersSelector,
-  (restaurants, filters) =>
+  reviewsSelector,
+  (restaurants, filters, reviews) =>
     Object.values(restaurants).filter(
-      restaurant => getAverageRate(restaurant) >= filters.minRating
+      restaurant =>
+        avarageRateSelector({ reviews }, { restaurant }) >= filters.minRating
     )
 );
 
