@@ -2,3 +2,8 @@ export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 
 export const SET_MIN_RATING = "SET_MIN_RATING";
+
+export const CREATE_NEW_USER_REVIEW = "CREATE_NEW_USER_REVIEW";
+export const CREATE_REVIEW = "CREATE_REVIEW";
+export const CREATE_USER = "CREATE_USER";
+export const ADD_REVIEW_TO_RESTAURANT = "ADD_REVIEW_TO_RESTAURANT";

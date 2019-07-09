@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Button, Modal, Form, Input, Rate } from "antd";
 import { idPropTypes } from "../utils";
+import { createNewUserReview } from "../ac";
 
 const NewRateForm = Form.create({
   name: "form_in_modal",
@@ -17,9 +19,9 @@ const NewRateForm = Form.create({
         ...props.text,
         value: props.text.value
       }),
-      rate: Form.createFormField({
-        ...props.rate,
-        value: props.rate.value
+      rating: Form.createFormField({
+        ...props.rating,
+        value: props.rating.value
       })
     };
   }
@@ -49,7 +51,7 @@ const NewRateForm = Form.create({
               })(<Input type="textarea" />)}
             </Form.Item>
             <Form.Item label="Rate">
-              {getFieldDecorator("rate", {
+              {getFieldDecorator("rating", {
                 initialValue: 0
               })(<Rate />)}
             </Form.Item>
@@ -70,7 +72,7 @@ class NewReview extends Component {
     fields: {
       userName: { value: "" },
       text: { value: "" },
-      rate: { value: 0 }
+      rating: { value: 0 }
     }
   };
 
@@ -89,7 +91,12 @@ class NewReview extends Component {
         return;
       }
 
-      console.log("Received values of form: ", values);
+      this.props.dispatchReview({
+        restaurantId: this.props.restaurantId,
+        name: this.state.fields.userName.value,
+        text: this.state.fields.text.value,
+        rating: this.state.fields.rating.value
+      });
 
       form.resetFields();
 
@@ -126,4 +133,13 @@ class NewReview extends Component {
   }
 }
 
-export default NewReview;
+const mapDispatchToProps = dispatch => ({
+  dispatchReview: ({ restaurantId, name, text, rating }) => {
+    dispatch(createNewUserReview({ restaurantId, name, text, rating }));
+  }
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewReview);
