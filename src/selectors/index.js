@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
-import { getAverageRate } from "../utils";
 
-const restaurantsSelector = state => state.restaurants;
+const restaurantsSelector = state => state.restaurants.toJS();
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
 export const dishSelector = (state, { id }) => state.dishes[id];
