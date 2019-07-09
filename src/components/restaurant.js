@@ -10,7 +10,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu menu={restaurant.menu} />
-      <ReviewList reviews={restaurant.reviews} />
+      <ReviewList restaurant={restaurant} />
       <RestaurantMap />
     </div>
   );

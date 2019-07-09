@@ -1,5 +1,6 @@
 import {
   ADD_ITEM,
+  ADD_REVIEW,
   DECREMENT,
   INCREMENT,
   REMOVE_ITEM,
@@ -27,4 +28,10 @@ export const removeItem = id => ({
 export const setMinRating = minRating => ({
   type: SET_MIN_RATING,
   payload: { minRating }
+});
+
+export const addReview = (review, restaurantId) => ({
+  type: ADD_REVIEW,
+  payload: { review, restaurantId },
+  generateId: true
 });
