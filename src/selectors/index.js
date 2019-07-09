@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const restaurantsSelector = state => state.restaurants.toJS();
+const restaurantsSelector = state => state.restaurants.get("entities").toJS();
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
 export const dishSelector = (state, { id }) => state.dishes[id];
