@@ -1,5 +1,5 @@
 import { arrToMap } from "../utils";
-import { ADD_REVIEW, LOAD_ALL_RESTAURANTS } from "../constants";
+import { ADD_REVIEW, LOAD_ALL_RESTAURANTS, SUCCESS } from "../constants";
 
 const defaultRestaurants = arrToMap([]);
 
@@ -18,7 +18,7 @@ export default (
         }
       };
 
-    case LOAD_ALL_RESTAURANTS:
+    case LOAD_ALL_RESTAURANTS + SUCCESS:
       return arrToMap(response);
 
     default:

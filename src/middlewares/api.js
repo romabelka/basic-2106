@@ -1,10 +1,18 @@
+import { ERROR, START, SUCCESS } from "../constants";
+
 export default store => next => async action => {
-  const { callAPI } = action;
+  const { callAPI, type, ...rest } = action;
 
   if (!callAPI) return next(action);
 
-  const rawRes = await fetch(callAPI);
-  const response = await rawRes.json();
+  try {
+    next({ ...rest, type: type + START });
 
-  next({ ...action, response });
+    const rawRes = await fetch(callAPI);
+    const response = await rawRes.json();
+
+    next({ ...rest, type: type + SUCCESS, response });
+  } catch (error) {
+    next({ ...rest, type: type + ERROR, error });
+  }
 };
