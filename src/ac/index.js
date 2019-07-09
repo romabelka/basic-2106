@@ -3,7 +3,8 @@ import {
   DECREMENT,
   INCREMENT,
   REMOVE_ITEM,
-  SET_MIN_RATING
+  SET_MIN_RATING,
+  ADD_RATING
 } from "../constants";
 
 export const increment = () => ({
@@ -28,3 +29,16 @@ export const setMinRating = minRating => ({
   type: SET_MIN_RATING,
   payload: { minRating }
 });
+
+export const addRating = (rating, restaurantId) => {
+  return {
+    type: ADD_RATING,
+    payload: {
+      restaurantId: restaurantId,
+      review: {
+        text: "Text",
+        rating: rating
+      }
+    }
+  };
+};

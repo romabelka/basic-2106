@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Rate } from "antd";
 import { getAverageRate } from "../utils";
 import { connect } from "react-redux";
+import { addRating } from "../ac";
 
 class RestaurantRate extends Component {
   static propTypes = {
@@ -13,8 +14,9 @@ class RestaurantRate extends Component {
     return (
       <Rate
         value={this.props.rate}
+        allowClear={false}
         onChange={rate => {
-          console.log(`change rating to ${rate}`);
+          this.props.handleAddReview(rate, this.props.restaurant.id);
         }}
       />
     );
@@ -27,7 +29,11 @@ const mapStateToProps = (state, ownProps) => ({
   rate: getAverageRate(ownProps.restaurant, state.reviews)
 });
 
+const mapToHandlers = {
+  handleAddReview: addRating
+};
+
 export default connect(
   mapStateToProps,
-  {}
+  mapToHandlers
 )(RestaurantRate);

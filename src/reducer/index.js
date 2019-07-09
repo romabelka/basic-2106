@@ -10,7 +10,7 @@ export default combineReducers({
   count: counterReducer,
   order,
   filters,
+  reviews,
   restaurants,
-  dishes,
-  reviews
+  dishes
 });
