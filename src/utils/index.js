@@ -1,6 +1,6 @@
-export function getAverageRate(restaurant) {
+export function calculateAverageRestaurantRate(restaurant, reviews){
   return restaurant.reviews
-    .map(review => review.rating)
-    .filter(rate => typeof rate !== "undefined")
-    .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
+        .map(id => reviews[id].rating)
+        .filter(rate => typeof rate !== "undefined")
+        .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
 }

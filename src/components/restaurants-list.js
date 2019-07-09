@@ -7,8 +7,7 @@ import { connect } from "react-redux";
 import { filtratedRestaurantsSelector } from "../selectors";
 
 function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
-  console.log("---", "rendering restaurant list");
-  return (
+   return (
     <List>
       {restaurants.map(restaurant => (
         <Restaurant
@@ -30,7 +29,6 @@ RestaurantsList.propTypes = {
 };
 
 export default connect(state => {
-  console.log("---", "connect");
   return {
     restaurants: filtratedRestaurantsSelector(state)
   };
