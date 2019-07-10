@@ -29,7 +29,6 @@ RestaurantsList.propTypes = {
 };
 
 export default connect(state => {
-  console.log("---", "connect");
   return {
     restaurants: filtratedRestaurantsSelector(state)
   };
