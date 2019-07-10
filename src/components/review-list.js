@@ -4,16 +4,19 @@ import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
 
-function ReviewList({ reviews }) {
+function ReviewList({ restaurant }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
-    <List>
-      {reviews.map(id => (
-        <List.Item key={id}>
-          <Review id={id} />
-        </List.Item>
-      ))}
-    </List>
+    <div>
+      <List
+        dataSource={restaurant.reviews}
+        renderItem={reviewId => (
+          <List.Item key={reviewId}>
+            <Review id={reviewId} />
+          </List.Item>
+        )}
+      />
+    </div>
   );
   return (
     <div>
@@ -26,7 +29,7 @@ function ReviewList({ reviews }) {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.array.isRequired
+  restaurant: PropTypes.object.isRequired
 };
 
 export default ReviewList;

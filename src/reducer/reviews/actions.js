@@ -1,11 +1,7 @@
 import { ADD_REVIEW } from "./constants";
 
-export const addReview = (userName, rating, text, restaurantId) => ({
+export const addReview = (review, restaurantId) => ({
   type: ADD_REVIEW,
-  payload: {
-    userName,
-    rating,
-    text,
-    restaurantId
-  }
+  payload: { review, restaurantId },
+  generateId: true
 });

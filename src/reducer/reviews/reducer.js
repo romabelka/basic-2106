@@ -1,16 +1,16 @@
 import { normalizedReviews } from "../../fixtures";
 import { ADD_REVIEW } from "./constants";
+import { arrToMap } from "../../utils";
 
-const defaultReviews = normalizedReviews.reduce(
-  (acc, item) => ({
-    ...acc,
-    [item.id]: item
-  }),
-  {}
-);
+const defaultReviews = arrToMap(normalizedReviews);
 
-export default (reviews = defaultReviews, { type }) => {
+export default (reviews = defaultReviews, { type, payload, id }) => {
   switch (type) {
+    case ADD_REVIEW:
+      return {
+        ...reviews,
+        [id]: { ...payload.review, id }
+      };
     default:
       return reviews;
   }

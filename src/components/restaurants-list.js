@@ -10,12 +10,12 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
   console.log("---", "rendering restaurant list");
   return (
     <List>
-      {restaurants.map(id => (
+      {restaurants.map(restaurant => (
         <Restaurant
-          key={id}
-          id={id}
-          isOpen={isItemOpen(id)}
-          onBtnClick={toggleOpenItem(id)}
+          key={restaurant.id}
+          restaurant={restaurant}
+          isOpen={isItemOpen(restaurant.id)}
+          onBtnClick={toggleOpenItem(restaurant.id)}
           data-id="restaurant"
         />
       ))}
@@ -32,6 +32,6 @@ RestaurantsList.propTypes = {
 export default connect(state => {
   console.log("---", "connect");
   return {
-    restaurants: Object.keys(filtratedRestaurantsSelector(state))
+    restaurants: filtratedRestaurantsSelector(state)
   };
 })(accordionDecorator(RestaurantsList));

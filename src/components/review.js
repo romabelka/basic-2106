@@ -2,16 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Comment, Rate } from "antd";
-import { reviewSelector, userSelector } from "../selectors";
+import { reviewSelector } from "../selectors";
 
-function Review({ review, user }) {
+function Review({ review }) {
   return (
     <Comment
       style={{
         margin: "16px",
         backgroundColor: "white"
       }}
-      author={user.name}
+      author={review.user}
       content={review.text}
       actions={[
         <Rate
@@ -26,16 +26,14 @@ function Review({ review, user }) {
 
 Review.propTypes = {
   review: PropTypes.shape({
-    id: PropTypes.string,
-    userId: PropTypes.string,
+    user: PropTypes.string,
     text: PropTypes.string,
     rating: PropTypes.number
   }).isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  review: reviewSelector(state, ownProps),
-  user: userSelector(state, ownProps)
+  review: reviewSelector(state, ownProps)
 });
 
 export default connect(mapStateToProps)(Review);

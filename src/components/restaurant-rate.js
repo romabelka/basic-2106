@@ -2,30 +2,18 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Rate } from "antd";
-import { getAverageRate } from "../utils";
-import { reviewsSelector } from "../selectors";
+import { avarageRateSelector } from "../selectors";
 
 class RestaurantRate extends Component {
   static propTypes = {
-    restaurant: PropTypes.object.isRequired,
-    reviews: PropTypes.object
-  };
-  state = {
-    rate: getAverageRate(this.props.restaurant, this.props.reviews)
+    restaurant: PropTypes.object.isRequired
   };
 
   render() {
-    return (
-      <Rate
-        value={this.state.rate}
-        onChange={rate => this.setState({ rate })}
-      />
-    );
+    return <Rate value={this.props.rate} disabled />;
   }
 }
 
-const mapStateToProps = state => ({
-  reviews: reviewsSelector(state)
-});
-
-export default connect(mapStateToProps)(RestaurantRate);
+export default connect((state, ownProps) => ({
+  rate: avarageRateSelector(state, ownProps)
+}))(RestaurantRate);

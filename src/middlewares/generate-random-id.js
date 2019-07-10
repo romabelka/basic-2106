@@ -1,10 +1,10 @@
 import uuid from "uuid/v4";
 
 export default store => next => action => {
-  const { generateId } = action;
-  if (!generateId) {
-    next();
-  } else {
-    next({ generatedId: uuid() });
-  }
+  if (!action.generateId) return next(action);
+
+  next({
+    ...action,
+    id: uuid()
+  });
 };

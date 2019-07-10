@@ -1,12 +1,7 @@
 import { normalizedUsers } from "../../fixtures";
+import { arrToMap } from "../../utils";
 
-const defaultUsers = normalizedUsers.reduce(
-  (acc, item) => ({
-    ...acc,
-    [item.id]: item
-  }),
-  {}
-);
+const defaultUsers = arrToMap(normalizedUsers);
 
 export default (users = defaultUsers, { type }) => {
   switch (type) {

@@ -1,17 +1,11 @@
 import { createSelector } from "reselect";
-import { getAverageRate } from "../utils";
 
 const restaurantsSelector = state => state.restaurants;
 const filtersSelector = state => state.filters;
-export const reviewsSelector = state => state.reviews;
+const reviewsSelector = state => state.reviews;
 
 export const dishSelector = (state, { id }) => state.dishes[id];
-export const restaurantSelector = (state, { id }) => state.restaurants[id];
 export const reviewSelector = (state, { id }) => state.reviews[id];
-export const userSelector = (state, { id }) => {
-  const userId = state.reviews[id].userId;
-  return state.users[userId];
-};
 
 export const totalAmountSelector = state =>
   Object.values(state.order).reduce((acc, amount) => acc + amount, 0);
@@ -26,13 +20,15 @@ export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
   filtersSelector,
   reviewsSelector,
-  (restaurants, filters, reviews) => {
-    return Object.entries(restaurants).reduce(
-      (acc, [id, restaurant]) =>
-        getAverageRate(restaurant, reviews) >= filters.minRating
-          ? { ...acc, [id]: restaurant }
-          : acc,
-      {}
-    );
-  }
+  (restaurants, filters, reviews) =>
+    Object.values(restaurants).filter(
+      restaurant =>
+        avarageRateSelector({ reviews }, { restaurant }) >= filters.minRating
+    )
 );
+
+export const avarageRateSelector = (state, { restaurant }) =>
+  restaurant.reviews
+    .map(id => reviewSelector(state, { id }).rating)
+    .filter(rate => typeof rate !== "undefined")
+    .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
