@@ -1,4 +1,4 @@
-import { SET_MIN_RATING } from "../constants";
+import { SET_MIN_RATING } from "./constants";
 
 const initialState = {
   minRating: 0

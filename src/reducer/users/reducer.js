@@ -1,5 +1,5 @@
-import { normalizedUsers } from "../fixtures";
-import { arrToMap } from "../utils";
+import { normalizedUsers } from "../../fixtures";
+import { arrToMap } from "../../utils";
 
 const defaultUsers = arrToMap(normalizedUsers);
 

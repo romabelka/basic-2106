@@ -1,12 +1,7 @@
 import { fromJS, Map } from "immutable";
-import { arrToMap } from "../utils";
-import {
-  ADD_REVIEW,
-  ERROR,
-  LOAD_ALL_RESTAURANTS,
-  START,
-  SUCCESS
-} from "../constants";
+import { arrToMap } from "../../utils";
+import { ERROR, LOAD_ALL_RESTAURANTS, START, SUCCESS } from "../../constants";
+import { ADD_REVIEW } from "../reviews/constants";
 
 const defaultState = new Map({
   entities: fromJS(arrToMap([])),

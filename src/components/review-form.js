@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Input, Rate } from "antd";
 import { useInputValue } from "../custom-hooks/use-input-value";
 import { connect } from "react-redux";
-import { addReview } from "../ac";
+import { addReview } from "../reducer/reviews/actions";
 
 function ReviewForm({ submitReview }) {
   const [text, setText] = useInputValue();

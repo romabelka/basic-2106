@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Select } from "antd";
-import { setMinRating } from "../ac";
+import { setMinRating } from "../reducer/filters/actions";
 
 function Filter({ minRating, setMinRating }) {
   return (

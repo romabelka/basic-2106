@@ -1,5 +1,5 @@
-import { normalizedDishes } from "../fixtures";
-import { arrToMap } from "../utils";
+import { normalizedDishes } from "../../fixtures";
+import { arrToMap } from "../../utils";
 
 const defaultDishes = arrToMap(normalizedDishes);
 
