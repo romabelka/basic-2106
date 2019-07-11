@@ -4,19 +4,21 @@ import { ENTITIES, LOADING_STATE } from "../constants";
 const restaurantsSelector = state => state.restaurants.get(ENTITIES).toJS();
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
-export const dishSelector = (state, { id }) => state.dishes[id];
+export const dishSelector = (state, { id }) => state.dishes.get(id);
 export const reviewSelector = (state, { id }) =>
   state.reviews.get(ENTITIES).get(id);
 export const restaurantLoadingSelector = state =>
   state.restaurants.get(LOADING_STATE);
 export const reviewsLoadingSelector = state => state.reviews.get(LOADING_STATE);
+export const userSelector = (state, { id }) =>
+  state.users.get(ENTITIES).get(id);
 
 export const totalAmountSelector = state =>
-  Object.values(state.order).reduce((acc, amount) => acc + amount, 0);
+  state.order.reduce((acc, amount) => acc + amount, 0);
 
 export const totalPriceSelector = state =>
-  Object.entries(state.order).reduce(
-    (acc, [id, amount]) => acc + dishSelector(state, { id }).price * amount,
+  state.order.reduce(
+    (acc, amount, id) => acc + dishSelector(state, { id }).price * amount,
     0
   );
 
@@ -31,7 +33,8 @@ export const filtratedRestaurantsSelector = createSelector(
     return Object.values(restaurants).filter(
       restaurant =>
         !smthIsLoading &&
-        avarageRateSelector({ reviews }, { restaurant }) >= filters.minRating
+        avarageRateSelector({ reviews }, { restaurant }) >=
+          filters.get("minRating")
     );
   }
 );

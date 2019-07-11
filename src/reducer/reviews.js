@@ -12,9 +12,9 @@ import {
 import { fromJS, Map } from "immutable";
 
 const defaultReviews = new Map({
-  loading: false,
-  error: null,
-  entities: new Map({})
+  [LOADING_STATE]: false,
+  [ERROR_STATE]: null,
+  [ENTITIES]: new Map({})
 });
 
 export default (

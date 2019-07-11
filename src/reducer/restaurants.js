@@ -2,16 +2,19 @@ import { fromJS, Map } from "immutable";
 import { arrToMap } from "../utils";
 import {
   ADD_REVIEW,
+  ENTITIES,
   ERROR,
+  ERROR_STATE,
   LOAD_ALL_RESTAURANTS,
+  LOADING_STATE,
   START,
   SUCCESS
 } from "../constants";
 
 const defaultState = new Map({
-  entities: fromJS(arrToMap([])),
-  loading: false,
-  error: null
+  [ENTITIES]: fromJS(arrToMap([])),
+  [LOADING_STATE]: false,
+  [ERROR_STATE]: null
 });
 
 export default (

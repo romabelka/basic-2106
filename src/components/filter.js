@@ -18,7 +18,7 @@ function Filter({ minRating, setMinRating }) {
 
 export default connect(
   state => ({
-    minRating: state.filters.minRating
+    minRating: state.filters.get("minRating")
   }),
   { setMinRating }
 )(Filter);
