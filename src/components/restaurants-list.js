@@ -4,21 +4,22 @@ import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { List } from "antd";
 import { connect } from "react-redux";
-import { filtratedRestaurantsSelector } from "../selectors";
+import { filtratedRestaurantsSelector, isLoadingRestaurants } from "../selectors";
 import { loadAllRestaurants } from "../ac";
 
 function RestaurantsList({
   restaurants,
   toggleOpenItem,
   isItemOpen,
-  loadAllRestaurants
+  loadAllRestaurants,
+  isLoading
 }) {
   useEffect(() => {
     loadAllRestaurants();
   }, []);
   console.log("---", "rendering restaurant list");
   return (
-    <List>
+    <List loading={isLoading}>
       {restaurants.map(restaurant => (
         <Restaurant
           key={restaurant.id}
@@ -42,7 +43,8 @@ export default connect(
   state => {
     console.log("---", "connect");
     return {
-      restaurants: filtratedRestaurantsSelector(state)
+      restaurants: filtratedRestaurantsSelector(state),
+      isLoading: isLoadingRestaurants(state)
     };
   },
   {

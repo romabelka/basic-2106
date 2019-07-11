@@ -3,9 +3,8 @@ import thunk from "redux-thunk";
 import reducer from "../reducer";
 import logger from "../middlewares/logger";
 import generateId from "../middlewares/generateId";
-import api from "../middlewares/api";
 
-const enhancer = applyMiddleware(thunk, generateId, api, logger);
+const enhancer = applyMiddleware(thunk, generateId, logger);
 const store = createStore(reducer, enhancer);
 
 //dev only. No need in prod

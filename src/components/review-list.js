@@ -4,8 +4,10 @@ import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
 import ReviewForm from "./review-form";
+import {connect} from "react-redux";
+import {loadRestaurantReviews} from "../ac";
 
-function ReviewList({ restaurant }) {
+function ReviewList({ restaurant, loadRestaurantReviews }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
     <div>
@@ -23,7 +25,7 @@ function ReviewList({ restaurant }) {
   return (
     <div>
       {body}
-      <Button onClick={toggleOpen}>
+      <Button onClick={()=>{toggleOpen(); loadRestaurantReviews();}}>
         {isOpen ? "hide reviews" : "show reviews"}
       </Button>
     </div>
@@ -34,4 +36,4 @@ ReviewList.propTypes = {
   restaurant: PropTypes.object.isRequired
 };
 
-export default ReviewList;
+export default connect(null,{loadRestaurantReviews})(ReviewList);

@@ -3,14 +3,15 @@ import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addItem, removeItem } from "../ac";
-import { dishSelector } from "../selectors";
+import { dishSelector, dishLoadingSelector } from "../selectors";
 
-function Dish({ dish, amount, handleDecrease, handleIncrease }) {
+function Dish({ dish, loading, amount, handleDecrease, handleIncrease }) {
+  
   return (
-    <Card
+    <Card loading={loading}
       bordered
       actions={[
-        `$${dish.price}`,
+        `$${loading? 0: dish.price}`,
         <>
           <span style={{ margin: "0 12px" }} data-id="dish-amount">
             {amount}
@@ -34,7 +35,7 @@ function Dish({ dish, amount, handleDecrease, handleIncrease }) {
         </>
       ]}
     >
-      <Card.Meta title={dish.name} description={dish.ingredients.join(", ")} />
+      <Card.Meta title={loading? "": dish.name} description={loading? "": dish.ingredients.join(", ")} />
     </Card>
   );
 }
@@ -44,15 +45,20 @@ Dish.defaultProps = {
 };
 
 Dish.propTypes = {
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
+  dish: PropTypes.object,
+  amount: PropTypes.number,
+  handleDecrease: PropTypes.func,
+  handleIncrease: PropTypes.func
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps) => {
+  //console.log('mapStateToProps');
+  //console.log(ownProps);
+  return {
   amount: state.order[ownProps.id] || 0,
-  dish: dishSelector(state, ownProps)
-});
+  dish: dishSelector(state, ownProps),
+  loading: dishLoadingSelector(state, ownProps)
+}};
 
 const mapDispatchToProps = {
   handleIncrease: addItem,

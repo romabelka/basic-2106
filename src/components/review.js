@@ -34,4 +34,5 @@ Review.propTypes = {
 
 export default connect((state, ownProps) => ({
   review: reviewSelector(state, ownProps)
-}))(Review);
+})
+)(Review);

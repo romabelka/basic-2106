@@ -5,20 +5,24 @@ import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 import RestaurantRate from "./restaurant-rate";
+import { loadRestaurantMenu } from "../ac";
+import { connect } from "react-redux";
+import {menuForRestaurantWasLoaded} from "../selectors";
 
-export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+ function Restaurant({ menuWasLoaded, restaurant, isOpen, onBtnClick, loadMenu}) {
   const body = isOpen && (
     <div data-id="restaurant-body">
-      <RestaurantMenu menu={restaurant.menu} />
+      <RestaurantMenu menu={restaurant.menu} restaurantId = {restaurant.id} />
       <ReviewList restaurant={restaurant} />
       <RestaurantMap />
     </div>
   );
+    //console.log()
   return (
     <List.Item
       style={{ paddingLeft: "8px" }}
       actions={[
-        <Button onClick={onBtnClick} data-id="menu-btn">
+        <Button onClick={()=>{onBtnClick(); if (!menuWasLoaded) loadMenu(restaurant.id);}} data-id="menu-btn">
           {isOpen ? "Hide menu" : "Show menu"}
         </Button>
       ]}
@@ -43,3 +47,13 @@ Restaurant.propTypes = {
     name: PropTypes.string
   })
 };
+const mapStateToProps = (state, ownProps) => {
+   return {
+  menuWasLoaded: menuForRestaurantWasLoaded(state, ownProps.restaurant.id)
+}};
+
+const mapDispatchToProps = {
+  loadMenu: loadRestaurantMenu
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Restaurant);
