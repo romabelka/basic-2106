@@ -1,0 +1,1 @@
+export const LOAD_ALL_DISHES = "LOAD_ALL_DISHES";

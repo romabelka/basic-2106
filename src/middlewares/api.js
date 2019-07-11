@@ -8,8 +8,8 @@ export default store => next => async action => {
   try {
     next({ ...rest, type: type + START });
 
-    const rawRes = await fetch(callAPI);
-    const response = await rawRes.json();
+    const rawResponse = await fetch(callAPI);
+    const response = await rawResponse.json();
 
     next({ ...rest, type: type + SUCCESS, response });
   } catch (error) {
