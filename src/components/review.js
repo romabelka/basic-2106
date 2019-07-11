@@ -11,12 +11,12 @@ function Review({ review }) {
         margin: "16px",
         backgroundColor: "white"
       }}
-      author={review.user}
-      content={review.text}
+      author={review.get("user")}
+      content={review.get("text")}
       actions={[
         <Rate
           disabled
-          defaultValue={review.rating}
+          defaultValue={review.get("rating")}
           style={{ marginLeft: "24px" }}
         />
       ]}
