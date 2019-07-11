@@ -2,14 +2,13 @@ import {
   ADD_ITEM,
   ADD_REVIEW,
   DECREMENT,
-  ERROR,
   INCREMENT,
   LOAD_ALL_RESTAURANTS,
+  LOAD_ALL_REVIEWS,
   REMOVE_ITEM,
-  SET_MIN_RATING,
-  START,
-  SUCCESS
+  SET_MIN_RATING
 } from "../constants";
+import { eventToEndpoint } from "../utils";
 
 export const increment = () => ({
   type: INCREMENT
@@ -47,15 +46,9 @@ export const loadAllRestaurants = () => ({
 });
 */
 
-export const loadAllRestaurants = () => async dispatch => {
-  try {
-    dispatch({ type: LOAD_ALL_RESTAURANTS + START });
+export const loadAllRestaurants = eventToEndpoint(
+  LOAD_ALL_RESTAURANTS,
+  "/api/restaurants"
+);
 
-    const rawRes = await fetch("/api/restaurants");
-    const response = await rawRes.json();
-
-    dispatch({ type: LOAD_ALL_RESTAURANTS + SUCCESS, response });
-  } catch (error) {
-    dispatch({ type: LOAD_ALL_RESTAURANTS + ERROR, error });
-  }
-};
+export const loadAllReviews = eventToEndpoint(LOAD_ALL_REVIEWS, "/api/reviews");

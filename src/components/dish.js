@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Button } from "antd";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addItem, removeItem } from "../ac";
 import { dishSelector } from "../selectors";
@@ -43,14 +42,8 @@ Dish.defaultProps = {
   name: "Unknown"
 };
 
-Dish.propTypes = {
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
-};
-
 const mapStateToProps = (state, ownProps) => ({
-  amount: state.order[ownProps.id] || 0,
+  amount: state.order.get(ownProps.id) || 0,
   dish: dishSelector(state, ownProps)
 });
 

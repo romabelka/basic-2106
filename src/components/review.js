@@ -2,21 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Comment, Rate } from "antd";
 import { connect } from "react-redux";
-import { reviewSelector } from "../selectors";
+import { reviewSelector, userSelector } from "../selectors";
 
-function Review({ review }) {
+function Review({ review, user }) {
   return (
     <Comment
       style={{
         margin: "16px",
         backgroundColor: "white"
       }}
-      author={review.user}
-      content={review.text}
+      author={user.get("name")}
+      content={review.get("text")}
       actions={[
         <Rate
           disabled
-          defaultValue={review.rating}
+          defaultValue={review.get("rating")}
           style={{ marginLeft: "24px" }}
         />
       ]}
@@ -32,6 +32,11 @@ Review.propTypes = {
   }).isRequired
 };
 
-export default connect((state, ownProps) => ({
-  review: reviewSelector(state, ownProps)
-}))(Review);
+export default connect((state, ownProps) => {
+  let review = reviewSelector(state, ownProps);
+  let user = userSelector(state, { id: review.get("userId") });
+  return {
+    review,
+    user
+  };
+})(Review);

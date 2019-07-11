@@ -2,33 +2,42 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
-import { List } from "antd";
+import { List, Spin } from "antd";
 import { connect } from "react-redux";
-import { filtratedRestaurantsSelector } from "../selectors";
-import { loadAllRestaurants } from "../ac";
+import {
+  filtratedRestaurantsSelector,
+  restaurantLoadingSelector,
+  reviewsLoadingSelector
+} from "../selectors";
+import { loadAllRestaurants, loadAllReviews } from "../ac";
 
 function RestaurantsList({
   restaurants,
   toggleOpenItem,
   isItemOpen,
-  loadAllRestaurants
+  loadAllRestaurants,
+  loadAllReviews,
+  loading
 }) {
   useEffect(() => {
+    loadAllReviews();
     loadAllRestaurants();
-  }, []);
+  }, [loadAllRestaurants, loadAllReviews]);
   console.log("---", "rendering restaurant list");
   return (
-    <List>
-      {restaurants.map(restaurant => (
-        <Restaurant
-          key={restaurant.id}
-          restaurant={restaurant}
-          isOpen={isItemOpen(restaurant.id)}
-          onBtnClick={toggleOpenItem(restaurant.id)}
-          data-id="restaurant"
-        />
-      ))}
-    </List>
+    <Spin spinning={loading}>
+      <List>
+        {restaurants.map(restaurant => (
+          <Restaurant
+            key={restaurant.id}
+            restaurant={restaurant}
+            isOpen={isItemOpen(restaurant.id)}
+            onBtnClick={toggleOpenItem(restaurant.id)}
+            data-id="restaurant"
+          />
+        ))}
+      </List>
+    </Spin>
   );
 }
 
@@ -42,10 +51,12 @@ export default connect(
   state => {
     console.log("---", "connect");
     return {
-      restaurants: filtratedRestaurantsSelector(state)
+      restaurants: filtratedRestaurantsSelector(state),
+      loading: restaurantLoadingSelector(state) || reviewsLoadingSelector(state)
     };
   },
   {
-    loadAllRestaurants
+    loadAllRestaurants,
+    loadAllReviews
   }
 )(accordionDecorator(RestaurantsList));
