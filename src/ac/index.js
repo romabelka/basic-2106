@@ -54,7 +54,7 @@ export const loadAllRestaurants = () => async dispatch => {
     dispatch({ type: LOAD_ALL_RESTAURANTS + ERROR, error });
   }
 };
-export const loadRestaurantMenu = (restId) => async dispatch => {
+export const loadRestaurantMenu = restId => async dispatch => {
   try {
     dispatch({ type: LOAD_RESTAURANT_MENU + START, restId });
 
@@ -62,21 +62,19 @@ export const loadRestaurantMenu = (restId) => async dispatch => {
     const response = await rawRes.json();
 
     dispatch({ type: LOAD_RESTAURANT_MENU + SUCCESS, response, restId });
-    //console.log(response);
   } catch (error) {
     dispatch({ type: LOAD_RESTAURANT_MENU + ERROR, error });
   }
 };
 
-export const loadRestaurantReviews = (restId) => async dispatch => {
+export const loadAllReviews = () => async dispatch => {
   try {
-    dispatch({ type: LOAD_RESTAURANT_REVIEWS + START, restId });
+    dispatch({ type: LOAD_RESTAURANT_REVIEWS + START });
 
-    const rawRes = await fetch("/api/reviews?id=" + restId);
+    const rawRes = await fetch("/api/reviews");
     const response = await rawRes.json();
 
-    dispatch({ type: LOAD_RESTAURANT_REVIEWS + SUCCESS, response, restId });
-    //console.log(response);
+    dispatch({ type: LOAD_RESTAURANT_REVIEWS + SUCCESS, response });
   } catch (error) {
     dispatch({ type: LOAD_RESTAURANT_REVIEWS + ERROR, error });
   }
