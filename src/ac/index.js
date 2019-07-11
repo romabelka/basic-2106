@@ -8,7 +8,9 @@ import {
   REMOVE_ITEM,
   SET_MIN_RATING,
   START,
-  SUCCESS
+  SUCCESS,
+  LOAD_RESTAURANT_MENU,
+  LOAD_RESTAURANT_REVIEWS
 } from "../constants";
 
 export const increment = () => ({
@@ -40,13 +42,6 @@ export const addReview = (review, restaurantId) => ({
   generateId: true
 });
 
-/*
-export const loadAllRestaurants = () => ({
-  type: LOAD_ALL_RESTAURANTS,
-  callAPI: "/api/restaurants"
-});
-*/
-
 export const loadAllRestaurants = () => async dispatch => {
   try {
     dispatch({ type: LOAD_ALL_RESTAURANTS + START });
@@ -57,5 +52,30 @@ export const loadAllRestaurants = () => async dispatch => {
     dispatch({ type: LOAD_ALL_RESTAURANTS + SUCCESS, response });
   } catch (error) {
     dispatch({ type: LOAD_ALL_RESTAURANTS + ERROR, error });
+  }
+};
+export const loadRestaurantMenu = restId => async dispatch => {
+  try {
+    dispatch({ type: LOAD_RESTAURANT_MENU + START, restId });
+
+    const rawRes = await fetch("/api/dishes?id=" + restId);
+    const response = await rawRes.json();
+
+    dispatch({ type: LOAD_RESTAURANT_MENU + SUCCESS, response, restId });
+  } catch (error) {
+    dispatch({ type: LOAD_RESTAURANT_MENU + ERROR, error });
+  }
+};
+
+export const loadAllReviews = () => async dispatch => {
+  try {
+    dispatch({ type: LOAD_RESTAURANT_REVIEWS + START });
+
+    const rawRes = await fetch("/api/reviews");
+    const response = await rawRes.json();
+
+    dispatch({ type: LOAD_RESTAURANT_REVIEWS + SUCCESS, response });
+  } catch (error) {
+    dispatch({ type: LOAD_RESTAURANT_REVIEWS + ERROR, error });
   }
 };

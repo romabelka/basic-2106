@@ -5,7 +5,7 @@ import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
 import ReviewForm from "./review-form";
 
-function ReviewList({ restaurant }) {
+export default function ReviewList({ restaurant }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
     <div>
@@ -33,5 +33,3 @@ function ReviewList({ restaurant }) {
 ReviewList.propTypes = {
   restaurant: PropTypes.object.isRequired
 };
-
-export default ReviewList;
