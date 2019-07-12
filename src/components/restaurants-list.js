@@ -6,22 +6,17 @@ import { List, Spin } from "antd";
 import { connect } from "react-redux";
 import { filtratedRestaurantsSelector } from "../selectors";
 import { loadAllRestaurants } from "../reducer/restaurants/actions";
-import { loadAllReviews } from "../reducer/reviews/actions";
 
 function RestaurantsList({
   restaurants,
   toggleOpenItem,
   isItemOpen,
   loadAllRestaurants,
-  loadAllReviews,
   areRestauransLoading
 }) {
   useEffect(() => {
-    loadAllReviews();
     loadAllRestaurants();
-  }, [loadAllReviews, loadAllRestaurants]);
-
-  // console.log("---", "rendering restaurant list");
+  }, [loadAllRestaurants]);
 
   const body = areRestauransLoading && (
     <div style={{ textAlign: "center" }}>
@@ -32,7 +27,6 @@ function RestaurantsList({
   return (
     <>
       {body}
-
       <List>
         {restaurants.map(restaurant => (
           <Restaurant
@@ -63,7 +57,6 @@ export default connect(
     };
   },
   {
-    loadAllRestaurants,
-    loadAllReviews
+    loadAllRestaurants
   }
 )(accordionDecorator(RestaurantsList));

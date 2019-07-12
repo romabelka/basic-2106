@@ -1,37 +1,68 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Button, List } from "antd";
+import { Button, List, Icon } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
 import ReviewForm from "./review-form";
+import { loadRestaurantReviews } from "../reducer/reviews/actions";
+import { reviewSelector } from "../selectors";
 
-function ReviewList({ restaurant }) {
+function ReviewList({
+  restaurantId,
+  reviews,
+  areReviewsLoading,
+  loadRestaurantReviews
+}) {
+  useEffect(() => {
+    loadRestaurantReviews();
+  }, [loadRestaurantReviews]);
+
   const { isOpen, toggleOpen } = useToggler();
+
+  const loadingBody = areReviewsLoading && (
+    <div style={{ textAlign: "center" }}>
+      <Icon type="loading" style={{ fontSize: 24, color: "#40a9ff" }} spin />
+    </div>
+  );
+
   const body = isOpen && (
-    <div>
+    <>
       <List
-        dataSource={restaurant.reviews}
-        renderItem={reviewId => (
-          <List.Item key={reviewId}>
-            <Review id={reviewId} />
+        dataSource={reviews}
+        renderItem={review => (
+          <List.Item key={review.id}>
+            <Review review={review} />
           </List.Item>
         )}
       />
-      <ReviewForm restaurantId={restaurant.id} />
-    </div>
+      <ReviewForm restaurantId={restaurantId} />
+    </>
   );
   return (
-    <div>
+    <>
+      {loadingBody}
       {body}
       <Button onClick={toggleOpen}>
         {isOpen ? "hide reviews" : "show reviews"}
       </Button>
-    </div>
+    </>
   );
 }
 
 ReviewList.propTypes = {
-  restaurant: PropTypes.object.isRequired
+  restaurantId: PropTypes.string.isRequired,
+  reviews: PropTypes.array.isRequired
 };
 
-export default ReviewList;
+export default connect(
+  (state, ownProps) => {
+    return {
+      areReviewsLoading: state.reviews.get("loading"),
+      reviews: reviewSelector(state, ownProps) || []
+    };
+  },
+  {
+    loadRestaurantReviews
+  }
+)(ReviewList);

@@ -7,7 +7,6 @@ export const loadAllDishes = restaurantId => async dispatch => {
 
     const rawResponse = await fetch(`/api/dishes?id=${restaurantId}`);
     const response = await rawResponse.json();
-    console.log(response);
 
     dispatch({ type: LOAD_ALL_DISHES + SUCCESS, response, restaurantId });
   } catch (error) {
