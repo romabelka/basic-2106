@@ -8,6 +8,9 @@ export const dishSelector = (state, { id }) =>
 export const reviewSelector = (state, { id }) =>
   state.reviews.getIn(["entities", id]);
 
+export const restaurantsLoading = state =>
+  state.restaurants.loading || state.reviews.loading;
+
 export const totalAmountSelector = state =>
   state.order.valueSeq().reduce((acc, amount) => acc + amount, 0);
 
@@ -33,6 +36,7 @@ export const filtratedRestaurantsSelector = createSelector(
 
 export const avarageRateSelector = (state, { restaurant }) =>
   restaurant.reviews
-    .map(id => reviewSelector(state, { id }).rating)
+    .map(id => reviewSelector(state, { id }))
+    .map(review => review && review.rating)
     .filter(rate => typeof rate !== "undefined")
     .reduce((acc, el, _, arr) => acc + el / arr.length, 0);
