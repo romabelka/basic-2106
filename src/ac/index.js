@@ -3,12 +3,14 @@ import {
   ADD_REVIEW,
   DECREMENT,
   ERROR,
+  LOAD_RESTAURANT_MENU,
   INCREMENT,
   LOAD_ALL_RESTAURANTS,
   REMOVE_ITEM,
   SET_MIN_RATING,
   START,
-  SUCCESS
+  SUCCESS,
+  LOAD_RESTAURANT_REVIEWS
 } from "../constants";
 
 export const increment = () => ({
@@ -57,5 +59,35 @@ export const loadAllRestaurants = () => async dispatch => {
     dispatch({ type: LOAD_ALL_RESTAURANTS + SUCCESS, response });
   } catch (error) {
     dispatch({ type: LOAD_ALL_RESTAURANTS + ERROR, error });
+  }
+};
+
+export const loadRestaurantMenu = restaurantId => async dispatch => {
+  try {
+    dispatch({ type: LOAD_RESTAURANT_MENU + START });
+
+    const rawRes = await fetch(`/api/dishes?id=${restaurantId}`);
+    const response = await rawRes.json();
+
+    dispatch({ type: LOAD_RESTAURANT_MENU + SUCCESS, response, restaurantId });
+  } catch (error) {
+    dispatch({ type: LOAD_RESTAURANT_MENU + ERROR, error });
+  }
+};
+
+export const loadRestaurantReviews = restaurantId => async dispatch => {
+  try {
+    dispatch({ type: LOAD_RESTAURANT_REVIEWS + START });
+
+    const rawRes = await fetch(`/api/reviews?id=${restaurantId}`);
+    const response = await rawRes.json();
+
+    dispatch({
+      type: LOAD_RESTAURANT_REVIEWS + SUCCESS,
+      response,
+      restaurantId
+    });
+  } catch (error) {
+    dispatch({ type: LOAD_RESTAURANT_REVIEWS + ERROR, error });
   }
 };

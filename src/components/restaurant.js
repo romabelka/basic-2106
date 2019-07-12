@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar, Button, List } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 import RestaurantRate from "./restaurant-rate";
+import { connect } from "react-redux";
+import { loadRestaurantReviews } from "../ac";
 
-export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+function Restaurant({ restaurant, isOpen, onBtnClick, loadRestaurantReviews }) {
+  useEffect(() => {
+    loadRestaurantReviews(restaurant.id);
+  }, []);
+
   const body = isOpen && (
     <div data-id="restaurant-body">
-      <RestaurantMenu menu={restaurant.menu} />
-      <ReviewList restaurant={restaurant} />
+      <RestaurantMenu restaurantId={restaurant.id} />
+      <ReviewList restaurantId={restaurant.id} />
       <RestaurantMap />
     </div>
   );
@@ -27,7 +33,7 @@ export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
         avatar={<Avatar shape="square" src={restaurant.image} />}
         title={restaurant.name}
       />
-      <RestaurantRate restaurant={restaurant} />
+      <RestaurantRate restaurantId={restaurant.id} />
       {body}
     </List.Item>
   );
@@ -43,3 +49,10 @@ Restaurant.propTypes = {
     name: PropTypes.string
   })
 };
+
+export default connect(
+  null,
+  {
+    loadRestaurantReviews
+  }
+)(Restaurant);

@@ -4,20 +4,22 @@ import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
 import ReviewForm from "./review-form";
+import { connect } from "react-redux";
+import { reviewSelector } from "../selectors";
 
-function ReviewList({ restaurant }) {
+function ReviewList({ restaurantId, reviews }) {
   const { isOpen, toggleOpen } = useToggler();
   const body = isOpen && (
     <div>
       <List
-        dataSource={restaurant.reviews}
-        renderItem={reviewId => (
-          <List.Item key={reviewId}>
-            <Review id={reviewId} />
+        dataSource={reviews}
+        renderItem={review => (
+          <List.Item key={review.id}>
+            <Review review={review} />
           </List.Item>
         )}
       />
-      <ReviewForm restaurantId={restaurant.id} />
+      <ReviewForm restaurantId={restaurantId} />
     </div>
   );
   return (
@@ -31,7 +33,15 @@ function ReviewList({ restaurant }) {
 }
 
 ReviewList.propTypes = {
-  restaurant: PropTypes.object.isRequired
+  restaurantId: PropTypes.string.isRequired,
+  reviews: PropTypes.array.isRequired
 };
 
-export default ReviewList;
+export default connect(
+  (state, ownProps) => {
+    return {
+      reviews: reviewSelector(state, ownProps) || []
+    };
+  },
+  {}
+)(ReviewList);
