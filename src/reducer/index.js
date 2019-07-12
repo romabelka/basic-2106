@@ -6,6 +6,7 @@ import restaurants from "./restaurants";
 import dishes from "./dishes";
 import reviews from "./reviews";
 import users from "./users";
+import menus from "./menus";
 
 export default combineReducers({
   count: counterReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   restaurants,
   dishes,
   users,
-  reviews
+  reviews,
+  menus
 });
