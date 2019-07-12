@@ -43,7 +43,7 @@ export default (
     case LOAD_ALL_RESTAURANTS + SUCCESS:
       return state
         .set("loading", false)
-        .set("entities", fromJS(arrToMap(response, RestaurantRecord)));
+        .set("entities", arrToMap(response, RestaurantRecord));
 
     default:
       return state;
