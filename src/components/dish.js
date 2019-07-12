@@ -50,7 +50,7 @@ Dish.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  amount: state.order[ownProps.id] || 0,
+  amount: state.order.get(ownProps.id) || 0,
   dish: dishSelector(state, ownProps)
 });
 

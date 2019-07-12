@@ -1,17 +1,19 @@
 import { createSelector } from "reselect";
 
-const restaurantsSelector = state => state.restaurants.get("entities").toJS();
+const restaurantsSelector = state => state.restaurants.get("entities");
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
-export const dishSelector = (state, { id }) => state.dishes[id];
-export const reviewSelector = (state, { id }) => state.reviews[id];
+export const dishSelector = (state, { id }) =>
+  state.dishes.getIn(["entities", id]);
+export const reviewSelector = (state, { id }) =>
+  state.reviews.getIn(["entities", id]);
 
 export const totalAmountSelector = state =>
-  Object.values(state.order).reduce((acc, amount) => acc + amount, 0);
+  state.order.valueSeq().reduce((acc, amount) => acc + amount, 0);
 
 export const totalPriceSelector = state =>
-  Object.entries(state.order).reduce(
-    (acc, [id, amount]) => acc + dishSelector(state, { id }).price * amount,
+  state.order.reduce(
+    (acc, amount, id) => acc + dishSelector(state, { id }).price * amount,
     0
   );
 
@@ -20,10 +22,13 @@ export const filtratedRestaurantsSelector = createSelector(
   filtersSelector,
   reviewsSelector,
   (restaurants, filters, reviews) =>
-    Object.values(restaurants).filter(
-      restaurant =>
-        avarageRateSelector({ reviews }, { restaurant }) >= filters.minRating
-    )
+    restaurants
+      .valueSeq()
+      .toArray()
+      .filter(
+        restaurant =>
+          avarageRateSelector({ reviews }, { restaurant }) >= filters.minRating
+      )
 );
 
 export const avarageRateSelector = (state, { restaurant }) =>
