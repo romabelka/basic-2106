@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addItem, removeItem } from "../reducer/order/actions";
 
-function Dish({ dish, amount, handleDecrease, handleIncrease }) {
+function Dish({ dish, amount, handleDecrease, handleIncrease, restaurantId }) {
   return (
     <Card
       bordered

@@ -20,9 +20,14 @@ export default (
       return state.set("loading", false).set("error", error);
 
     case LOAD_ALL_DISHES + SUCCESS:
-      return state
-        .set("loading", false)
-        .setIn(["entities", restaurantId], response);
+      const dishesMap = response.reduce((acc, value) => {
+        return {
+          ...acc,
+          [value.id]: value
+        };
+      }, {});
+      debugger;
+      return state.set("loading", false).set("entities", fromJS(dishesMap));
 
     default:
       return state;
