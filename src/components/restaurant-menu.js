@@ -1,25 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Row, Col } from "antd";
+import { Row, Col, Spin } from "antd";
 import Dish from "./dish";
+import { loadAllDishes } from "../reducer/dishes/actions";
+import { menuDishesSelector } from "../selectors";
 
-function RestaurantMenu({ menu }) {
-  return (
-    <div style={{ padding: "16px" }}>
-      <Row gutter={16}>
-        {menu.map(id => (
-          <Col key={id} span={8}>
-            <Dish id={id} />
-          </Col>
-        ))}
-      </Row>
+function RestaurantMenu({
+  restaurantId,
+  menu,
+  loadAllDishes,
+  areDishesLoading
+}) {
+  useEffect(() => {
+    loadAllDishes(restaurantId);
+  }, []);
+
+  const body = areDishesLoading && (
+    <div style={{ textAlign: "center" }}>
+      <Spin size="large" />
     </div>
+  );
+
+  return (
+    <>
+      {body}
+      <div style={{ padding: "16px" }}>
+        <Row gutter={16}>
+          {menu.map(dish => (
+            <Col key={dish.id} span={8}>
+              <Dish dish={dish} />
+            </Col>
+          ))}
+        </Row>
+      </div>
+    </>
   );
 }
 
 RestaurantMenu.propTypes = {
-  menu: PropTypes.array.isRequired
+  restaurantId: PropTypes.string.isRequired,
+  menu: PropTypes.array.isRequired,
+  areDishesLoading: PropTypes.bool
 };
 
-export default connect()(RestaurantMenu);
+export default connect(
+  (state, ownProps) => {
+    return {
+      areDishesLoading: state.dishes.get("loading"),
+      menu: menuDishesSelector(state, ownProps) || []
+    };
+  },
+  {
+    loadAllDishes
+  }
+)(RestaurantMenu);

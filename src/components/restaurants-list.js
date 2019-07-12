@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { filtratedRestaurantsSelector } from "../selectors";
 import { loadAllRestaurants } from "../reducer/restaurants/actions";
 import { loadAllReviews } from "../reducer/reviews/actions";
-import { loadAllDishes } from "../reducer/dishes/actions";
 
 function RestaurantsList({
   restaurants,
@@ -15,14 +14,12 @@ function RestaurantsList({
   isItemOpen,
   loadAllRestaurants,
   loadAllReviews,
-  loadAllDishes,
   areRestauransLoading
 }) {
   useEffect(() => {
-    loadAllDishes();
     loadAllReviews();
     loadAllRestaurants();
-  }, [loadAllDishes, loadAllReviews, loadAllRestaurants]);
+  }, [loadAllReviews, loadAllRestaurants]);
 
   // console.log("---", "rendering restaurant list");
 
@@ -67,7 +64,6 @@ export default connect(
   },
   {
     loadAllRestaurants,
-    loadAllDishes,
     loadAllReviews
   }
 )(accordionDecorator(RestaurantsList));
