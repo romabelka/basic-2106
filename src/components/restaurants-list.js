@@ -6,6 +6,7 @@ import { List, Spin } from "antd";
 import { connect } from "react-redux";
 import { filtratedRestaurantsSelector, restaurantsLoading } from "../selectors";
 import { loadAllRestaurants, loadAllReviews } from "../ac";
+import { NavLink } from "react-router-dom";
 
 function RestaurantsList({
   restaurants,
@@ -28,17 +29,16 @@ function RestaurantsList({
     );
 
   return (
-    <List>
-      {restaurants.map(restaurant => (
-        <Restaurant
-          key={restaurant.id}
-          restaurant={restaurant}
-          isOpen={isItemOpen(restaurant.id)}
-          onBtnClick={toggleOpenItem(restaurant.id)}
-          data-id="restaurant"
-        />
-      ))}
-    </List>
+    <List
+      dataSource={restaurants}
+      renderItem={restaurant => (
+        <List.Item>
+          <NavLink to={`/restaurants/${restaurant.id}`}>
+            {restaurant.name}
+          </NavLink>
+        </List.Item>
+      )}
+    />
   );
 }
 

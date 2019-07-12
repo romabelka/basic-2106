@@ -20,6 +20,9 @@ export const menuLoadedSelector = (state, { restaurant }) =>
 export const totalAmountSelector = state =>
   state.order.valueSeq().reduce((acc, amount) => acc + amount, 0);
 
+export const restaurantSelector = (state, { id }) =>
+  state.restaurants.getIn(["entities", id]);
+
 export const totalPriceSelector = state =>
   state.order.reduce(
     (acc, amount, id) => acc + dishSelector(state, { id }).price * amount,

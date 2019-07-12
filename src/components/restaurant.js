@@ -5,8 +5,12 @@ import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
 import RestaurantRate from "./restaurant-rate";
+import { connect } from "react-redux";
+import { restaurantSelector } from "../selectors";
 
-export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
+function Restaurant({ restaurant, isOpen, onBtnClick }) {
+  if (!restaurant) return null;
+
   const body = isOpen && (
     <div data-id="restaurant-body">
       <RestaurantMenu restaurant={restaurant} />
@@ -43,3 +47,7 @@ Restaurant.propTypes = {
     name: PropTypes.string
   })
 };
+
+export default connect((state, ownProps) => ({
+  restaurant: restaurantSelector(state, ownProps)
+}))(Restaurant);
