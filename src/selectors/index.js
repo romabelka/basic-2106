@@ -11,6 +11,12 @@ export const reviewSelector = (state, { id }) =>
 export const restaurantsLoading = state =>
   state.restaurants.loading || state.reviews.loading;
 
+export const menuLoadingSelector = (state, { restaurant }) =>
+  state.dishes.loading.get(restaurant.id);
+
+export const menuLoadedSelector = (state, { restaurant }) =>
+  state.dishes.loaded.get(restaurant.id);
+
 export const totalAmountSelector = state =>
   state.order.valueSeq().reduce((acc, amount) => acc + amount, 0);
 

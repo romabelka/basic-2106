@@ -11,6 +11,8 @@ export const LOAD_ALL_REVIEWS = "LOAD_ALL_REVIEWS";
 
 export const LOAD_ALL_RESTAURANTS = "LOAD_ALL_RESTAURANTS";
 
+export const LOAD_MENU = "LOAD_MENU";
+
 export const START = "_START";
 export const SUCCESS = "_SUCCESS";
 export const ERROR = "_ERROR";

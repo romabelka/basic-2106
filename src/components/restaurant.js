@@ -9,7 +9,7 @@ import RestaurantRate from "./restaurant-rate";
 export default function Restaurant({ restaurant, isOpen, onBtnClick }) {
   const body = isOpen && (
     <div data-id="restaurant-body">
-      <RestaurantMenu menu={restaurant.menu} />
+      <RestaurantMenu restaurant={restaurant} />
       <ReviewList restaurant={restaurant} />
       <RestaurantMap />
     </div>
