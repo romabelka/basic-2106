@@ -1,8 +1,10 @@
 import React from "react";
 import Restaurant from "./restaurant";
-import accordionDecorator from "./decorators/accordion";
+import { useAccordion } from "../custom-hooks/use-accordion";
 
-function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
+export default function RestaurantsList({ restaurants }) {
+  const { toggleOpenItem, isItemOpen } = useAccordion();
+
   return (
     <div>
       {restaurants.map(restaurant => (
@@ -16,5 +18,3 @@ function RestaurantsList({ restaurants, toggleOpenItem, isItemOpen }) {
     </div>
   );
 }
-
-export default accordionDecorator(RestaurantsList);
