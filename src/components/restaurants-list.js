@@ -2,46 +2,57 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
-import { List } from "antd";
+import { List, Spin } from "antd";
 import { connect } from "react-redux";
 import { filtratedRestaurantsSelector } from "../selectors";
-import { loadAllRestaurants } from "../ac";
+import { loadAllRestaurants } from "../reducer/restaurants/actions";
 
 function RestaurantsList({
   restaurants,
   toggleOpenItem,
   isItemOpen,
-  loadAllRestaurants
+  loadAllRestaurants,
+  areRestauransLoading
 }) {
   useEffect(() => {
     loadAllRestaurants();
-  }, []);
-  console.log("---", "rendering restaurant list");
+  }, [loadAllRestaurants]);
+
+  const body = areRestauransLoading && (
+    <div style={{ textAlign: "center" }}>
+      <Spin size="large" />
+    </div>
+  );
+
   return (
-    <List>
-      {restaurants.map(restaurant => (
-        <Restaurant
-          key={restaurant.id}
-          restaurant={restaurant}
-          isOpen={isItemOpen(restaurant.id)}
-          onBtnClick={toggleOpenItem(restaurant.id)}
-          data-id="restaurant"
-        />
-      ))}
-    </List>
+    <>
+      {body}
+      <List>
+        {restaurants.map(restaurant => (
+          <Restaurant
+            key={restaurant.id}
+            restaurant={restaurant}
+            isOpen={isItemOpen(restaurant.id)}
+            onBtnClick={toggleOpenItem(restaurant.id)}
+            data-id="restaurant"
+          />
+        ))}
+      </List>
+    </>
   );
 }
 
 RestaurantsList.propTypes = {
   restaurants: PropTypes.array.isRequired,
   toggleOpenItem: PropTypes.func.isRequired,
-  isItemOpen: PropTypes.func.isRequired
+  isItemOpen: PropTypes.func.isRequired,
+  areRestauransLoading: PropTypes.bool
 };
 
 export default connect(
   state => {
-    console.log("---", "connect");
     return {
+      areRestauransLoading: state.restaurants.get("loading"),
       restaurants: filtratedRestaurantsSelector(state)
     };
   },

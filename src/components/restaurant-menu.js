@@ -1,53 +1,57 @@
-import React, { Component } from "react";
-import Dish from "./dish";
-import { Row, Col } from "antd";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Row, Col, Icon } from "antd";
+import Dish from "./dish";
+import { loadAllDishes } from "../reducer/dishes/actions";
+import { menuDishesSelector } from "../selectors";
 
-class RestaurantMenu extends Component {
-  static propTypes = {
-    menu: PropTypes.array.isRequired
-  };
+function RestaurantMenu({
+  restaurantId,
+  menu,
+  loadAllDishes,
+  areDishesLoading
+}) {
+  useEffect(() => {
+    loadAllDishes(restaurantId);
+  }, [loadAllDishes, restaurantId]);
 
-  static getDerivedStateFromProps(props, state) {
-    return {};
-  }
+  const body = areDishesLoading && (
+    <div style={{ textAlign: "center" }}>
+      <Icon type="loading" style={{ fontSize: 24, color: "#fadb14" }} spin />
+    </div>
+  );
 
-  state = {
-    error: null
-  };
-
-  /*
-       getSnapshotBeforeUpdate(prevProps, prevState) {}
-        componentWillReceiveProps(nextProps, nextContext) {
-        }
-
-        componentWillUpdate(nextProps, nextState, nextContext) {
-        }
-
-        componentWillMount() {
-
-        }
-    */
-
-  componentDidCatch(error, errorInfo) {
-    this.setState({ error });
-  }
-
-  render() {
-    if (this.state.error) return <h3>Oooops....</h3>;
-    const { menu } = this.props;
-    return (
+  return (
+    <>
+      {body}
       <div style={{ padding: "16px" }}>
         <Row gutter={16}>
-          {menu.map(id => (
-            <Col key={id} span={8}>
-              <Dish id={id} />
+          {menu.map(dish => (
+            <Col key={dish.id} span={8}>
+              <Dish dish={dish} />
             </Col>
           ))}
         </Row>
       </div>
-    );
-  }
+    </>
+  );
 }
 
-export default RestaurantMenu;
+RestaurantMenu.propTypes = {
+  restaurantId: PropTypes.string.isRequired,
+  menu: PropTypes.array.isRequired,
+  areDishesLoading: PropTypes.bool
+};
+
+export default connect(
+  (state, ownProps) => {
+    return {
+      areDishesLoading: state.dishes.get("loading"),
+      menu: menuDishesSelector(state, ownProps) || []
+    };
+  },
+  {
+    loadAllDishes
+  }
+)(RestaurantMenu);

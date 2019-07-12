@@ -1,4 +1,4 @@
-import { ERROR, START, SUCCESS } from "../constants";
+import { ERROR, START, SUCCESS } from "../reducer/restaurants/constants";
 
 export default store => next => async action => {
   const { callAPI, type, ...rest } = action;
@@ -8,8 +8,8 @@ export default store => next => async action => {
   try {
     next({ ...rest, type: type + START });
 
-    const rawRes = await fetch(callAPI);
-    const response = await rawRes.json();
+    const rawResponse = await fetch(callAPI);
+    const response = await rawResponse.json();
 
     next({ ...rest, type: type + SUCCESS, response });
   } catch (error) {

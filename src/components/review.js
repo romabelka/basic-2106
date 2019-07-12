@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Comment, Rate } from "antd";
-import { connect } from "react-redux";
-import { reviewSelector } from "../selectors";
 
-function Review({ review }) {
+export default function Review({ review }) {
   return (
     <Comment
       style={{
@@ -31,7 +29,3 @@ Review.propTypes = {
     rating: PropTypes.number
   }).isRequired
 };
-
-export default connect((state, ownProps) => ({
-  review: reviewSelector(state, ownProps)
-}))(Review);

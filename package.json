@@ -14,6 +14,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "simple_api": "file:simple_api",
     "uuid": "^3.3.2"
   },
   "scripts": {
