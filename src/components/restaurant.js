@@ -8,7 +8,7 @@ import RestaurantRate from "./restaurant-rate";
 import { connect } from "react-redux";
 import { restaurantSelector } from "../selectors";
 
-function Restaurant({ restaurant, isOpen, onBtnClick }) {
+function Restaurant({ restaurant, isOpen }) {
   if (!restaurant) return null;
 
   const body = isOpen && (
@@ -19,14 +19,7 @@ function Restaurant({ restaurant, isOpen, onBtnClick }) {
     </div>
   );
   return (
-    <List.Item
-      style={{ paddingLeft: "8px" }}
-      actions={[
-        <Button onClick={onBtnClick} data-id="menu-btn">
-          {isOpen ? "Hide menu" : "Show menu"}
-        </Button>
-      ]}
-    >
+    <List.Item style={{ paddingLeft: "8px" }}>
       <List.Item.Meta
         avatar={<Avatar shape="square" src={restaurant.image} />}
         title={restaurant.name}
