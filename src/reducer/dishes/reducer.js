@@ -1,5 +1,4 @@
 import { fromJS, Map } from "immutable";
-import { arrToMap } from "../../utils";
 import { LOAD_ALL_DISHES } from "./constants";
 import { SUCCESS, START, ERROR } from "../restaurants/constants";
 

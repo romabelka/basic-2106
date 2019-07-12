@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Row, Col, Spin } from "antd";
+import { Row, Col, Icon } from "antd";
 import Dish from "./dish";
 import { loadAllDishes } from "../reducer/dishes/actions";
 import { menuDishesSelector } from "../selectors";
@@ -14,11 +14,11 @@ function RestaurantMenu({
 }) {
   useEffect(() => {
     loadAllDishes(restaurantId);
-  }, []);
+  }, [loadAllDishes, restaurantId]);
 
   const body = areDishesLoading && (
     <div style={{ textAlign: "center" }}>
-      <Spin size="large" />
+      <Icon type="loading" style={{ fontSize: 24, color: "#fadb14" }} spin />
     </div>
   );
 

@@ -3,11 +3,12 @@ import { createSelector } from "reselect";
 const restaurantsSelector = state => state.restaurants.get("entities").toJS();
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
-export const dishSelector = (state, { id }) =>
-  state.dishes.get("entities").toJS();
+
+export const dishSelector = (state, { id }) => state.dishes[id];
 export const reviewSelector = (state, { id }) => state.reviews[id];
 export const menuDishesSelector = (state, { restaurantId }) =>
-  state.dishes.get("entities").toJS()[restaurantId] || [];
+  state.dishes.get("entities").toJS()[restaurantId];
+
 export const totalAmountSelector = state =>
   Object.values(state.order).reduce((acc, amount) => acc + amount, 0);
 
