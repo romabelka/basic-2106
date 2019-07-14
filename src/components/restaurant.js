@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Button, List } from "antd";
+import { Avatar, List } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";

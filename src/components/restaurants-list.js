@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
 import { List, Spin } from "antd";
 import { connect } from "react-redux";
