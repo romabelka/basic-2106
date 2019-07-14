@@ -5,6 +5,10 @@ const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
 export const dishSelector = (state, { id }) =>
   state.dishes.getIn(["entities", id]);
+export const restaurantIdByDishSelector = state => id => {
+  return restaurantsSelector(state).find(item => item.menu.includes(id)).id;
+};
+
 export const reviewSelector = (state, { id }) =>
   state.reviews.getIn(["entities", id]);
 
@@ -28,6 +32,10 @@ export const totalPriceSelector = state =>
     (acc, amount, id) => acc + dishSelector(state, { id }).price * amount,
     0
   );
+
+export const ordersSelector = state => {
+  return new Map(state.order);
+};
 
 export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
