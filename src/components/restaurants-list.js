@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import Restaurant from "./restaurant";
+import * as PropTypes from "prop-types";
 import accordionDecorator from "../decorators/accordion";
-import { List, Spin } from "antd";
+import { List } from "antd";
 import { connect } from "react-redux";
 import { filtratedRestaurantsSelector, restaurantsLoading } from "../selectors";
 import { loadAllRestaurants, loadAllReviews } from "../ac";
@@ -10,8 +9,6 @@ import { NavLink } from "react-router-dom";
 
 function RestaurantsList({
   restaurants,
-  toggleOpenItem,
-  isItemOpen,
   loading,
   loadAllRestaurants,
   loadAllReviews
@@ -19,17 +16,11 @@ function RestaurantsList({
   useEffect(() => {
     loadAllRestaurants();
     loadAllReviews();
-  }, []);
-
-  if (loading)
-    return (
-      <div>
-        <Spin />
-      </div>
-    );
+  }, [loadAllRestaurants, loadAllReviews]);
 
   return (
     <List
+      loading={loading}
       dataSource={restaurants}
       renderItem={restaurant => (
         <List.Item>

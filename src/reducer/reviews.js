@@ -11,7 +11,7 @@ const ReviewRecord = Record({
 
 const ReducerRecord = Record({
   entities: arrToMap([], ReviewRecord),
-  loading: false
+  loading: true
 });
 
 export default (

@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, Button } from "antd";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Card, Button } from "antd";
 import { addItem, removeItem } from "../ac";
 import { dishSelector } from "../selectors";
 
@@ -39,14 +39,28 @@ function Dish({ dish, amount, handleDecrease, handleIncrease }) {
   );
 }
 
-Dish.defaultProps = {
-  name: "Unknown"
+Dish.propTypes = {
+  dish: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    ingredients: PropTypes.arrayOf(PropTypes.string)
+  }),
+  amount: PropTypes.number,
+  handleDecrease: PropTypes.func,
+  handleIncrease: PropTypes.func
 };
 
-Dish.propTypes = {
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
+// noinspection JSUnusedGlobalSymbols
+Dish.defaultProps = {
+  dish: PropTypes.shape({
+    name: "Unknown",
+    price: 0,
+    ingredients: []
+  }),
+  amount: 0,
+  handleDecrease: () => null,
+  handleIncrease: () => null
 };
 
 const mapStateToProps = (state, ownProps) => ({

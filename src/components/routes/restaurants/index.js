@@ -1,19 +1,27 @@
 import React from "react";
-import RestaurantsList from "../../restaurants-list";
 import { Route } from "react-router-dom";
+import { connect } from "react-redux";
+import RestaurantsList from "../../restaurants-list";
 import Restaurant from "../../restaurant";
+import { restaurantsSelector } from "../../../selectors";
 
-export default function RestaurantsPage() {
-  return (
-    <div>
-      <RestaurantsList />
+const renderRestaurant = ({ match }) => {
+  if (match && match.params && match.params.id) {
+    return <Restaurant id={match.params.id} isOpen />;
+  }
+
+  return <h1>Please select a restaurant</h1>;
+};
+
+const RestaurantsPage = ({ restaurantsSize }) => (
+  <div>
+    <RestaurantsList />
+    {restaurantsSize ? (
       <Route path="/restaurants/:id" children={renderRestaurant} />
-    </div>
-  );
-}
+    ) : null}
+  </div>
+);
 
-function renderRestaurant({ match }) {
-  if (!match) return <h1>Please select a restaurant</h1>;
-
-  return <Restaurant id={match.params.id} isOpen />;
-}
+export default connect(state => ({
+  restaurantsSize: restaurantsSelector(state).size
+}))(RestaurantsPage);

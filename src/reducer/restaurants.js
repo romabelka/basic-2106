@@ -19,7 +19,7 @@ const RestaurantRecord = Record({
 
 const defaultState = new Map({
   entities: arrToMap([], RestaurantRecord),
-  loading: false,
+  loading: true,
   error: null
 });
 

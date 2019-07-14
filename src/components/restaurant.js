@@ -1,6 +1,6 @@
 import React from "react";
-import { Avatar, Button, List } from "antd";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
+import { Avatar, List } from "antd";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
 import RestaurantMap from "./restaurant-map";
@@ -9,7 +9,9 @@ import { connect } from "react-redux";
 import { restaurantSelector } from "../selectors";
 
 function Restaurant({ restaurant, isOpen }) {
-  if (!restaurant) return null;
+  if (!restaurant) {
+    return {};
+  }
 
   const body = isOpen && (
     <div data-id="restaurant-body">
