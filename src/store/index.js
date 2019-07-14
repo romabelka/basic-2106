@@ -1,14 +1,17 @@
-import { createStore, applyMiddleware } from "redux";
+// global window
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import reducer from "../reducer";
 import logger from "../middlewares/logger";
 import generateId from "../middlewares/generateId";
 import api from "../middlewares/api";
 
-const enhancer = applyMiddleware(thunk, generateId, api, logger);
-const store = createStore(reducer, enhancer);
+// noinspection JSUnresolvedVariable
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-//dev only. No need in prod
-window.store = store;
+const middleware = [thunk, generateId, api, logger];
 
-export default store;
+export default createStore(
+  reducer,
+  composeEnhancers(applyMiddleware(...middleware))
+);

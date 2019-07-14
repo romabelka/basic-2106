@@ -5,7 +5,7 @@ import { totalAmountSelector, totalPriceSelector } from "../selectors";
 function Cart({ totalAmount, totalPrice }) {
   return (
     <div>
-      total {totalAmount} items from {totalPrice}$
+      total {totalAmount} items from ${totalPrice}
     </div>
   );
 }

@@ -1,9 +1,7 @@
 import {
   ADD_ITEM,
   ADD_REVIEW,
-  DECREMENT,
   ERROR,
-  INCREMENT,
   LOAD_ALL_RESTAURANTS,
   LOAD_ALL_REVIEWS,
   LOAD_MENU,
@@ -12,14 +10,6 @@ import {
   START,
   SUCCESS
 } from "../constants";
-
-export const increment = () => ({
-  type: INCREMENT
-});
-
-export const decrement = () => ({
-  type: DECREMENT
-});
 
 export const addItem = id => ({
   type: ADD_ITEM,
@@ -41,13 +31,6 @@ export const addReview = (review, restaurantId) => ({
   payload: { review, restaurantId },
   generateId: true
 });
-
-/*
-export const loadAllRestaurants = () => ({
-  type: LOAD_ALL_RESTAURANTS,
-  callAPI: "/api/restaurants"
-});
-*/
 
 export const loadAllRestaurants = () => async dispatch => {
   try {

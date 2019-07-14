@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import * as PropTypes from "prop-types";
-import accordionDecorator from "../decorators/accordion";
-import { List } from "antd";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { List } from "antd";
+import accordionDecorator from "../decorators/accordion";
 import { filtratedRestaurantsSelector, restaurantsLoading } from "../selectors";
 import { loadAllRestaurants, loadAllReviews } from "../ac";
-import { NavLink } from "react-router-dom";
 
 function RestaurantsList({
   restaurants,
