@@ -3,9 +3,10 @@ import { Card, Button } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addItem, removeItem } from "../ac";
-import { dishSelector } from "../selectors";
+import { dishRestaurantSelector, dishSelector } from "../selectors";
+import { NavLink } from "react-router-dom";
 
-function Dish({ dish, amount, handleDecrease, handleIncrease }) {
+function Dish({ dish, amount, handleDecrease, handleIncrease, restaurant }) {
   return (
     <Card
       bordered
@@ -34,7 +35,12 @@ function Dish({ dish, amount, handleDecrease, handleIncrease }) {
         </>
       ]}
     >
-      <Card.Meta title={dish.name} description={dish.ingredients.join(", ")} />
+      <NavLink to={`/restaurants/${restaurant.id}`}>
+        <Card.Meta
+          title={dish.name}
+          description={dish.ingredients.join(", ")}
+        />
+      </NavLink>
     </Card>
   );
 }
@@ -51,7 +57,8 @@ Dish.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   amount: state.order.get(ownProps.id) || 0,
-  dish: dishSelector(state, ownProps)
+  dish: dishSelector(state, ownProps),
+  restaurant: dishRestaurantSelector(state, ownProps)
 });
 
 const mapDispatchToProps = {
