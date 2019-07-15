@@ -21,9 +21,9 @@ export const decrement = () => ({
   type: DECREMENT
 });
 
-export const addItem = id => ({
-  type: ADD_ITEM,
-  payload: { id }
+export const addItem = dish => ({
+  type : ADD_ITEM,
+  payload : dish
 });
 
 export const removeItem = id => ({
