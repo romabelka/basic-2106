@@ -5,9 +5,9 @@ import { totalAmountSelector, totalPriceSelector } from "../selectors";
 function Cart({ totalAmount, totalPrice }) {
   return (
     <div>
-      total {totalAmount} items from {totalPrice}$
+      total {totalAmount} items for {totalPrice}$
     </div>
-  );
+  );  
 }
 
 export default connect(state => ({

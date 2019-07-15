@@ -5,16 +5,23 @@ import OrderForm from "./components/order-form";
 import Cart from "./components/cart";
 import Filter from "./components/filter";
 import RestaurantsPage from "./components/routes/restaurants";
+import {Button, Icon} from "antd";
+import "./styles.css"
 
 export default function App() {
+  const style={display: 'inline', fontSize: '32px'};
   return (
     <div>
-      <h1>Delivery App</h1>
+      <NavLink to="/"><div style={style}><p style={style}>Delivery App  </p><Icon type="home" theme="twoTone" /></div></NavLink>
+      
       <NavLink to="/checkout">
         <Cart />
       </NavLink>
-      <NavLink to="/restaurants">Restaurants</NavLink>
-      <NavLink to="/filter">Filter</NavLink>
+      <NavLink to="/restaurants">
+        <Button type="link" size="large">Restaurants</Button></NavLink>
+      <NavLink to="/filter">
+        <Button type="link" size="large">Filter</Button><Icon type="filter" /></NavLink>
+        
 
       <Switch>
         <Route path="/filter" exact component={Filter} />

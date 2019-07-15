@@ -1,0 +1,8 @@
+.ant-table-title {
+    font-weight: bold;
+}
+.ant-table-footer {
+    text-align: right;
+    font-weight: bold;
+    color: red;
+}
