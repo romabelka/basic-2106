@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Button, List } from "antd";
+import { Avatar, List } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
@@ -8,12 +8,12 @@ import RestaurantRate from "./restaurant-rate";
 import { connect } from "react-redux";
 import { restaurantSelector } from "../selectors";
 
-function Restaurant({ restaurant, isOpen }) {
+function Restaurant({ restaurant, isOpen, dishIdToSelect }) {
   if (!restaurant) return null;
 
   const body = isOpen && (
     <div data-id="restaurant-body">
-      <RestaurantMenu restaurant={restaurant} />
+      <RestaurantMenu restaurant={restaurant} dishIdToSelect={dishIdToSelect} />
       <ReviewList restaurant={restaurant} />
       <RestaurantMap />
     </div>

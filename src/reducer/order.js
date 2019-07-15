@@ -1,6 +1,5 @@
 import { ADD_ITEM, REMOVE_ITEM } from "../constants";
-import { Map, Record } from "immutable";
-import {arrToMap} from "../utils"
+import { Map } from "immutable";
 
 export default (order = new Map({}), action) => {
   const { type, payload } = action;

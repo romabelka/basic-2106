@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { loadMenu } from "../ac";
 import { menuLoadedSelector, menuLoadingSelector } from "../selectors";
 
-function RestaurantMenu({ restaurant, loaded, loading, loadMenu }) {
+function RestaurantMenu({ restaurant, loaded, loading, loadMenu, dishIdToSelect }) {
   useEffect(() => {
     if (!loaded && !loading) loadMenu(restaurant.id);
   }, [restaurant.id]);
@@ -22,7 +22,7 @@ function RestaurantMenu({ restaurant, loaded, loading, loadMenu }) {
       <Row gutter={16}>
         {restaurant.menu.map(id => (
           <Col key={id} span={8}>
-            <Dish restaurantId={restaurant.id} dishId={id} />
+            <Dish restaurantId={restaurant.id} dishId={id} dishIdToSelect={dishIdToSelect} />
           </Col>
         ))}
       </Row>

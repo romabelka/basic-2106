@@ -5,7 +5,8 @@ import OrderForm from "./components/order-form";
 import Cart from "./components/cart";
 import Filter from "./components/filter";
 import RestaurantsPage from "./components/routes/restaurants";
-import {Button, Icon} from "antd"
+import {Button, Icon} from "antd";
+import "./styles.css"
 
 export default function App() {
   const style={display: 'inline', fontSize: '32px'};

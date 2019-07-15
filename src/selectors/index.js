@@ -3,6 +3,8 @@ import { createSelector } from "reselect";
 const restaurantsSelector = state => state.restaurants.get("entities");
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
+export const allDishesSelect = state => state.dishes;
+export const dishSelector1 = (dishes, dishId) => dishes.getIn(["entities", dishId]);
 export const dishSelector = (state, { dishId }) =>
   state.dishes.getIn(["entities", dishId]);
 export const reviewSelector = (state, { id }) =>

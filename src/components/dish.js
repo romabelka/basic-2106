@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import { addItem, removeItem } from "../ac";
 import { dishSelector,amountOfDishInOrder } from "../selectors";
 
-function Dish({ dish, amount, handleDecrease, handleIncrease, restaurantId }) {
+function Dish({ dish, amount, handleDecrease, handleIncrease, restaurantId, dishIdToSelect }) {
+  const style = (dishIdToSelect===dish.id) ? {borderColor: "red", borderWidth: "medium"} : {};
   return (
-    <Card
+    <Card style = {style}
       bordered
       actions={[
         `$${dish.price}`,
