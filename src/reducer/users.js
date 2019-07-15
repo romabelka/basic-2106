@@ -1,11 +1,18 @@
-import { normalizedUsers } from "../fixtures";
 import { arrToMap } from "../utils";
+import { Record } from "immutable";
 
-const defaultUsers = arrToMap(normalizedUsers);
+const UserRecord = Record({
+  id: null,
+  name: null
+});
 
-export default (users = defaultUsers, { type }) => {
+const ReducerRecord = Record({
+  entities: arrToMap([], UserRecord)
+});
+
+export default (usersState = new ReducerRecord(), { type }) => {
   switch (type) {
     default:
-      return users;
+      return usersState;
   }
 };

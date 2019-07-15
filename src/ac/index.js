@@ -5,6 +5,8 @@ import {
   ERROR,
   INCREMENT,
   LOAD_ALL_RESTAURANTS,
+  LOAD_ALL_REVIEWS,
+  LOAD_MENU,
   REMOVE_ITEM,
   SET_MIN_RATING,
   START,
@@ -59,3 +61,14 @@ export const loadAllRestaurants = () => async dispatch => {
     dispatch({ type: LOAD_ALL_RESTAURANTS + ERROR, error });
   }
 };
+
+export const loadAllReviews = () => ({
+  type: LOAD_ALL_REVIEWS,
+  callAPI: "/api/reviews"
+});
+
+export const loadMenu = restaurantId => ({
+  type: LOAD_MENU,
+  payload: { restaurantId },
+  callAPI: `/api/dishes?id=${restaurantId}`
+});

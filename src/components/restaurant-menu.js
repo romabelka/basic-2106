@@ -1,45 +1,62 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import Dish from "./dish";
-import { Row, Col } from "antd";
-import PropTypes from "prop-types";
+import { Row, Col, Spin } from "antd";
+import { connect } from "react-redux";
+import { loadMenu } from "../ac";
+import { menuLoadedSelector, menuLoadingSelector } from "../selectors";
 
+function RestaurantMenu({ restaurant, loaded, loading, loadMenu }) {
+  useEffect(() => {
+    if (!loaded && !loading) loadMenu(restaurant.id);
+  }, [restaurant.id]);
+
+  if (!loaded)
+    return (
+      <div>
+        <Spin />
+      </div>
+    );
+
+  return (
+    <div style={{ padding: "16px" }}>
+      <Row gutter={16}>
+        {restaurant.menu.map(id => (
+          <Col key={id} span={8}>
+            <Dish id={id} />
+          </Col>
+        ))}
+      </Row>
+    </div>
+  );
+}
+
+/*
 class RestaurantMenu extends Component {
-  static propTypes = {
-    menu: PropTypes.array.isRequired
-  };
-
-  static getDerivedStateFromProps(props, state) {
-    return {};
+  componentDidMount() {
+    const { loaded, loading, loadMenu, restaurant } = this.props;
+    if (!loaded && !loading) loadMenu(restaurant.id);
   }
 
-  state = {
-    error: null
-  };
-
-  /*
-       getSnapshotBeforeUpdate(prevProps, prevState) {}
-        componentWillReceiveProps(nextProps, nextContext) {
-        }
-
-        componentWillUpdate(nextProps, nextState, nextContext) {
-        }
-
-        componentWillMount() {
-
-        }
-    */
-
-  componentDidCatch(error, errorInfo) {
-    this.setState({ error });
+  componentDidUpdate() {
+    const { loaded, loading, loadMenu, restaurant } = this.props;
+    if (!loaded && !loading) loadMenu(restaurant.id);
   }
 
   render() {
     if (this.state.error) return <h3>Oooops....</h3>;
-    const { menu } = this.props;
+    const { restaurant, loaded } = this.props;
+
+    if (!loaded)
+      return (
+        <div>
+          <Spin />
+        </div>
+      );
+
     return (
       <div style={{ padding: "16px" }}>
         <Row gutter={16}>
-          {menu.map(id => (
+          {restaurant.menu.map(id => (
             <Col key={id} span={8}>
               <Dish id={id} />
             </Col>
@@ -49,5 +66,12 @@ class RestaurantMenu extends Component {
     );
   }
 }
+*/
 
-export default RestaurantMenu;
+export default connect(
+  (state, ownProps) => ({
+    loading: menuLoadingSelector(state, ownProps),
+    loaded: menuLoadedSelector(state, ownProps)
+  }),
+  { loadMenu }
+)(RestaurantMenu);

@@ -1,4 +1,4 @@
-import { fromJS, Map } from "immutable";
+import { Map, Record } from "immutable";
 import { arrToMap } from "../utils";
 import {
   ADD_REVIEW,
@@ -8,8 +8,17 @@ import {
   SUCCESS
 } from "../constants";
 
+const RestaurantRecord = Record({
+  id: null,
+  name: null,
+  location: {},
+  image: null,
+  menu: [],
+  reviews: []
+});
+
 const defaultState = new Map({
-  entities: fromJS(arrToMap([])),
+  entities: arrToMap([], RestaurantRecord),
   loading: false,
   error: null
 });
@@ -22,7 +31,7 @@ export default (
     case ADD_REVIEW:
       return state.updateIn(
         ["entities", payload.restaurantId, "reviews"],
-        reviews => reviews.push(id)
+        reviews => reviews.concat(id)
       );
 
     case LOAD_ALL_RESTAURANTS + START:
@@ -34,7 +43,7 @@ export default (
     case LOAD_ALL_RESTAURANTS + SUCCESS:
       return state
         .set("loading", false)
-        .set("entities", fromJS(arrToMap(response)));
+        .set("entities", arrToMap(response, RestaurantRecord));
 
     default:
       return state;
