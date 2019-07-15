@@ -6,6 +6,7 @@ import { addItem, removeItem } from "../ac";
 import { dishSelector } from "../selectors";
 
 function Dish({ dish, amount, handleDecrease, handleIncrease }) {
+
   return (
     <Card
       bordered
@@ -28,7 +29,7 @@ function Dish({ dish, amount, handleDecrease, handleIncrease }) {
               shape="circle"
               icon="plus"
               data-id="dish-plus"
-              onClick={() => handleIncrease(dish.id)}
+              onClick={() => handleIncrease(dish)}
             />
           </Button.Group>
         </>
