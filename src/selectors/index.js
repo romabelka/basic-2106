@@ -17,12 +17,44 @@ export const menuLoadingSelector = (state, { restaurant }) =>
 export const menuLoadedSelector = (state, { restaurant }) =>
   state.dishes.loaded.get(restaurant.id);
 
-export const totalAmountSelector = state =>
-  state.order.valueSeq().reduce((acc, amount) => acc + amount, 0);
-
 export const restaurantSelector = (state, { id }) =>
   state.restaurants.getIn(["entities", id]);
 
+export const dishPriceList = state => {
+
+  const dishCntArr = state.order.valueSeq().toArray();
+  const dishIdArr = state.order.keySeq().toArray();
+  
+  return dishIdArr.map( (i,index)=> {
+
+    let dishId = dishIdArr[index];
+    return {
+      id : getRestaurantIdByDishId(state, dishId ),
+      name : dishSelector(state, { id : dishId }).name,
+      cnt  : dishCntArr[index]
+    }
+  });
+}
+
+export const getRestaurantIdByDishId = (state, dishId) =>{
+
+  let restElem = null;
+  let restIndex = -1;
+
+  restaurantsSelector(state).forEach( (item, index)  => {
+    if( restIndex === -1 ) {
+      restElem = ( item.menu.indexOf(dishId) !== -1 ) ? item : null;
+      if( restElem )
+        restIndex = restElem.id
+    }
+  })
+
+  return restIndex;
+}
+
+export const totalAmountSelector = state => 
+  state.order.reduce((acc, amount) => acc + amount, 0);
+ 
 export const totalPriceSelector = state =>
   state.order.reduce(
     (acc, amount, id) => acc + dishSelector(state, { id }).price * amount,
