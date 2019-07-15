@@ -4,11 +4,8 @@ const restaurantsSelector = state => state.restaurants.get("entities");
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
 export const allDishesSelect = state => state.dishes;
-export const dishSelector1 = (dishes, dishId) => dishes.getIn(["entities", dishId]);
-export const dishSelector = (state, { dishId }) =>
-  state.dishes.getIn(["entities", dishId]);
-export const reviewSelector = (state, { id }) =>
-  state.reviews.getIn(["entities", id]);
+export const dishSelector = (state, { dishId }) => state.dishes.getIn(["entities", dishId]);
+export const reviewSelector = (state, { id }) => state.reviews.getIn(["entities", id]);
 
 export const restaurantsLoading = state =>
   state.restaurants.loading || state.reviews.loading;
@@ -38,10 +35,23 @@ export const totalPriceSelector = state => {
   return arr.reduce((sum, amount)=>sum+amount,0);
 }
 
+export const totalOrderSelector = state => {
+  // возвращает массив объектов вида {restId, dishId, amount, name, price}, 
+  // содержащий позиции заказа (id ресторана, id блюда, колво, имя блюда, цена)
+  // для отображения в таблице - компоненте CheckoutTable
+  let arr = []; 
+  state.order.entrySeq().forEach(v=> (v[1].entrySeq().forEach(e=> {
+    let price = dishSelector(state, {dishId: e[0]}).price;
+    let name = dishSelector(state, {dishId: e[0]}).name;
+    let amount = e[1];
+    if (amount) arr.push({restId: v[0], dishId: e[0], amount, name, price} );
+  })));
+   
+  return arr;
+}
+
 export const restaurantSelector = (state, { id }) =>
   state.restaurants.getIn(["entities", id]);
-
-
 
 export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
