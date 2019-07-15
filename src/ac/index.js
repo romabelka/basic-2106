@@ -21,14 +21,14 @@ export const decrement = () => ({
   type: DECREMENT
 });
 
-export const addItem = id => ({
+export const addItem = (dishId, restId) => ({
   type: ADD_ITEM,
-  payload: { id }
+  payload: { dishId, restId }
 });
 
-export const removeItem = id => ({
+export const removeItem = (dishId, restId)  => ({
   type: REMOVE_ITEM,
-  payload: { id }
+  payload: { dishId, restId }
 });
 
 export const setMinRating = minRating => ({
@@ -41,13 +41,6 @@ export const addReview = (review, restaurantId) => ({
   payload: { review, restaurantId },
   generateId: true
 });
-
-/*
-export const loadAllRestaurants = () => ({
-  type: LOAD_ALL_RESTAURANTS,
-  callAPI: "/api/restaurants"
-});
-*/
 
 export const loadAllRestaurants = () => async dispatch => {
   try {
