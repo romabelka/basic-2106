@@ -50,7 +50,10 @@ RestaurantsList.propTypes = {
 
 export default connect(
   state => ({
-    restaurants: filtratedRestaurantsSelector(state),
+    restaurants: filtratedRestaurantsSelector(state).concat({
+      id: "hohoho",
+      name: "non existing restaurant"
+    }),
     loading: restaurantsLoading(state)
   }),
   {

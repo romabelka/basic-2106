@@ -12,6 +12,8 @@ import {
   START,
   SUCCESS
 } from "../constants";
+import { matchPath } from "react-router-dom";
+import { push } from "connected-react-router";
 
 export const increment = () => ({
   type: INCREMENT
@@ -49,7 +51,7 @@ export const loadAllRestaurants = () => ({
 });
 */
 
-export const loadAllRestaurants = () => async dispatch => {
+export const loadAllRestaurants = () => async (dispatch, getState) => {
   try {
     dispatch({ type: LOAD_ALL_RESTAURANTS + START });
 
@@ -57,6 +59,17 @@ export const loadAllRestaurants = () => async dispatch => {
     const response = await rawRes.json();
 
     dispatch({ type: LOAD_ALL_RESTAURANTS + SUCCESS, response });
+
+    const { router, restaurants } = getState();
+
+    console.log("---", router);
+    const { id } = matchPath(router.location.pathname, {
+      path: "/restaurants/:id"
+    }).params;
+
+    if (!restaurants.entities.get(id)) {
+      dispatch(push("/error"));
+    }
   } catch (error) {
     dispatch({ type: LOAD_ALL_RESTAURANTS + ERROR, error });
   }
