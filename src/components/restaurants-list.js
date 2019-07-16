@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import Restaurant from "./restaurant";
 import accordionDecorator from "../decorators/accordion";
+import Filter from "./filter";
 import { List, Spin } from "antd";
 import { connect } from "react-redux";
 import { filtratedRestaurantsSelector, restaurantsLoading } from "../selectors";
@@ -29,16 +29,19 @@ function RestaurantsList({
     );
 
   return (
-    <List
-      dataSource={restaurants}
-      renderItem={restaurant => (
-        <List.Item>
-          <NavLink to={`/restaurants/${restaurant.id}`}>
-            {restaurant.name}
-          </NavLink>
-        </List.Item>
-      )}
-    />
+    <>
+      <Filter />
+      <List
+        dataSource={restaurants}
+        renderItem={restaurant => (
+          <List.Item>
+            <NavLink to={`/restaurants/${restaurant.id}`}>
+              {restaurant.name}
+            </NavLink>
+          </List.Item>
+        )}
+      />
+    </>
   );
 }
 
