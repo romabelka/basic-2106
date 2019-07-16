@@ -9,18 +9,20 @@ import CheckoutPage from "./components/routes/checkout";
 import { Provider } from "./contexts/username";
 import { useInputValue } from "./custom-hooks/use-input-value";
 import { Input } from "antd";
+import Menu, { MenuItem } from "./components/menu";
 
 export default function App() {
   const [username, setUserName] = useInputValue("Roma");
 
   return (
     <div>
-      <h1>Delivery App</h1>
-      <NavLink to="/checkout">
-        <Cart />
-      </NavLink>
-      <NavLink to="/restaurants">Restaurants</NavLink>
-      <NavLink to="/filter">Filter</NavLink>
+      <Menu>
+        <Menu.Item to="/checkout">
+          <Cart />
+        </Menu.Item>
+        <MenuItem to="/restaurants">Restaurants</MenuItem>
+        <MenuItem to="/filter" children={"Filter"} />
+      </Menu>
       <div>
         Username: <Input value={username} onChange={setUserName} />
       </div>
