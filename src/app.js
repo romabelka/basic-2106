@@ -1,11 +1,11 @@
 import React from "react";
-import { Route, NavLink, Switch } from "react-router-dom";
+import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 import "antd/dist/antd.css";
 import OrderForm from "./components/order-form";
 import Cart from "./components/cart";
 import Filter from "./components/filter";
 import RestaurantsPage from "./components/routes/restaurants";
-import CheckoutPage from "./components/routes/restaurants/checkout";
+import CheckoutPage from "./components/routes/checkout";
 
 export default function App() {
   return (
@@ -18,6 +18,7 @@ export default function App() {
       <NavLink to="/filter">Filter</NavLink>
 
       <Switch>
+        <Redirect from="/" exact to="/restaurants" />
         <Route path="/filter" exact component={Filter} />
         <Route path="/checkout" exact component={CheckoutPage} />
         <Route
