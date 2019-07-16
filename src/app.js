@@ -19,6 +19,7 @@ export default function App() {
 
       <Switch>
         <Redirect from="/" exact to="/restaurants" />
+        <Redirect from="/restaurants/" exact strict to="/restaurants" />
         <Route path="/filter" exact component={Filter} />
         <Route path="/checkout" exact component={CheckoutPage} />
         <Route
@@ -26,7 +27,7 @@ export default function App() {
           render={({ id }) => <h1>Add a review for {id}</h1>}
         />
         <Route path="/restaurants" component={RestaurantsPage} />
-        <Route path="/checkout" component={OrderForm} />
+        <Route path="*" render={() => <h1>Not Found Page</h1>} />
       </Switch>
     </div>
   );
