@@ -17,14 +17,14 @@ const RestaurantRecord = Record({
   reviews: []
 });
 
-const defaultState = new Map({
+const ReducerRecord = Record({
   entities: arrToMap([], RestaurantRecord),
   loading: false,
   error: null
 });
 
 export default (
-  state = defaultState,
+  state = new ReducerRecord(),
   { type, payload, id, response, error }
 ) => {
   switch (type) {

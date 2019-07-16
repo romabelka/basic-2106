@@ -5,6 +5,7 @@ import OrderForm from "./components/order-form";
 import Cart from "./components/cart";
 import Filter from "./components/filter";
 import RestaurantsPage from "./components/routes/restaurants";
+import CheckoutPage from "./components/routes/restaurants/checkout";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
 
       <Switch>
         <Route path="/filter" exact component={Filter} />
+        <Route path="/checkout" exact component={CheckoutPage} />
         <Route
           path="/restaurants/:id/review"
           render={({ id }) => <h1>Add a review for {id}</h1>}

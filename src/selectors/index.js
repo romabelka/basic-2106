@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const restaurantsSelector = state => state.restaurants.get("entities");
+const restaurantsSelector = state => state.restaurants.entities;
 const filtersSelector = state => state.filters;
 const reviewsSelector = state => state.reviews;
 export const dishSelector = (state, { id }) =>
@@ -28,6 +28,15 @@ export const totalPriceSelector = state =>
     (acc, amount, id) => acc + dishSelector(state, { id }).price * amount,
     0
   );
+
+export const orderListSelector = state =>
+  state.order.toArray().map(([id, amount]) => ({
+    dish: dishSelector(state, { id }),
+    amount,
+    restaurant: restaurantsSelector(state).find(restaurant =>
+      restaurant.menu.includes(id)
+    )
+  }));
 
 export const filtratedRestaurantsSelector = createSelector(
   restaurantsSelector,
