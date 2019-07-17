@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import Restaurant from "./restaurant";
-import accordionDecorator from "../decorators/accordion";
-import { List, Spin } from "antd";
-import { connect } from "react-redux";
-import { filtratedRestaurantsSelector, restaurantsLoading } from "../selectors";
-import { loadAllRestaurants, loadAllReviews } from "../ac";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { List, Spin } from "antd";
+import { filtratedRestaurantsSelector, restaurantsLoading } from "../selectors";
+import { loadAllRestaurants } from "../reducer/restaurants/actions";
+import { loadAllReviews } from "../reducer/reviews/actions";
+import accordionDecorator from "../decorators/accordion";
+import Filter from "./filter";
 
 function RestaurantsList({
   restaurants,
@@ -29,16 +30,19 @@ function RestaurantsList({
     );
 
   return (
-    <List
-      dataSource={restaurants}
-      renderItem={restaurant => (
-        <List.Item>
-          <NavLink to={`/restaurants/${restaurant.id}`}>
-            {restaurant.name}
-          </NavLink>
-        </List.Item>
-      )}
-    />
+    <>
+      <Filter />
+      <List
+        dataSource={restaurants}
+        renderItem={restaurant => (
+          <List.Item>
+            <NavLink to={`/restaurants/${restaurant.id}`}>
+              {restaurant.name}
+            </NavLink>
+          </List.Item>
+        )}
+      />
+    </>
   );
 }
 
@@ -50,10 +54,7 @@ RestaurantsList.propTypes = {
 
 export default connect(
   state => ({
-    restaurants: filtratedRestaurantsSelector(state).concat({
-      id: "hohoho",
-      name: "non existing restaurant"
-    }),
+    restaurants: filtratedRestaurantsSelector(state),
     loading: restaurantsLoading(state)
   }),
   {

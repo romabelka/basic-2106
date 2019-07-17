@@ -1,6 +1,7 @@
-import { arrToMap } from "../utils";
-import { ADD_REVIEW, LOAD_ALL_REVIEWS, START, SUCCESS } from "../constants";
 import { Record } from "immutable";
+import { arrToMap } from "../../utils";
+import { ADD_REVIEW, LOAD_ALL_REVIEWS } from "./constants";
+import { START, SUCCESS } from "../restaurants/constants";
 
 const ReviewRecord = Record({
   id: null,

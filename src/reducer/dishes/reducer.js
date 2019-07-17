@@ -1,7 +1,8 @@
 import { Record, Set } from "immutable";
-import { normalizedDishes } from "../fixtures";
-import { arrToMap } from "../utils";
-import { LOAD_MENU, START, SUCCESS } from "../constants";
+import { normalizedDishes } from "../../fixtures";
+import { arrToMap } from "../../utils/index";
+import { LOAD_MENU } from "./constants";
+import { START, SUCCESS } from "../restaurants/constants";
 
 const DishRecord = Record({
   id: null,

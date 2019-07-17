@@ -1,5 +1,5 @@
-import { ADD_ITEM, REMOVE_ITEM } from "../constants";
 import { Map } from "immutable";
+import { ADD_ITEM, REMOVE_ITEM } from "./constants";
 
 export default (order = new Map({}), action) => {
   const { type, payload } = action;

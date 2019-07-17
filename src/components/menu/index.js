@@ -12,7 +12,5 @@ function Menu({ children }) {
 
 Menu.propTypes = {};
 
-Menu.Item = MenuItem;
-
 export { MenuItem };
 export default Menu;

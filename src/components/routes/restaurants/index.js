@@ -1,6 +1,6 @@
 import React from "react";
-import RestaurantsList from "../../restaurants-list";
 import { Route } from "react-router-dom";
+import RestaurantsList from "../../restaurants-list";
 import Restaurant from "../../restaurant";
 
 export default function RestaurantsPage() {

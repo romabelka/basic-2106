@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Comment, Rate } from "antd";
-import { connect } from "react-redux";
 import { reviewSelector } from "../selectors";
-import { userContext, Consumer } from "../contexts/username";
+import { userContext } from "../contexts/username";
 
 function Review({ review }) {
   const username = useContext(userContext);
@@ -22,7 +22,6 @@ function Review({ review }) {
             defaultValue={review.rating}
             style={{ marginLeft: "24px" }}
           />
-          <Consumer>{username => <h3>{username}</h3>}</Consumer>
         </div>
       ]}
     />

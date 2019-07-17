@@ -1,5 +1,5 @@
 import { Record } from "immutable";
-import { SET_MIN_RATING } from "../constants";
+import { SET_MIN_RATING } from "./constants";
 
 const ReducerState = Record({
   minRating: 0
