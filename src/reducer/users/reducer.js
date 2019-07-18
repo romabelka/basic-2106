@@ -1,5 +1,5 @@
-import { arrToMap } from "../utils";
 import { Record } from "immutable";
+import { arrToMap } from "../../utils";
 
 const UserRecord = Record({
   id: null,

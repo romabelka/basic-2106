@@ -1,0 +1,29 @@
+{
+  "title": "Приложение для доставки еды",
+  "restaurants": {
+    "mainpage": "Список ресторанов",
+    "select": "Пожалуйста, выберите ресторан"
+  },
+  "notfound-page": "Страница не найдена",
+  "button": {
+    "cart-order": "Заказать",
+    "restaurants-filter": "Все",
+    "reviews-show": "Показать отзывы",
+    "reviews-hide": "Скрыть отзывы",
+    "reviews-submit": "Отравить отзыв"
+  },
+  "review-form": {
+    "label-text": "Текст"
+  },
+  "order-form": {
+    "label-name": "Имя",
+    "label-phone": "Телефон",
+    "label-address": "Адрес доставки"
+  },
+  "cart-checkout": {
+    "empty": "В корзине нет товаров. Добавьте блюдо из",
+    "total": "Всего",
+    "items": "товаров",
+    "from": "ценой"
+  }
+}

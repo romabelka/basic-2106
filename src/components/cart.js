@@ -1,11 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { totalAmountSelector, totalPriceSelector } from "../selectors";
 
 function Cart({ totalAmount, totalPrice }) {
+  const { t, i18n } = useTranslation();
+
   return (
     <div>
-      total {totalAmount} items from {totalPrice}$
+      {t("cart-checkout.total")} {totalAmount} {t("cart-checkout.items")}{" "}
+      {t("cart-checkout.from")} {totalPrice}$
     </div>
   );
 }

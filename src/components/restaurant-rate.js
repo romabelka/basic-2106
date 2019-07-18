@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Rate } from "antd";
-import { connect } from "react-redux";
 import { avarageRateSelector } from "../selectors";
 
 class RestaurantRate extends Component {
@@ -13,8 +13,6 @@ class RestaurantRate extends Component {
     return <Rate value={this.props.rate} disabled />;
   }
 }
-
-RestaurantRate.propTypes = {};
 
 export default connect((state, ownProps) => ({
   rate: avarageRateSelector(state, ownProps)
