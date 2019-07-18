@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "antd/dist/antd.css";
 import Cart from "./components/cart";
 import RestaurantsPage from "./components/routes/restaurants";
@@ -8,13 +9,15 @@ import { Provider } from "./contexts/username";
 import Menu, { MenuItem } from "./components/menu";
 
 function App() {
+  const { t, i18n } = useTranslation();
+
   return (
     <div>
       <Menu>
         <MenuItem to="/checkout">
           <Cart />
         </MenuItem>
-        <MenuItem to="/restaurants">Restaurants</MenuItem>
+        <MenuItem to="/restaurants">{t("restaurants.mainpage")}</MenuItem>
       </Menu>
       <Switch>
         <Route path="/" exact render={() => null} />
@@ -24,7 +27,7 @@ function App() {
           path="/restaurants/:id/review"
           render={({ id }) => <h1>Add a review for {id}</h1>}
         />
-        <Route path="*" render={() => <h1>Not Found Page</h1>} />
+        <Route path="*" render={() => <h1>{t("notfound-page")}</h1>} />
       </Switch>
     </div>
   );

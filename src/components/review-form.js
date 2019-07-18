@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { Button, Input, Rate } from "antd";
 import { useInputValue } from "../custom-hooks/use-input-value";
 import { addReview } from "../reducer/reviews/actions";
@@ -7,6 +8,7 @@ import { addReview } from "../reducer/reviews/actions";
 function ReviewForm({ submitReview }) {
   const [text, setText] = useInputValue();
   const [rating, setRating] = useState();
+  const { t, i18n } = useTranslation();
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -15,10 +17,10 @@ function ReviewForm({ submitReview }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      Text: <Input value={text} onChange={setText} />
+      {t("review-form.label-text")}: <Input value={text} onChange={setText} />
       <Rate onChange={setRating} value={rating} />
       <Button type="primary" htmlType="submit">
-        Submit Review
+        {t("button.reviews-submit")}
       </Button>
     </form>
   );

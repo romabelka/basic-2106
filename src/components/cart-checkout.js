@@ -1,17 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { Row, Col } from "antd";
 import { orderSelector } from "../selectors";
 import Dish from "./dish";
 
 function CartCheckout({ order, restaurant }) {
+  const { t, i18n } = useTranslation();
+
   if (!order.length)
     return (
       <div>
-        Your cart is empty. Add something from the <span />
-        <NavLink to="/restaurants">Restaurants List</NavLink>
+        {t("cart-checkout.empty")} <span />
+        <NavLink to="/restaurants">{t("restaurants.mainpage")}</NavLink>
       </div>
     );
 

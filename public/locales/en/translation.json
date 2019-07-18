@@ -1,0 +1,29 @@
+{
+  "title": "Delivery App",
+  "restaurants": {
+    "mainpage": "Restaurants List",
+    "select": "Please select a restaurant"
+  },
+  "notfound-page": "Not Found Page",
+  "button": {
+    "cart-order": "Order",
+    "restaurants-filter": "All",
+    "reviews-show": "Show reviews",
+    "reviews-hide": "Hide reviews",
+    "reviews-submit": "Submit review"
+  },
+  "review-form": {
+    "label-text": "Text"
+  },
+  "order-form": {
+    "label-name": "Name",
+    "label-phone": "Phone",
+    "label-address": "Address"
+  },
+  "cart-checkout": {
+    "empty": "Your cart is empty. Add something from the",
+    "total": "Total",
+    "items": "items",
+    "from": "from"
+  }
+}

@@ -1,12 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
 import ReviewForm from "./review-form";
 
 function ReviewList({ restaurant }) {
+  const { t, i18n } = useTranslation();
+
   const { isOpen, toggleOpen } = useToggler();
+
   const body = isOpen && (
     <div>
       <List
@@ -20,11 +24,12 @@ function ReviewList({ restaurant }) {
       <ReviewForm restaurantId={restaurant.id} />
     </div>
   );
+
   return (
     <div>
       {body}
       <Button onClick={toggleOpen}>
-        {isOpen ? "hide reviews" : "show reviews"}
+        {isOpen ? `${t("button.reviews-hide")}` : `${t("button.reviews-show")}`}
       </Button>
     </div>
   );
