@@ -3,17 +3,21 @@ import { connect } from "react-redux";
 import { orderListSelector } from "../selectors";
 import { Button, List } from "antd";
 import CartItem from "./cart-item";
+import { Consumer } from "../contexts/context";
 
 function Checkout({ orderList }) {
-  debugger;
   return (
-    <div>
-      <List
-        dataSource={orderList}
-        renderItem={cartItem => <CartItem item={cartItem} />}
-      />
-      <Button type="primary">Order Now</Button>
-    </div>
+    <Consumer>
+      {context => (
+        <div>
+          <List
+            dataSource={orderList}
+            renderItem={cartItem => <CartItem item={cartItem} />}
+          />
+          <Button type="primary">{context.localization.ORDER}</Button>
+        </div>
+      )}
+    </Consumer>
   );
 }
 

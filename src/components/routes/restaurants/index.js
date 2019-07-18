@@ -2,6 +2,7 @@ import React from "react";
 import RestaurantsList from "../../restaurants-list";
 import { Route } from "react-router-dom";
 import Restaurant from "../../restaurant";
+import { Consumer } from "../../../contexts/context";
 
 export default function RestaurantsPage() {
   return (
@@ -13,7 +14,12 @@ export default function RestaurantsPage() {
 }
 
 function renderRestaurant({ match }) {
-  if (!match) return <h1>Please select a restaurant</h1>;
+  if (!match)
+    return (
+      <Consumer>
+        {context => <h1>{context.localization.PLEASE_SELECT_RESTAURANT}</h1>}
+      </Consumer>
+    );
 
   return <Restaurant id={match.params.id} isOpen />;
 }
