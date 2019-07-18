@@ -1,12 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { totalAmountSelector, totalPriceSelector } from "../selectors";
+import { Consumer } from "../contexts/context";
 
 function Cart({ totalAmount, totalPrice }) {
   return (
-    <div>
-      total {totalAmount} items from {totalPrice}$
-    </div>
+    <Consumer>
+      {context => (
+        <div>
+          {`${context.localization.TOTAL} ${totalAmount} ${
+            context.localization.FROM
+          } ${totalPrice}$`}
+        </div>
+      )}
+    </Consumer>
   );
 }
 

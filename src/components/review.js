@@ -3,17 +3,16 @@ import PropTypes from "prop-types";
 import { Comment, Rate } from "antd";
 import { connect } from "react-redux";
 import { reviewSelector } from "../selectors";
-import { userContext, Consumer } from "../contexts/username";
+import { userContext, Consumer } from "../contexts/context";
 
 function Review({ review }) {
-  const username = useContext(userContext);
   return (
     <Comment
       style={{
         margin: "16px",
         backgroundColor: "white"
       }}
-      author={username}
+      author={review.user}
       content={review.text}
       actions={[
         <div>
@@ -22,7 +21,7 @@ function Review({ review }) {
             defaultValue={review.rating}
             style={{ marginLeft: "24px" }}
           />
-          <Consumer>{username => <h3>{username}</h3>}</Consumer>
+          <Consumer>{state => <h3>{state.username}</h3>}</Consumer>
         </div>
       ]}
     />
