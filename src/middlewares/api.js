@@ -1,4 +1,4 @@
-import { ERROR, START, SUCCESS } from "../constants";
+import { ERROR, START, SUCCESS } from "../reducer/restaurants/constants";
 
 export default store => next => async action => {
   const { callAPI, type, ...rest } = action;
