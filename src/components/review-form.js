@@ -3,6 +3,7 @@ import { Button, Input, Rate } from "antd";
 import { useInputValue } from "../custom-hooks/use-input-value";
 import { connect } from "react-redux";
 import { addReview } from "../ac";
+import { Consumer } from "../contexts/locale";
 
 function ReviewForm({ submitReview }) {
   const [text, setText] = useInputValue();
@@ -15,10 +16,11 @@ function ReviewForm({ submitReview }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      Text: <Input value={text} onChange={setText} />
+      <Consumer>{locale => locale.text + ":"}</Consumer>
+      <Input value={text} onChange={setText} />
       <Rate onChange={setRating} value={rating} />
       <Button type="primary" htmlType="submit">
-        Submit Review
+        <Consumer>{locale => locale.submitReview}</Consumer>
       </Button>
     </form>
   );

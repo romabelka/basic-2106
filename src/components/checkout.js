@@ -3,16 +3,18 @@ import { connect } from "react-redux";
 import { orderListSelector } from "../selectors";
 import { Button, List } from "antd";
 import CartItem from "./cart-item";
+import { Consumer } from "../contexts/locale";
 
 function Checkout({ orderList }) {
-  debugger;
   return (
     <div>
       <List
         dataSource={orderList}
         renderItem={cartItem => <CartItem item={cartItem} />}
       />
-      <Button type="primary">Order Now</Button>
+      <Button type="primary">
+        <Consumer>{locale => locale.orderNow}</Consumer>
+      </Button>
     </div>
   );
 }
