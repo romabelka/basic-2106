@@ -4,6 +4,7 @@ import { Button, List } from "antd";
 import useToggler from "../custom-hooks/use-toggle-open";
 import Review from "./review";
 import ReviewForm from "./review-form";
+import { Consumer } from "../contexts/locale";
 
 function ReviewList({ restaurant }) {
   const { isOpen, toggleOpen } = useToggler();
@@ -24,7 +25,9 @@ function ReviewList({ restaurant }) {
     <div>
       {body}
       <Button onClick={toggleOpen}>
-        {isOpen ? "hide reviews" : "show reviews"}
+        <Consumer>
+          {locale => (isOpen ? locale.hideReviews : locale.showReviews)}
+        </Consumer>
       </Button>
     </div>
   );

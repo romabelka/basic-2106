@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Input } from "antd";
 import { useInputValue } from "../custom-hooks/use-input-value";
+import { Consumer } from "../contexts/locale";
 
 export default function OrderForm() {
   const [name, setName] = useInputValue();
@@ -15,11 +16,14 @@ export default function OrderForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      Name: <Input value={name} onChange={setName} />
-      Tel: <Input value={telephone} onChange={setTelephone} />
-      Address: <Input.TextArea value={address} onChange={setAddress} />
+      <Consumer>{locale => locale.name + ":"}</Consumer>
+      <Input value={name} onChange={setName} />
+      <Consumer>{locale => locale.phoneAbbr + ":"}</Consumer>
+      <Input value={telephone} onChange={setTelephone} />
+      <Consumer>{locale => locale.address + ":"}</Consumer>
+      <Input.TextArea value={address} onChange={setAddress} />
       <Button type="primary" htmlType="submit">
-        Order
+        <Consumer>{locale => locale.toOrder}</Consumer>
       </Button>
     </form>
   );
