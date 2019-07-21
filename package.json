@@ -5,6 +5,8 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "antd": "^3.19.8",
+    "connected-react-router": "^6.5.2",
+    "history": "^4.9.0",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

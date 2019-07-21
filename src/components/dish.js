@@ -6,7 +6,6 @@ import { addItem, removeItem } from "../ac";
 import { dishSelector } from "../selectors";
 
 function Dish({ dish, amount, handleDecrease, handleIncrease }) {
-
   return (
     <Card
       bordered
@@ -29,7 +28,7 @@ function Dish({ dish, amount, handleDecrease, handleIncrease }) {
               shape="circle"
               icon="plus"
               data-id="dish-plus"
-              onClick={() => handleIncrease(dish)}
+              onClick={() => handleIncrease(dish.id)}
             />
           </Button.Group>
         </>
@@ -45,9 +44,9 @@ Dish.defaultProps = {
 };
 
 Dish.propTypes = {
-  price: PropTypes.number.isRequired,
+  price: PropTypes.number,
   name: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
+  ingredients: PropTypes.arrayOf(PropTypes.string)
 };
 
 const mapStateToProps = (state, ownProps) => ({
