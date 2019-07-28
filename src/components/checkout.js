@@ -5,7 +5,6 @@ import { Button, List } from "antd";
 import CartItem from "./cart-item";
 
 function Checkout({ orderList }) {
-  debugger;
   return (
     <div>
       <List

@@ -48,11 +48,11 @@ export const filtratedRestaurantsSelector = createSelector(
       .toArray()
       .filter(
         restaurant =>
-          avarageRateSelector({ reviews }, { restaurant }) >= filters.minRating
+          averageRateSelector({ reviews }, { restaurant }) >= filters.minRating
       )
 );
 
-export const avarageRateSelector = (state, { restaurant }) =>
+export const averageRateSelector = (state, { restaurant }) =>
   restaurant.reviews
     .map(id => reviewSelector(state, { id }))
     .map(review => review && review.rating)

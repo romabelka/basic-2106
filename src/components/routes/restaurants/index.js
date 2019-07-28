@@ -13,7 +13,9 @@ export default function RestaurantsPage() {
 }
 
 function renderRestaurant({ match }) {
-  if (!match) return <h1>Please select a restaurant</h1>;
+  if (!match) {
+    return <h1>Please select a restaurant</h1>;
+  }
 
   return <Restaurant id={match.params.id} isOpen />;
 }

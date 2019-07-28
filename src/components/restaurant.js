@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Button, List } from "antd";
+import { Avatar, List } from "antd";
 import PropTypes from "prop-types";
 import ReviewList from "./review-list";
 import RestaurantMenu from "./restaurant-menu";
@@ -9,7 +9,10 @@ import { connect } from "react-redux";
 import { restaurantSelector } from "../selectors";
 
 function Restaurant({ restaurant, isOpen }) {
-  if (!restaurant) return null;
+  if (!restaurant) {
+    // noinspection JSConstructorReturnsPrimitive
+    return null;
+  }
 
   const body = isOpen && (
     <div data-id="restaurant-body">

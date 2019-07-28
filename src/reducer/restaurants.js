@@ -1,4 +1,4 @@
-import { Map, Record } from "immutable";
+import { Record } from "immutable";
 import { arrToMap } from "../utils";
 import {
   ADD_REVIEW,

@@ -62,7 +62,6 @@ export const loadAllRestaurants = () => async (dispatch, getState) => {
 
     const { router, restaurants } = getState();
 
-    console.log("---", router);
     const { id } = matchPath(router.location.pathname, {
       path: "/restaurants/:id"
     }).params;

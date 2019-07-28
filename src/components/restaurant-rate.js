@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Rate } from "antd";
 import { connect } from "react-redux";
-import { avarageRateSelector } from "../selectors";
+import { averageRateSelector } from "../selectors";
 
 class RestaurantRate extends Component {
   static propTypes = {
@@ -17,5 +17,5 @@ class RestaurantRate extends Component {
 RestaurantRate.propTypes = {};
 
 export default connect((state, ownProps) => ({
-  rate: avarageRateSelector(state, ownProps)
+  rate: averageRateSelector(state, ownProps)
 }))(RestaurantRate);
