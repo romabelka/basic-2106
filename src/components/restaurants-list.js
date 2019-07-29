@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { filtratedRestaurantsSelector, restaurantsLoading } from "../selectors";
 import { loadAllRestaurants, loadAllReviews } from "../ac";
 import { NavLink } from "react-router-dom";
+import { Consumer } from '../contexts/languauge'
 
 function RestaurantsList({
   restaurants,
@@ -52,7 +53,7 @@ export default connect(
   state => ({
     restaurants: filtratedRestaurantsSelector(state).concat({
       id: "hohoho",
-      name: "non existing restaurant"
+      name: <Consumer>{ currentLocalize => currentLocalize.notExistRestaurant }</Consumer>
     }),
     loading: restaurantsLoading(state)
   }),
