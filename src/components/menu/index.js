@@ -1,17 +1,17 @@
 import React from "react";
 import MenuItem from "./menu-item";
+import { Consumer } from '../../contexts/languauge';
 
 function Menu({ children }) {
   return (
     <div>
-      <h1>Delivery App</h1>
+      <Consumer>{currentLocalize => <h1>{currentLocalize.deliveryApp}</h1>}</Consumer>
       {children}
     </div>
   );
 }
 
 Menu.propTypes = {};
-
 Menu.Item = MenuItem;
 
 export { MenuItem };
