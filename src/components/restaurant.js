@@ -24,7 +24,7 @@ function Restaurant({ restaurant, isOpen }) {
         avatar={<Avatar shape="square" src={restaurant.image} />}
         title={restaurant.name}
       />
-      <RestaurantRate restaurant={restaurant} />
+      <RestaurantRate restaurant={restaurant} key={restaurant.id} />
       {body}
     </List.Item>
   );
