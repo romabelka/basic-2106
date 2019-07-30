@@ -1,0 +1,28 @@
+{
+  "en": {
+    "header-delivery-app": "Delivery App",
+    "cart-total": "total",
+    "cart-items": "items",
+    "cart-for": "for",
+    "menu-restaurants": "Restaurants",
+    "menu-filter": "Filter",
+    "auth-username": "Username",
+    "page-select-restaurant": "Please select a restaurant",
+    "btn-show-reviews": "show reviews",
+    "btn-hide-reviews": "hide reviews",
+    "btn-submit-review": "submit reviews"
+  },
+  "ru": {
+    "header-delivery-app": "Доставка Еды",
+    "cart-total": "всего",
+    "cart-items": "товаров",
+    "cart-for": "за",
+    "menu-restaurants": "Рестораны",
+    "menu-filter": "Фильтры",
+    "auth-username": "Имя",
+    "page-select-restaurant": "Выбери ресторан",
+    "btn-show-reviews": "показать отзывы",
+    "btn-hide-reviews": "спрятать отзывы",
+    "btn-submit-review": "отправить отзыв"
+  }
+}

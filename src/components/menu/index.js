@@ -1,10 +1,13 @@
 import React from "react";
 import MenuItem from "./menu-item";
+import { Translate } from "../../locale/context";
 
 function Menu({ children }) {
   return (
     <div>
-      <h1>Delivery App</h1>
+      <h1>
+        <Translate>header-delivery-app</Translate>
+      </h1>
       {children}
     </div>
   );
