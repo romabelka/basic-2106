@@ -7,7 +7,7 @@
     "core-js": "^0.9.6",
     "object-assign": "4.0.1",
     "qs": "^5.2.0",
-    "express": "^4.13.3"
+    "express": "^4.17.1"
   },
   "scripts": {
     "start": "supervisor server.js"
