@@ -15,7 +15,7 @@ router.get("/dishes", function(req, res, next) {
   var result = mocks.dishes;
   if (id) {
     var restaurant = mocks.restaurants.find(function(r) {
-      return r.id === id;
+      return r.id === id
     });
     if (restaurant) {
       result = restaurant.menu.map(function(dishId) {
