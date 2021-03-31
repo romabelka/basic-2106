@@ -11,7 +11,6 @@ export const localizeСontext = createContext({
         notExistRestaurant : 'Non existing restaurant',
         showReview : 'Show review',
         hideReview : 'Hide review',
-        submitReview : 'Submit Review'
     },
     ru : {
         username : 'имя пользователя',
@@ -22,8 +21,6 @@ export const localizeСontext = createContext({
         selectRestaurants : 'Пожалуйста, выберите ресторан',
         notExistRestaurant : 'Несуществующий ресторан',
         showReview : 'Показать отзывы',
-        hideReview : 'Скрыть отзывы',
-        submitReview : 'Отправить ревью'
     }
 });
 export const { Provider, Consumer } = localizeСontext;
